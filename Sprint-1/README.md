@@ -99,15 +99,23 @@ Cameron discussed the algorithm he created for getting unique questions from the
 ---
 
 ## Day [5] - Scrum Meeting, Oct 9th, 9.30 am
+<<<<<<< HEAD
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
 Neja, Cameron, Oskar, Mengqi, Jordan, Andrew, Fayzuddin, Melvin, Daniel
+=======
+The Scrum Master for this meeting was **X**
+
+### Members Present:
+
+>>>>>>> main
 
 ### Members Not Present:
 n/a
 
 ### Apologies:
+<<<<<<< HEAD
 Blazej
 
 ### Summary of Conversation:
@@ -116,3 +124,12 @@ Neja started the meeting with announcing she managed to fix the problem with the
 
 ---
 
+=======
+n/a
+
+### Summary of Conversation:
+
+
+
+---
+>>>>>>> main
