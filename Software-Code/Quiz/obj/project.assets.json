@@ -11880,28 +11880,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/nejacesnik/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Cammy\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nejacesnik/Industrial-Project-Team-9/Software-Code/Quiz/Quiz.csproj",
+      "projectUniqueName": "D:\\Documents\\4. Uni\\4th Year\\IndustrialProject\\Industrial-Project-Team-9\\Software-Code\\Quiz\\Quiz.csproj",
       "projectName": "Quiz",
-      "projectPath": "/Users/nejacesnik/Industrial-Project-Team-9/Software-Code/Quiz/Quiz.csproj",
-      "packagesPath": "/Users/nejacesnik/.nuget/packages/",
-      "outputPath": "/Users/nejacesnik/Industrial-Project-Team-9/Software-Code/Quiz/obj/",
+      "projectPath": "D:\\Documents\\4. Uni\\4th Year\\IndustrialProject\\Industrial-Project-Team-9\\Software-Code\\Quiz\\Quiz.csproj",
+      "packagesPath": "C:\\Users\\Cammy\\.nuget\\packages\\",
+      "outputPath": "D:\\Documents\\4. Uni\\4th Year\\IndustrialProject\\Industrial-Project-Team-9\\Software-Code\\Quiz\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "/Users/nejacesnik/.config/NuGet/NuGet.Config"
+        "C:\\Users\\Cammy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11946,7 +11949,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
