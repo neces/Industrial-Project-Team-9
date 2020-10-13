@@ -5,7 +5,7 @@ namespace Quizzarr.Data
 {
     public class SqlQuestionRepo : IQuestionRepo
     {
-        public List<Question> GetQuestionsSet()
+        public Question GetQuestionsSet(int index)
         {
             throw new System.NotImplementedException();
         }

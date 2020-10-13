@@ -12,11 +12,13 @@ namespace Quizzarr.Controllers
 
         private List<GameSession> Sessions;
         private List<User> Users;
-        private readonly IQuizzarrRepo _repository;
+        private IQuizzarrRepo _repository;
+        private readonly IQuestionRepo _questionRepository;
 
-        public QuizController(IQuizzarrRepo repository)
+        public QuizController(IQuizzarrRepo repository, IQuestionRepo questionRepository)
         {
             _repository = repository;
+            _questionRepository = questionRepository;
         }
 
         [HttpGet("{id}")]
@@ -57,8 +59,19 @@ namespace Quizzarr.Controllers
             return null;
         }
 
-        public ActionResult <Question> nextQuestion() {
-            return null;
+
+        // api/quizzarr/byQuestion?sessionID=session01&qIndex=0
+        [HttpGet("byQuestion")]
+        public ActionResult <Question> nextQuestion(string sessionID, int qIndex) {
+
+            GameSession curSession = _repository.GetSessionById(sessionID);
+            if (curSession == null) return NotFound();
+
+            Question question = _questionRepository.GetQuestionsSet(qIndex);
+
+            if (question == null) return NotFound();
+
+            return Ok(question);
         }
 
         public ActionResult <PlaceholderType> answerQuestion() {

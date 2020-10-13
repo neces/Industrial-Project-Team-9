@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\oskar\\Documents\\IndustrialTeamProject\\Quizzarr\\Quizzarr.csproj",
+  "FilePath": "d:\\Documents\\4. Uni\\4th Year\\IndustrialProject\\Industrial-Project-Team-9\\Software-Code\\Quizzarr\\Quizzarr.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14387,7 +14387,7 @@
         }
       }
     ],
-    "CSharpLanguageVersion": 800
+    "CSharpLanguageVersion": 900
   },
   "RootNamespace": "Quizzarr",
   "Documents": [],
