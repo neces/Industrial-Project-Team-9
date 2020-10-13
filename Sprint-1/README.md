@@ -99,19 +99,18 @@ Cameron discussed the algorithm he created for getting unique questions from the
 ---
 
 ## Day [5] - Scrum Meeting, Oct 9th, 9.30 am
-The Scrum Master for this meeting was **X**
+The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
-
+Neja, Cameron, Oskar, Mengqi, Jordan, Andrew, Fayzuddin, Melvin, Daniel
 
 ### Members Not Present:
 n/a
 
 ### Apologies:
-n/a
+Blazej
 
 ### Summary of Conversation:
+Neja started the meeting with announcing she managed to fix the problem with the GitHub repository and pushed all of the files and code we have created by now. She was also working on the prototype to show the client in the meeting on Monday. Oskar created a backend API that allows to fetch data and tested it, today he will speak to Jordan to set it up on Azure server. Jordan mentioned the website and database host is set up. Cameron had some probles accessing and they will be trying to resolve that today. Cameron has also written SQL for creating the tables and started working on code for different queries, his plan for today is to continue testing the data and database connection. Fayzuddin had a problem with a bug that took him most of the day and is not fixed yet. Cameron offered to help look into that. Karen is collecting questions and learning ASP .NET. Andrew and Melvin has also added questions to the database. Daniel started working on the report and collecting information throught the project we need to successfully write it. He will set up a document so we can track of it. We also talked about GitHub and making sure everything we push is on separate branches that are merged regularly and assigning someone else to code-review them.
 
 
-
----
