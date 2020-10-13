@@ -7,7 +7,7 @@ namespace Quizzarr.Data
     {
         //private List<GameSession> games = new List<GameSession>();
 
-        List<GameSession> Games { get; }
+       // List<GameSession> Games { get; }
 
         GameSession GetSessionById(string id);
 
