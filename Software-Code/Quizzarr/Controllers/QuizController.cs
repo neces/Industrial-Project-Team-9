@@ -25,11 +25,14 @@ namespace Quizzarr.Controllers
                 {
                     SessionId="session01",
                     Users = new List<User>{
-                        new User {Id="0", DisplayName="Bob"},
-                        new User {Id="0", DisplayName="Jan"},
-                        new User {Id="0", DisplayName="Joe"}
+                        new User ("001", "Bob"),
+                        new User ("002","Jan"),
+                        new User ("003", "Joe")
                     },
-                    Questions = new List<Question>(),
+                    Questions = new List<Question> {
+                        new Question { id=0, type="MultiChoice", question="What is my name?", answer="Topu", topic="Personal", multiChoice_ID=0, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Jordan", "Cammy", "Melvin"} },
+                        new Question { id=1, type="MultiChoice", question="What is my fav colour?", answer="Purple", topic="Personal", multiChoice_ID=1, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Green", "Blue", "Red"} }
+                    },
                     currentQuestion = 0
                 }
             );
@@ -39,10 +42,9 @@ namespace Quizzarr.Controllers
                 {
                     SessionId="session02",
                     Users = new List<User>{
-                        new User {Id="0", DisplayName="Topu"},
-                        new User {Id="0", DisplayName="Cammy"},
-                        new User {Id="0", DisplayName="Jordan"},
-                        new User {Id="0", DisplayName="Melvin"}
+                        new User ("004", "Jordan"),
+                        new User ("005","Topu"),
+                        new User ("006", "Cammy")
                     },
                     Questions = new List<Question>(),
                     currentQuestion = 0
@@ -90,7 +92,7 @@ namespace Quizzarr.Controllers
 
             string userId = val;
 
-            User newUser = new User { Id = userId, DisplayName = displayName };
+            User newUser = new User(userId, displayName);
 
             LobbyUsers.Add(newUser);
 
@@ -145,13 +147,13 @@ namespace Quizzarr.Controllers
             return Ok(newSession);
         }
 
-        // api/quizzarr/joinSession?userID=<your id here>&quizCode=<friends quiz code>
+        // api/quizzarr/joinSession?userID=<your id here>&sessionID=<friends quiz code>
         [HttpGet("joinSession")]
-        public ActionResult<PlaceholderType> JoinSession(string userId, string quizCode)
+        public ActionResult<PlaceholderType> JoinSession(string userId, string sessionID)
         {
             GameSession joinSession = null;
             foreach(GameSession session in Sessions) {
-                if (quizCode == session.QuizCode) {
+                if (sessionID == session.SessionId) {
                     joinSession = session;
                     break;
                 }
@@ -179,33 +181,51 @@ namespace Quizzarr.Controllers
         }
 
 
-        // api/quizzarr/byQuestion?sessionID=session01                             &qIndex=0
-        [HttpGet("byQuestion")]
-        public ActionResult <Question> nextQuestion(string sessionID) {
+        // api/quizzarr/getQuestion?userID=<your user ID>
+        [HttpGet("getQuestion")]
+        public ActionResult <Question> nextQuestion(string userID) {
 
-            //GameSession curSession = _repository.GetSessionById(sessionID);
-            GameSession curSession = null;
-            foreach (GameSession session in Sessions)
-            {
-                if (session.SessionId.Equals(sessionID)){
-                    curSession = session;
-                    break;
-                }
-            }
+            GameSession curSession = findSessionWithUser(userID);
             
             if (curSession == null) return NotFound();
 
-            int qIndex = curSession.currentQuestion++;
+            int qIndex = curSession.currentQuestion;
+            System.Console.WriteLine(qIndex);
 
-            Question question = _questionRepository.GetQuestionsSet(qIndex);
+            if (qIndex >= curSession.Questions.Count) return NotFound();
+
+            Question question = curSession.Questions[qIndex];
 
             if (question == null) return NotFound();
 
             return Ok(question);
         }
 
-        public ActionResult <PlaceholderType> answerQuestion() {
-            return null;
+        // api/quizzarr/submitAnswer?userID=<your user ID>&answer=<answer selected>
+        [HttpGet("submitAnswer")]
+        public ActionResult <PlaceholderType> answerQuestion(string userID, string answer) {
+            
+            GameSession curSession = findSessionWithUser(userID);
+
+            int qIndex = curSession.currentQuestion;
+
+            foreach(User u in curSession.Users) {
+                if (userID.Equals(u.Id)) {
+                    u.Answered = true;
+                }
+            }
+
+            bool ans = false;
+            if (answer.Equals(curSession.Questions[qIndex].answer))
+                ans = true;
+            
+            if (CheckIfAllAnswered(curSession)) {
+                curSession.currentQuestion += 1;
+                System.Console.WriteLine("New current question num " + curSession.currentQuestion);
+                SetAllUnanswered(curSession);
+            }
+            
+            return Ok(ans);
         }
 
 
@@ -226,6 +246,33 @@ namespace Quizzarr.Controllers
         //     return new string(System.Linq.Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         // }​​​​​
 
+        public GameSession findSessionWithUser(string userID) {
+            GameSession curSession = null;
+            foreach (GameSession session in Sessions)
+            {
+                foreach (User u in session.Users) {
+                    if (userID.Equals(u.Id)) {
+                        curSession = session;
+                        break;
+                    }
+                    if (curSession != null) break;
+                }
+            }
+            return curSession;
+        }
+
+        public bool CheckIfAllAnswered(GameSession session) {
+            foreach (User u in session.Users) {
+                if (!u.Answered)
+                    return false;
+            }
+            return true;
+        }
+
+        public void SetAllUnanswered(GameSession session) {
+            foreach (User u in session.Users)
+                u.Answered = false;
+        }
 
         // ==================================================================================
         public void PrintLobbyUsers() {
