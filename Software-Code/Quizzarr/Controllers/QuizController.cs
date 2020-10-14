@@ -52,13 +52,13 @@ namespace Quizzarr.Controllers
             // );
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<GameSession> GetSessionById(string id)
-        {
-            var session = _repository.GetSessionById(id);
+        // [HttpGet("{id}")]
+        // public ActionResult<GameSession> GetSessionById(string id)
+        // {
+        //     var session = _repository.GetSessionById(id);
 
-            return Ok(session);
-        }
+        //     return Ok(session);
+        // }
 
         // GetUId is generates new userId for a client that requests it; the id is added to list of all UIds
         // api/quizzarr/newUser?displayName=<your name here>
@@ -192,6 +192,8 @@ namespace Quizzarr.Controllers
             */
             List<Question> questions = _questionRepository.GetQuestionsSet();
 
+            System.Console.WriteLine(questions.Count);
+
             GameSession session = findSessionWithUser(hostUId);
 
             if ((questions == null) || (questions.Count <= 0) || (session == null)) return NotFound();
@@ -302,6 +304,13 @@ namespace Quizzarr.Controllers
             System.Console.WriteLine();
         }
 
+        [HttpGet]
+        public ActionResult <PlaceholderType> PrintAllSessionIDs() {
+            foreach(GameSession session in Sessions)
+                System.Console.WriteLine(session.SessionId + " - " + session.Users.Count + " users in session");
+
+            return Ok(Sessions);
+        }
 
     }
 }
