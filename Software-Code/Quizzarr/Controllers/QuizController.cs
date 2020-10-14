@@ -242,8 +242,8 @@ namespace Quizzarr.Controllers
             bool ans = false;
             if (answer.Equals(curSession.Questions[qIndex].answer)) {
                 ans = true;
-                UpdateScore(userID);
             }
+            GetUserInSession(findSessionWithUser(userID), userID).MyScore.UpdateScore(ans);
             
             if (CheckIfAllAnswered(curSession)) {
                 curSession.currentQuestion += 1;
@@ -269,7 +269,7 @@ namespace Quizzarr.Controllers
             GameSession session = findSessionWithUser(userID);
 
             foreach(User u in session.Users) {
-                leaderboard.Add(new Leaderboard(u.DisplayName, u.Score));
+                leaderboard.Add(new Leaderboard(u.DisplayName, u.MyScore.Score, u.MyScore.highestStreak));
             }
 
             return Ok(leaderboard);
@@ -308,10 +308,6 @@ namespace Quizzarr.Controllers
         public void SetAllUnanswered(GameSession session) {
             foreach (User u in session.Users)
                 u.Answered = false;
-        }
-
-        public void UpdateScore(string userID) {
-            GetUserInSession(findSessionWithUser(userID), userID).Score++;
         }
 
         public User GetUserInSession(GameSession session, string userID) {
