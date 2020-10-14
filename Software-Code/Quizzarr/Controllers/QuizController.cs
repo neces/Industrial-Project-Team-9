@@ -20,36 +20,36 @@ namespace Quizzarr.Controllers
             _repository = repository;
             _questionRepository = questionRepository;
 
-            Sessions.Add(
-                new GameSession
-                {
-                    SessionId="session01",
-                    Users = new List<User>{
-                        new User ("001", "Bob"),
-                        new User ("002","Jan"),
-                        new User ("003", "Joe")
-                    },
-                    Questions = new List<Question> {
-                        new Question { id=0, type="MultiChoice", question="What is my name?", answer="Topu", topic="Personal", multiChoice_ID=0, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Jordan", "Cammy", "Melvin"} },
-                        new Question { id=1, type="MultiChoice", question="What is my fav colour?", answer="Purple", topic="Personal", multiChoice_ID=1, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Green", "Blue", "Red"} }
-                    },
-                    currentQuestion = 0
-                }
-            );
+            // Sessions.Add(
+            //     new GameSession
+            //     {
+            //         SessionId="session01",
+            //         Users = new List<User>{
+            //             new User ("001", "Bob"),
+            //             new User ("002","Jan"),
+            //             new User ("003", "Joe")
+            //         },
+            //         Questions = new List<Question> {
+            //             new Question { id=0, type="MultiChoice", question="What is my name?", answer="Topu", topic="Personal", multiChoice_ID=0, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Jordan", "Cammy", "Melvin"} },
+            //             new Question { id=1, type="MultiChoice", question="What is my fav colour?", answer="Purple", topic="Personal", multiChoice_ID=1, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Green", "Blue", "Red"} }
+            //         },
+            //         currentQuestion = 0
+            //     }
+            // );
 
-            Sessions.Add(
-                new GameSession
-                {
-                    SessionId="session02",
-                    Users = new List<User>{
-                        new User ("004", "Jordan"),
-                        new User ("005","Topu"),
-                        new User ("006", "Cammy")
-                    },
-                    Questions = new List<Question>(),
-                    currentQuestion = 0
-                }
-            );
+            // Sessions.Add(
+            //     new GameSession
+            //     {
+            //         SessionId="session02",
+            //         Users = new List<User>{
+            //             new User ("004", "Jordan"),
+            //             new User ("005","Topu"),
+            //             new User ("006", "Cammy")
+            //         },
+            //         Questions = new List<Question>(),
+            //         currentQuestion = 0
+            //     }
+            // );
         }
 
         [HttpGet("{id}")]
@@ -126,7 +126,8 @@ namespace Quizzarr.Controllers
                 QuizCode = newQuizCode,
                 Users = new List<User>(),
                 Questions = new List<Question>(),
-                currentQuestion = 0
+                currentQuestion = 0,
+                gameInProgress = false
             };
 
             User newUser = null;
@@ -160,6 +161,8 @@ namespace Quizzarr.Controllers
             }
             if (joinSession == null) return NotFound();
 
+            if (joinSession.gameInProgress) return NotFound();
+
             User user = null;
             foreach(User u in LobbyUsers) {
                 if (u.Id == userId) {
@@ -176,8 +179,27 @@ namespace Quizzarr.Controllers
             return Ok(joinSession);
         }
 
-        public ActionResult <PlaceholderType> StartSession() {
-            return null;
+        //api/quizzarr/startSession?hostUId=<your UID here>
+        [HttpGet("startSession")]
+        public ActionResult <PlaceholderType> StartSession(string hostUId) {
+            /*
+                Generate list of random question numbers to get from database
+                Get a list of questions
+                Populate session question list with that list
+                Mark session as "in progress" so that other users can no longer join
+                    Update join session func to reflect this
+                Push to all users in session that the game is starting
+            */
+            List<Question> questions = _questionRepository.GetQuestionsSet();
+
+            GameSession session = findSessionWithUser(hostUId);
+
+            if ((questions == null) || (questions.Count <= 0) || (session == null)) return NotFound();
+
+            session.Questions = questions;
+            session.gameInProgress = true;
+            
+            return NoContent();
         }
 
 

@@ -10,5 +10,6 @@ namespace Quizzarr.Models
         public List<Question> Questions { get; set; }
 
         public int currentQuestion { get; set; }
+        public bool gameInProgress { get; set; }
     }
 }
