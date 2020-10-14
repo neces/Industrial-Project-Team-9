@@ -1,0 +1,32 @@
+{
+  "quiz": [
+    {
+      "name": "Charlie's Lockdown Quiz",
+      "id": "0334586",
+      "rounds": 2,
+      "questions": 3,
+      "timeRound": 30,
+      "timeQuestion": 15
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "question": "How old do you have to be to enter the Hunger Games?",
+      "answers": ["12", "13", "14", "15"],
+      "correctAnswer": "12"
+    },
+    {
+      "id": 2,
+      "question": "La La Land won an Academy Award for Best Picture in 2017",
+      "answers": ["True", "False"],
+      "correctAnswer": "False"
+    }
+  ],
+  "personal": [
+    {
+      "id": 1,
+      "nickname": "Charlie"
+    }
+  ]
+}
