@@ -296,12 +296,6 @@ namespace Quizzarr.Controllers
             return Ok(ans);
         }
 
-
-        public ActionResult<PlaceholderType> getStatus()
-        {
-            return null;
-        }
-
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
         public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
@@ -315,6 +309,34 @@ namespace Quizzarr.Controllers
             }
 
             return Ok(leaderboard);
+        }
+
+        // api/quizzarr/leaveSession?userID=<your uid>
+        [HttpGet("leaveSession")]
+        public ActionResult <PlaceholderType> LeaveSession(string userID) {
+            bool userInSession = true;
+
+            GameSession session = findSessionWithUser(userID);
+            
+            User user = null;
+            if (session == null) {
+                user = GetUserInLobby(userID);
+                userInSession = false;
+            } else {
+                user = GetUserInSession(session, userID);
+            }
+            if (user == null) return NotFound();
+
+            if (userInSession) {
+                session.Users.Remove(user);
+
+                if (session.Users.Count <= 0) 
+                    Sessions.Remove(session); 
+            } else {
+                LobbyUsers.Remove(user);
+            }
+            
+            return NoContent();
         }
         
         
@@ -354,6 +376,14 @@ namespace Quizzarr.Controllers
 
         public User GetUserInSession(GameSession session, string userID) {
             foreach (User u in session.Users)
+                if (userID.Equals(u.Id))
+                    return u;
+
+            return null;
+        }
+
+        public User GetUserInLobby(string userID) {
+            foreach (User u in LobbyUsers)
                 if (userID.Equals(u.Id))
                     return u;
 
