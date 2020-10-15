@@ -4,6 +4,7 @@ import Timer from './components/Timer'
 import Leaderboard from './components/Leaderboard'
 import Question from './components/Question'
 import Answer from './components/Answer'
+import QuizLogo from './assets/Logo.png'
 
 const App = () => {
   const [isLoading, setLoading] = useState(true)
@@ -43,32 +44,19 @@ const App = () => {
       getQuestion()
       return <div className="App">Loading...</div>;
     }
-
-  return (
-    <div>
-      <div className="quiz-logo">
-        <img src={QuizLogo} alt="Quiz Logo" width="100" height="100"/>
+    return (
+      <div>
+        <div className='quiz-logo'>
+          <img src={QuizLogo} alt="Quiz Logo" width="400"></img>
+        </div>
+        <div className='app'>
+          <div className='question-section'>
+              <Question questions={questions} /></div>
+          <div className='answers'>
+              <Answer questions={questions} getQuestion={getQuestion} /> </div>
+        </div>
       </div>
-      <div className='app'>
-        {showScore ? (
-          <div className='score-section'>
-            You scored {score} out of {questions.length}
-          </div>
-        ) : (
-            <>
-              <div className='question-section'>
-                <div className='question-text'>{questions[currentQuestion].question}</div>
-              </div>
-              <div className='answer-section'>
-                {questions[currentQuestion].answers.map((answer) => (
-                  <button onClick={() => handleAnswerOptionClick(answer)}>{answer}</button>
-                ))}
-              </div>
-            </>
-          )}
-      </div>
-    </div>
-    )
+      )
 }
 
 export default App

@@ -28,8 +28,10 @@ body {
   padding: 20px;
   justify-content: space-evenly;
 }
-.quiz-logo {
-  
+.quiz-logo{
+  position: fixed;
+  top: 0px;
+  left: 50px;
 }
 .score-section {
   font-size: 24px;
@@ -41,6 +43,9 @@ body {
 .question-section {
   width: 100%;
   position: relative;
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 25px;
 }
 
 .question-count {
@@ -82,7 +87,7 @@ body {
 
 button {
   width: 100%;
-  font-size: 16px;
+  font-size: 30px;
   color: #ffffff;
   background-color: #191E24;
   border-radius: 15px;
