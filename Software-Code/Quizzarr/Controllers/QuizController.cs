@@ -278,20 +278,16 @@ namespace Quizzarr.Controllers
 
             int qIndex = curSession.currentQuestion;
 
-            foreach (User u in curSession.Users)
-            {
-                if (userID.Equals(u.Id))
-                {
-                    u.Answered = true;
-                }
-            }
+            GetUserInSession(findSessionWithUser(userID), userID).Answered = true;
 
             bool ans = false;
-            if (answer.Equals(curSession.Questions[qIndex].answer))
+            if (answer.Equals(curSession.Questions[qIndex].answer)) {
                 ans = true;
 
-            if (CheckIfAllAnswered(curSession))
-            {
+            }
+            GetUserInSession(findSessionWithUser(userID), userID).MyScore.UpdateScore(ans);
+            
+            if (CheckIfAllAnswered(curSession)) {
                 curSession.currentQuestion += 1;
                 System.Console.WriteLine("New current question num " + curSession.currentQuestion);
                 SetAllUnanswered(curSession);
@@ -306,18 +302,22 @@ namespace Quizzarr.Controllers
             return null;
         }
 
-        public ActionResult<PlaceholderType> GetResult()
+        // api/quizzarr/getLeaderboard?userID=<your user id here>
+        [HttpGet("getLeaderBoard")]
+        public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
         {
-            return null;
+            List<Leaderboard> leaderboard = new List<Leaderboard>();
+
+            GameSession session = findSessionWithUser(userID);
+
+            foreach(User u in session.Users) {
+                leaderboard.Add(new Leaderboard(u.DisplayName, u.MyScore.Score, u.MyScore.highestStreak));
+            }
+
+            return Ok(leaderboard);
         }
-
-        // public static string RandomString(int length)
-        // {​​​​​
-        //     System.Random random = new System.Random();
-        //     const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        //     return new string(System.Linq.Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
-        // }​​​​​
-
+        
+        
         public GameSession findSessionWithUser(string userID)
         {
             GameSession curSession = null;
@@ -350,6 +350,14 @@ namespace Quizzarr.Controllers
         {
             foreach (User u in session.Users)
                 u.Answered = false;
+        }
+
+        public User GetUserInSession(GameSession session, string userID) {
+            foreach (User u in session.Users)
+                if (userID.Equals(u.Id))
+                    return u;
+
+            return null;
         }
 
         // ==================================================================================
