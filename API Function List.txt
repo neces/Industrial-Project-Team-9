@@ -90,3 +90,15 @@ Returns
             DisplayName
             Score
             HighestStreak
+
+
+
+Leave Session
+    Removes a user from a session or the lobby
+Call
+    api/quizzarr/leaveSession?userID=<your uid>
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    404 Not Found
+        User id doesnt exist
