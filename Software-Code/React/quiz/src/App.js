@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import QuestionBox from './components/QuestionBox'
 import Question from './components/Question'
+import QuizLogo from "./assets/QuizLogo.png"
 
 const App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -57,25 +58,28 @@ const App = () => {
       return <div className="App">Loading...</div>;
     }
 
-    return (
+  return (
     <div>
+      <div className="quiz-logo">
+        <img src={QuizLogo} alt="Quiz Logo" width="100" height="100"/>
+      </div>
       <div className='app'>
         {showScore ? (
           <div className='score-section'>
             You scored {score} out of {questions.length}
           </div>
         ) : (
-          <>
-            <div className='question-section'>
-              <div className='question-text'>{questions[currentQuestion].question}</div>
-            </div>
-            <div className='answer-section'>
-              {questions[currentQuestion].answers.map((answer) => (
-                <button onClick={() => handleAnswerOptionClick(answer)}>{answer}</button>
-              ))}
-            </div>
-          </>
-        )}
+            <>
+              <div className='question-section'>
+                <div className='question-text'>{questions[currentQuestion].question}</div>
+              </div>
+              <div className='answer-section'>
+                {questions[currentQuestion].answers.map((answer) => (
+                  <button onClick={() => handleAnswerOptionClick(answer)}>{answer}</button>
+                ))}
+              </div>
+            </>
+          )}
       </div>
       <></>
     </div>
