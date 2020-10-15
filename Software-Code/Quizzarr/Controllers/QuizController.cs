@@ -241,6 +241,8 @@ namespace Quizzarr.Controllers
 
             GameSession session = findSessionWithUser(hostUId);
 
+            if (!session.HostID.Equals(hostUId)) return Forbid();
+
             if ((questions == null) || (questions.Count <= 0) || (session == null)) return NotFound();
 
             session.Questions = questions;
