@@ -1,60 +1,46 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import QuestionBox from './components/QuestionBox'
+import Timer from './components/Timer'
+import Leaderboard from './components/Leaderboard'
 import Question from './components/Question'
-import QuizLogo from "./assets/QuizLogo.png"
+import Answer from './components/Answer'
 
 const App = () => {
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true)
   const [quiz, setQuiz] = useState([])
   const [questions, setQuestions] = useState([])
-  const [personal, setPersonal] = useState([])
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [showScore, setShowScore] = useState(false)
-  const [score, setScore] = useState(0)
+  const [scores, setScores] = useState([])
 
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/quiz')
-      .then(response => {
-        console.log('promise fulfilled')
-        setQuiz(response.data)
-      })
-    axios
+    // send a post request with quizid and nickname beforehand
+
+    const getQuiz = () => {
+      // get request for quiz info, name, questions, rounds, times
+      // also get user nickname and userID
+      // run once at the begging of the quiz
+    }
+
+    const getQuestion = () => {
+      console.log('getting question')
+      axios
       .get('http://localhost:3001/questions')
       .then(response => {
         console.log('promise fulfilled')
         setQuestions(response.data)
-      })
-    axios
-      .get('http://localhost:3001/personal')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersonal(response.data)
         setLoading(false);
       })
-  }, [])
-  console.log('render', quiz.length, 'quiz data')
-  console.log('render', questions.length, 'questions')
-  console.log('render', personal.length, 'both')
-  
-    const handleAnswerOptionClick = (answer) => {
-      if (answer === questions[currentQuestion].correctAnswer) {
-        setScore(score + 1);
-      }
-  
-      const nextQuestion = currentQuestion + 1;
-      if (nextQuestion < questions.length) {
-        setCurrentQuestion(nextQuestion);
-      } else {
-        setShowScore(true);
-      }
-      console.log(answer)
-      console.log(questions[currentQuestion].correctAnswer)
-    };
+      .catch(error => {
+        this.setState({ errorMessage: error.message });
+        console.error('There was an error!', error);
+      })
+    }
+
+    const getScores = () => {
+      // get scores to create a leaderboard
+    }
 
     if (isLoading) {
+      getQuiz()
+      getQuestion()
       return <div className="App">Loading...</div>;
     }
 
@@ -81,7 +67,6 @@ const App = () => {
             </>
           )}
       </div>
-      <></>
     </div>
     )
 }

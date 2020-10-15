@@ -1,0 +1,92 @@
+
+
+New User 
+    Generates a unique user ID
+    Adds user to list of known users
+Call
+    api/quizzarr/newUser?displayName=<your name here>
+Returns
+    200 OK
+        Unique user ID to be held by the client
+
+
+
+New Session
+    Generates a new quiz session
+    Adds user as the host of the session
+Call
+    api/quizzarr/newSession?hostUId=<your uid>
+Returns
+    200 OK
+        Unique quiz id (to be shared, used for others to join)
+    404 Not Found
+        User ID provided was either already in a game or doesnt exist
+
+
+
+Join Session
+    Adds a user to an existing quiz session
+Call
+    api/quizzarr/joinSession?userID=<your uid>&sessionID=<friends sessionID>
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    404 Not Found
+        The session does not exist
+        The session is already started
+        The user id does not exist
+
+
+
+Start Session
+    Starts a quiz session 
+Call
+    api/quizzarr/startSession?hostUId=<your user id>
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    404 Not Found
+        There was a problem with getting the session
+        There was a problem with getting the questions
+
+
+
+Get Question
+    Get the next question in the quiz
+Call
+    api/quizzarr/getQuestion?userID=<your uid>
+Returns
+    200 OK
+        Question JSON object
+            Type
+            Question
+            CorrectAnswer
+            Answers[]
+    404 Not Found
+        No more questions in the list
+        Issue with getting question
+
+
+
+Submit Answer
+    Checks to see if the answer provided was correct
+    Updates score to reflect answer
+    Keeps track of everyone that has answered
+Call
+    api/quizzarr/submitAnswer?userID=<your uid>&answer=<string of answer>
+Returns
+    200 OK
+        A boolean value (true if question was answered correct)
+
+
+
+Get Leaderboard
+    Gets a list of users and their scores
+Call
+    api/quizzarr/getLeaderBoard?userID=<your uid>
+Returns
+    200 OK
+        Leaderboard JSON object
+            DisplayName
+            Score
+            HighestStreak
