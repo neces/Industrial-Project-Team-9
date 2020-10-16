@@ -287,7 +287,7 @@ namespace Quizzarr.Controllers
             foreach(User u in session.Users) {
                 leaderboard.Add(new Leaderboard(u.DisplayName, u.MyScore.Score, u.MyScore.highestStreak));
             }
-
+            leaderboard.Sort((a, b) => b.score.CompareTo(a.score));
             return Ok(leaderboard);
         }
 
