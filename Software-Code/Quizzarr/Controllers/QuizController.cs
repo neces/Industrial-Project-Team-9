@@ -19,37 +19,6 @@ namespace Quizzarr.Controllers
         {
             _repository = repository;
             _questionRepository = questionRepository;
-
-            // Sessions.Add(
-            //     new GameSession
-            //     {
-            //         SessionId="session01",
-            //         Users = new List<User>{
-            //             new User ("001", "Bob"),
-            //             new User ("002","Jan"),
-            //             new User ("003", "Joe")
-            //         },
-            //         Questions = new List<Question> {
-            //             new Question { id=0, type="MultiChoice", question="What is my name?", answer="Topu", topic="Personal", multiChoice_ID=0, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Jordan", "Cammy", "Melvin"} },
-            //             new Question { id=1, type="MultiChoice", question="What is my fav colour?", answer="Purple", topic="Personal", multiChoice_ID=1, numCorrect=1, numIncorrect=10, difficulty=(1/10), altAnswers= new List<string>{"Green", "Blue", "Red"} }
-            //         },
-            //         currentQuestion = 0
-            //     }
-            // );
-
-            // Sessions.Add(
-            //     new GameSession
-            //     {
-            //         SessionId="session02",
-            //         Users = new List<User>{
-            //             new User ("004", "Jordan"),
-            //             new User ("005","Topu"),
-            //             new User ("006", "Cammy")
-            //         },
-            //         Questions = new List<Question>(),
-            //         currentQuestion = 0
-            //     }
-            // );
         }
 
         // [HttpGet("{id}")]
@@ -222,19 +191,25 @@ namespace Quizzarr.Controllers
 
             return Ok(joinSession);
         }
+
+
+        // api/quizzarr/newUserAndJoin?displayName=<your name here>&sessionID=<session id>
+        [HttpGet("newUserAndJoin")]
+        public ActionResult<string> newUserAndJoinSession(string displayName, string sessionID) {
+
+            var result = (OkObjectResult)newUser(displayName).Result;
+            string userID = (string)result.Value;
+
+            JoinSession(userID, sessionID);
+
+            return Ok(userID);
+        }
+
         
         //api/quizzarr/startSession?hostUId=<your UID here>
         [HttpGet("startSession")]
         public ActionResult<PlaceholderType> StartSession(string hostUId)
         {
-            /*
-                Generate list of random question numbers to get from database
-                Get a list of questions
-                Populate session question list with that list
-                Mark session as "in progress" so that other users can no longer join
-                    Update join session func to reflect this
-                Push to all users in session that the game is starting
-            */
             List<Question> questions = _questionRepository.GetQuestionsSet();
 
             System.Console.WriteLine(questions.Count);
@@ -300,6 +275,21 @@ namespace Quizzarr.Controllers
             return Ok(ans);
         }
 
+
+        // api/quizzarr/getCorrectAnswer?userID=<your id here>
+        [HttpGet("getCorrectAnswer")]
+        public ActionResult <string> getCorrectAnswer(string userID) {
+
+            GameSession session = findSessionWithUser(userID);
+            if (session == null) { System.Console.WriteLine("Session not found"); return NotFound(); }
+
+            string answer = session.Questions[session.currentQuestion - 1].answer;
+            if (answer == null) { System.Console.WriteLine("Answer not found"); return NotFound(); }
+
+            return Ok(answer);
+        }
+
+
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
         public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
@@ -311,7 +301,7 @@ namespace Quizzarr.Controllers
             foreach(User u in session.Users) {
                 leaderboard.Add(new Leaderboard(u.DisplayName, u.MyScore.Score, u.MyScore.highestStreak));
             }
-            leaderboard.Sort((a, b) => b.score.CompareTo(a.score));
+
             return Ok(leaderboard);
         }
 

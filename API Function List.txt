@@ -1,21 +1,36 @@
-
-
 New User 
     Generates a unique user ID
     Adds user to list of known users
 Call
     api/quizzarr/newUser?displayName=<your name here>
+Call Type
+    GET
 Returns
     200 OK
         Unique user ID to be held by the client
 
 
 
+New User and Join Session
+    Creates a new user
+    Joins the session specified
+Call
+    api/quizzarr/newUserAndJoin?displayName<your name here>&sessionID<friends sessionID>
+Call Type
+    GET
+Returns
+    200 OK
+        Unique user ID to be held by the client
+
+        
+
 New Session
     Generates a new quiz session
     Adds user as the host of the session
 Call
     api/quizzarr/newSession?hostUId=<your uid>
+Call Type
+    GET
 Returns
     200 OK
         Unique quiz id (to be shared, used for others to join)
@@ -28,6 +43,8 @@ Join Session
     Adds a user to an existing quiz session
 Call
     api/quizzarr/joinSession?userID=<your uid>&sessionID=<friends sessionID>
+Call Type
+    GET
 Returns
     204 No Content
         Process was successful but no data needs to be returned
@@ -42,6 +59,8 @@ Start Session
     Starts a quiz session 
 Call
     api/quizzarr/startSession?hostUId=<your user id>
+Call Type
+    GET
 Returns
     204 No Content
         Process was successful but no data needs to be returned
@@ -57,6 +76,8 @@ Get Question
     Get the next question in the quiz
 Call
     api/quizzarr/getQuestion?userID=<your uid>
+Call Type
+    GET
 Returns
     200 OK
         Question JSON object
@@ -76,9 +97,23 @@ Submit Answer
     Keeps track of everyone that has answered
 Call
     api/quizzarr/submitAnswer?userID=<your uid>&answer=<string of answer>
+Call Type
+    GET
 Returns
     200 OK
         A boolean value (true if question was answered correct)
+
+
+
+Get Correct Answer
+    Retuns the correct answer for the question
+Call
+    api/quizzarr/getCorrectAnswer?userID=<your uid>
+Call Type
+    GET
+Returns
+    200 OK
+        String containing the answer
 
 
 
@@ -86,6 +121,8 @@ Get Leaderboard
     Gets a list of users and their scores
 Call
     api/quizzarr/getLeaderBoard?userID=<your uid>
+Call Type
+    GET
 Returns
     200 OK
         Leaderboard JSON object
@@ -99,6 +136,8 @@ Leave Session
     Removes a user from a session or the lobby
 Call
     api/quizzarr/leaveSession?userID=<your uid>
+Call Type
+    GET
 Returns
     204 No Content
         Process was successful but no data needs to be returned
