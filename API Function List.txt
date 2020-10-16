@@ -11,6 +11,19 @@ Returns
 
 
 
+New User and Join Session
+    Creates a new user
+    Joins the session specified
+Call
+    api/quizzarr/newUserAndJoin?displayName<your name here>&sessionID<friends sessionID>
+Call Type
+    GET
+Returns
+    200 OK
+        Unique user ID to be held by the client
+
+        
+
 New Session
     Generates a new quiz session
     Adds user as the host of the session
