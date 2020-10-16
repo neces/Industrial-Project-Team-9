@@ -3,14 +3,16 @@ import Main from './Main'
 
 const App = () => {
 
-  // logo can be loaded here already
-    return (
+  return (
     <div>
       <div className='app'>
-            <Main />
+        <div className='quiz-logo'>
+          <img src={require('./assets/Logo.png')} alt='Quiz Logo' width="400"></img>
+        </div>
+        <Main />
       </div>
     </div>
-    )
+  )
 }
 
 export default App
