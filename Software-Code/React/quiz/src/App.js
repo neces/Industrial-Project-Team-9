@@ -5,12 +5,10 @@ const App = () => {
 
   return (
     <div>
-      <div className='app'>
-        <div className='quiz-logo'>
-          <img src={require('./assets/Logo.png')} alt='Quiz Logo' width="400"></img>
-        </div>
-        <Main />
+      <div className='quiz-logo'>
+        <img src={require('./assets/Logo.png')} alt='Quiz Logo' width="280"></img>
       </div>
+        <Main />
     </div>
   )
 }
