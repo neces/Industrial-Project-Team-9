@@ -6,6 +6,7 @@ namespace Quizzarr.Models
     {
         public string SessionId { get; set; }
         public string QuizCode { get; set; }
+        public string HostID { get; set; }
         public List<User> Users { get; set; }
         public List<Question> Questions { get; set; }
 

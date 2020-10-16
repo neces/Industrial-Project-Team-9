@@ -45,6 +45,8 @@ Call
 Returns
     204 No Content
         Process was successful but no data needs to be returned
+    403 Forbidden
+        User id provided was not the host of the session, session wont start
     404 Not Found
         There was a problem with getting the session
         There was a problem with getting the questions
@@ -90,3 +92,15 @@ Returns
             DisplayName
             Score
             HighestStreak
+
+
+
+Leave Session
+    Removes a user from a session or the lobby
+Call
+    api/quizzarr/leaveSession?userID=<your uid>
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    404 Not Found
+        User id doesnt exist

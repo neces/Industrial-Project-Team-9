@@ -160,6 +160,7 @@ namespace Quizzarr.Controllers
             {
                 SessionId = newSessionId,
                 QuizCode = newQuizCode,
+                HostID = null,
                 Users = new List<User>(),
                 Questions = new List<Question>(),
                 currentQuestion = 0,
@@ -180,6 +181,7 @@ namespace Quizzarr.Controllers
             LobbyUsers.Remove(newUser);
             PrintLobbyUsers();
             newSession.Users.Add(newUser);
+            SetUpHost(newSession);
 
             Sessions.Add(newSession);
 
@@ -220,7 +222,7 @@ namespace Quizzarr.Controllers
 
             return Ok(joinSession);
         }
-
+        
         //api/quizzarr/startSession?hostUId=<your UID here>
         [HttpGet("startSession")]
         public ActionResult<PlaceholderType> StartSession(string hostUId)
@@ -238,6 +240,8 @@ namespace Quizzarr.Controllers
             System.Console.WriteLine(questions.Count);
 
             GameSession session = findSessionWithUser(hostUId);
+
+            if (!session.HostID.Equals(hostUId)) return Forbid();
 
             if ((questions == null) || (questions.Count <= 0) || (session == null)) return NotFound();
 
@@ -296,12 +300,6 @@ namespace Quizzarr.Controllers
             return Ok(ans);
         }
 
-
-        public ActionResult<PlaceholderType> getStatus()
-        {
-            return null;
-        }
-
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
         public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
@@ -315,6 +313,36 @@ namespace Quizzarr.Controllers
             }
 
             return Ok(leaderboard);
+        }
+
+        // api/quizzarr/leaveSession?userID=<your uid>
+        [HttpGet("leaveSession")]
+        public ActionResult <PlaceholderType> LeaveSession(string userID) {
+            bool userInSession = true;
+
+            GameSession session = findSessionWithUser(userID);
+            
+            User user = null;
+            if (session == null) {
+                user = GetUserInLobby(userID);
+                userInSession = false;
+            } else {
+                user = GetUserInSession(session, userID);
+            }
+            if (user == null) return NotFound();
+
+            if (userInSession) {
+                session.Users.Remove(user);
+
+                if (session.Users.Count <= 0) 
+                    Sessions.Remove(session);
+                else
+                    SetUpHost(session);
+            } else {
+                LobbyUsers.Remove(user);
+            }
+            
+            return NoContent();
         }
         
         
@@ -358,6 +386,18 @@ namespace Quizzarr.Controllers
                     return u;
 
             return null;
+        }
+
+        public User GetUserInLobby(string userID) {
+            foreach (User u in LobbyUsers)
+                if (userID.Equals(u.Id))
+                    return u;
+
+            return null;
+        }
+
+        public void SetUpHost(GameSession session) {
+            session.HostID = session.Users[0].Id;
         }
 
         // ==================================================================================
