@@ -300,6 +300,21 @@ namespace Quizzarr.Controllers
             return Ok(ans);
         }
 
+
+        // api/quizzarr/getCorrectAnswer?userID=<your id here>
+        [HttpGet("getCorrectAnswer")]
+        public ActionResult <string> getCorrectAnswer(string userID) {
+
+            GameSession session = findSessionWithUser(userID);
+            if (session == null) { System.Console.WriteLine("Session not found"); return NotFound(); }
+
+            string answer = session.Questions[session.currentQuestion - 1].answer;
+            if (answer == null) { System.Console.WriteLine("Answer not found"); return NotFound(); }
+
+            return Ok(answer);
+        }
+
+
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
         public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
