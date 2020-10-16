@@ -11,6 +11,7 @@ const Quiz = () => {
   const [showWaiting, setShowWaiting] = useState(true)
   const [gameSession, setGameSession] = useState([])
   const [questions, setQuestions] = useState([])
+  const timer = 15; // this is to be changed once variable is ready to be passed through from creation of quiz 
 
     const getGameSession = () => {
       //getGameSession request
@@ -57,6 +58,7 @@ const Quiz = () => {
       <div className='app'>
             <Question questions={questions} />
             <Answer questions={questions} getQuestion={getQuestion} />
+            <Timer timer={timer} />
       </div>
     </div>
     )
