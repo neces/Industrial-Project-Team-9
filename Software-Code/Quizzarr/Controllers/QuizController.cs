@@ -195,13 +195,14 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/newUserAndJoin?displayName=<your name here>&sessionID=<session id>
         [HttpGet("newUserAndJoin")]
-        public ActionResult newUserAndJoinSession(string displayName, string sessionID) {
+        public ActionResult<string> newUserAndJoinSession(string displayName, string sessionID) {
 
             var result = (OkObjectResult)newUser(displayName).Result;
+            string userID = (string)result.Value;
 
-            JoinSession((string)result.Value, sessionID);
+            JoinSession(userID, sessionID);
 
-            return NoContent();
+            return Ok(userID);
         }
 
         
