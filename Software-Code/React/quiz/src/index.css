@@ -20,7 +20,7 @@ body {
 }
 
 .app {
-  background-color: #252d4a;
+  background-color: #030A17;
   width: 450px;
   min-height: 200px;
   height: min-content;
@@ -28,10 +28,26 @@ body {
   padding: 20px;
   justify-content: space-evenly;
 }
-.quiz-logo{
+.quiz-logo {
   position: fixed;
   top: 0px;
   left: 50px;
+}
+.ready-graphic {
+  margin-left: auto;
+  margin-right: auto;
+}
+.start-form {
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  width: 50%;
+  padding-bottom: 30px;
+}
+input {
+  text-align: center;
+  height: 30px;
+  background-color: #191E24;
 }
 .score-section {
   font-size: 24px;

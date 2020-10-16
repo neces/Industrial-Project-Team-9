@@ -27,18 +27,18 @@ const Home = ({}) => {
   // for monday, there are no links in the upper right corner
   // add logo and ready for a quiz graphic
   return (
+
     <div>
-      <div className='app'>
-        <form onSubmit={postUserDetails}>
-          <div>
-            <input value={newQuizID} placeholder='Quiz ID' onChange={handleQuizIDChange}/>
-          </div>
-          <div>
-            <input value={newName} placeholder='Nickname' onChange={handleNameChange}/>
-          </div>
-          <button type="submit">START</button>
-        </form>
+      <div className='ready-graphic'>
+        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="450"></img>
       </div>
+      <form onSubmit={postUserDetails}>
+        <div className='start-form'>
+          <input value={newQuizID} placeholder='Quiz ID' onChange={handleQuizIDChange} />
+          <input value={newName} placeholder='Nickname' onChange={handleNameChange} />
+        </div>
+        <button type="submit">START</button>
+      </form>
     </div>
   )
 }
