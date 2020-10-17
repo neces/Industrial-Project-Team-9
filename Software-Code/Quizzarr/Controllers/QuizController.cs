@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Quizzarr.Data;
 using Quizzarr.Models;
+using Quizzarr.DTOs;
+using System.Linq;
 
 namespace Quizzarr.Controllers
 {
@@ -20,14 +22,6 @@ namespace Quizzarr.Controllers
             _repository = repository;
             _questionRepository = questionRepository;
         }
-
-        // [HttpGet("{id}")]
-        // public ActionResult<GameSession> GetSessionById(string id)
-        // {
-        //     var session = _repository.GetSessionById(id);
-
-        //     return Ok(session);
-        // }
 
         // api/quizzarr/gameSessionStatus?userId=<your UId here>
         [HttpGet("gameSessionStatus")]
@@ -217,7 +211,7 @@ namespace Quizzarr.Controllers
 
             try {
                 var resultSession = (OkObjectResult)JoinSession(userID, sessionID).Result;
-            } catch (System.Exception e) {
+            } catch (System.Exception) {
                 LeaveSession(userID);
                 return NotFound();
             }
@@ -249,8 +243,9 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/getQuestion?userID=<your user ID>
         [HttpGet("getQuestion")]
-        public ActionResult<Question> nextQuestion(string userID)
+        public ActionResult<QuestionReadDTO> nextQuestion(string userID)
         {
+            QuestionReadDTO qRead = new QuestionReadDTO();
 
             GameSession curSession = findSessionWithUser(userID);
 
@@ -265,7 +260,25 @@ namespace Quizzarr.Controllers
 
             if (question == null) return NotFound();
 
-            return Ok(question);
+            qRead.type = question.type;
+            qRead.question = question.question;
+
+            // ** THIS IS TEMPORARY - USE FOR THE CLIENT MEETING ONLY AND THEN REPLACE WITH THE GET ANSWER FUNCTION **
+            qRead.correctAnswer = question.answer;
+            
+            if (question.type.Equals("MultiChoice")) {
+                List<string> vals = new List<string>();
+                vals.Add(question.answer);
+                foreach(string ans in question.altAnswers)
+                    vals.Add(ans);
+
+                qRead.answers = vals.OrderBy(x => System.Guid.NewGuid()).ToList();
+            } else {
+                qRead.answers.Add("True");
+                qRead.answers.Add("False");
+            }
+
+            return Ok(qRead);
         }
 
         // api/quizzarr/submitAnswer?userID=<your user ID>&answer=<answer selected>
