@@ -21,6 +21,8 @@ Call Type
 Returns
     200 OK
         Unique user ID to be held by the client
+    404 Not Found
+        The session ID provided was not valid
 
         
 
