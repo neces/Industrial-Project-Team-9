@@ -1,44 +1,53 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 
 const Home = ({}) => {
-  const [ newQuizID, setQuizID ] = useState('')
-  const [ newName, setNewName ] = useState('')
+  const [ sessionID, setSessionID ] = useState('')
+  const [ displayName, setDisplayName ] = useState('')
+  const [ userID, setUserID ] = useState('')
+  const [ submitted, setSubmitted ] = useState(false)
 
-  const handleQuizIDChange = (event) => {
+  const handleSessionIDChange = (event) => {
     console.log(event.target.value)
-    setQuizID(event.target.value)
+    setSessionID(event.target.value)
   }
 
-  const handleNameChange = (event) => {
+  const handleDisplayNameChange = (event) => {
     console.log(event.target.value)
-    setNewName(event.target.value)
+    setDisplayName(event.target.value)
   }
 
-  const postUserDetails = (event) => {
-    console.log(newName)
-    console.log(newQuizID)
-    // new user call
-    // join session call
-    // store that data
-    // redirect to quiz
+  const sendUserDetails = (event) => {
+    event.preventDefault();
+    axios
+    .get('https://team9app.azurewebsites.net/api/quizzarr/newUserAndJoin', { params: {
+      displayName,
+      sessionID
+    }})
+    .then(response => {
+      console.log(response);
+      setUserID(response)
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    })
+    setSubmitted(true)
   }
 
-  // currently the text can't be seen when typing in because the text box is also white
-  // for monday, there are no links in the upper right corner
-  // add logo and ready for a quiz graphic
   return (
-
     <div>
       <div className='ready-graphic'>
-        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="450"></img>
+        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="500"></img>
       </div>
-      <form onSubmit={postUserDetails}>
+      <form onSubmit={sendUserDetails}>
         <div className='start-form'>
-          <input value={newQuizID} placeholder='Quiz ID' onChange={handleQuizIDChange} />
-          <input value={newName} placeholder='Nickname' onChange={handleNameChange} />
+          <input value={sessionID} placeholder='Quiz ID' onChange={handleSessionIDChange} />
+          <input value={displayName} placeholder='Nickname' onChange={handleDisplayNameChange} />
+        <button className='start-button' type="submit">START</button>
         </div>
-        <button type="submit">START</button>
       </form>
+      { submitted ? <Redirect to='/quiz'/> : null }
     </div>
   )
 }

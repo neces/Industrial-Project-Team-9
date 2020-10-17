@@ -11,27 +11,36 @@ const Quiz = () => {
   const [showWaiting, setShowWaiting] = useState(true)
   const [gameSession, setGameSession] = useState([])
   const [questions, setQuestions] = useState([])
-  const timer = 15; // this is to be changed once variable is ready to be passed through from creation of quiz 
+  let timer = 15 // this is to be changed once variable is ready to be passed through from creation of quiz 
 
     const getGameSession = () => {
-      //getGameSession request
-      // returns name, no. questions, no. rounds, time between rounds, time for question
-      // returns how many people have joined the session
-      // return if the game is in progress
+      console.log('getting question')
+      axios
+      .get('http://localhost:3001/questions') // api call not created yet
+      // .get('https://team9app.azurewebsites.net/api/quizzarr/', { params: { userID } })
+      .then(response => {
+        console.log('promise fulfilled')
+        setGameSession(response.data)
+      })
+      .catch(error => {
+        this.setState({ errorMessage: error.message })
+        console.error('There was an error!', error)
+      })
     }
 
     const getQuestion = () => {
       console.log('getting question')
       axios
-      .get('http://localhost:3001/questions')
+      .get('http://localhost:3001/questions') // api/quizzarr/getQuestion?userID=<your uid>
+      // .get('https://team9app.azurewebsites.net/api/quizzarr/getQuestion?', { params: { userID } })
       .then(response => {
         console.log('promise fulfilled')
         setQuestions(response.data)
         setLoading(false)
       })
       .catch(error => {
-        this.setState({ errorMessage: error.message });
-        console.error('There was an error!', error);
+        this.setState({ errorMessage: error.message })
+        console.error('There was an error!', error)
       })
     }
 
@@ -40,6 +49,10 @@ const Quiz = () => {
       getGameSession()
       // until it returns game in progress false, show waiting screen
       // when it returns true, set showWaiting to false and get question
+      // returns name, no. questions, no. rounds, time between rounds, time for question
+      // returns how many people have joined the session
+      // return if the game is in progress
+      // console.log(gameSession[0].questions)
       setTimeout(() => {
         setShowWaiting(false)
       }, 3000);
