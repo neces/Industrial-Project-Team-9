@@ -159,7 +159,7 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/joinSession?userID=<your id here>&sessionID=<friends quiz code>
         [HttpGet("joinSession")]
-        public ActionResult<PlaceholderType> JoinSession(string userId, string sessionID)
+        public ActionResult<string> JoinSession(string userId, string sessionID)
         {
             GameSession joinSession = null;
             foreach (GameSession session in Sessions)
@@ -189,7 +189,7 @@ namespace Quizzarr.Controllers
             PrintLobbyUsers();
             joinSession.Users.Add(user);
 
-            return Ok(joinSession);
+            return Ok(joinSession.SessionId);
         }
 
 
@@ -200,7 +200,12 @@ namespace Quizzarr.Controllers
             var result = (OkObjectResult)newUser(displayName).Result;
             string userID = (string)result.Value;
 
-            JoinSession(userID, sessionID);
+            try {
+                var resultSession = (OkObjectResult)JoinSession(userID, sessionID).Result;
+            } catch (System.Exception e) {
+                LeaveSession(userID);
+                return NotFound();
+            }
 
             return Ok(userID);
         }
