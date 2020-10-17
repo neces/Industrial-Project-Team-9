@@ -15,7 +15,7 @@ New Session
     Generates a new quiz session
     Adds user as the host of the session
 Call
-    api/quizzarr/newSession?hostUId=<your uid>
+    api/quizzarr/newSession?hostUId=<your UId here>&quizName=<quiz name here>&numberOfRounds=<number of rounds here>&numberOfQuestionsPerRound=<number of question per round here>&timeBetweenRounds=<time between rounds here>&timePerQuestion=<time per question here>
 Returns
     200 OK
         Unique quiz id (to be shared, used for others to join)
@@ -104,3 +104,23 @@ Returns
         Process was successful but no data needs to be returned
     404 Not Found
         User id doesnt exist
+
+
+
+Game Session Status
+    Gets the status of a game session given user id
+Call
+    api/quizzarr/gameSessionStatus?userId=<your UId here>
+Returns
+    200 OK
+        UserViewGameStatus JSON object
+            sessionId
+            quizName
+            numberOfUsers
+            gameInProgress
+            numberOfQuestions
+            currentQuestion
+            numberOfRounds
+            numberOfQuestionPerRound
+            timeBetweenRounds
+            timePerQuestion

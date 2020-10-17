@@ -60,7 +60,7 @@ namespace Quizzarr.Controllers
         //     return Ok(session);
         // }
 
-
+        // api/quizzarr/gameSessionStatus?userId=<your UId here>
         [HttpGet("gameSessionStatus")]
         public ActionResult<UserViewGameStatus> gameSessionStatus(string userId)
         {
@@ -77,10 +77,21 @@ namespace Quizzarr.Controllers
             UserViewGameStatus view = new UserViewGameStatus
             {
                 SessionId = gameSession.SessionId,
-                QuizCode = gameSession.QuizCode,
+                QuizName = gameSession.QuizName,
+                NumberOfUsers = gameSession.Users.Count,
+
+                gameInProgress = gameSession.gameInProgress,
+
+                NumberOfQuestions = gameSession.NumberOfQuestion,
                 currentQuestion = gameSession.currentQuestion,
-                gameInProgress = gameSession.gameInProgress
+
+                NumberOfRounds = gameSession.NumberOfRounds,
+                NumberOfQuestionPerRound = gameSession.NumberOfQuestionPerRound,
+                TimeBetweenRounds = gameSession.TimeBetweenRounds,
+                TimePerQuestion = gameSession.TimePerQuestion
             };
+
+            
 
             return Ok(view);
         }
@@ -133,9 +144,9 @@ namespace Quizzarr.Controllers
             return Ok(userId);
         }
 
-        // api/quizzarr/newSession?hostUId=<your UId here>
+        // api/quizzarr/newSession?hostUId=<your UId here>&quizName=<quiz name here>&numberOfRounds=<nor>&numberOfQuestionsPerRound=<norpr>&timeBetweenRounds=<tbr>&timePerQuestion=<tpq>
         [HttpGet("newSession")]
-        public ActionResult<string> NewSession(string hostUId)
+        public ActionResult<string> NewSession(string hostUId, string quizName, int numberOfRounds, int numberOfQuestionsPerRound, int timeBetweenRounds, int timePerQuestion)
         {
             System.Random rand = new System.Random(System.Guid.NewGuid().GetHashCode());
 
@@ -159,12 +170,16 @@ namespace Quizzarr.Controllers
             GameSession newSession = new GameSession
             {
                 SessionId = newSessionId,
-                QuizCode = newQuizCode,
+                QuizName = quizName,
                 HostID = null,
                 Users = new List<User>(),
                 Questions = new List<Question>(),
                 currentQuestion = 0,
-                gameInProgress = false
+                gameInProgress = false,
+                NumberOfRounds = numberOfRounds,
+                NumberOfQuestionPerRound = numberOfQuestionsPerRound,
+                TimeBetweenRounds = timeBetweenRounds,
+                TimePerQuestion = timePerQuestion
             };
 
             User newUser = null;
