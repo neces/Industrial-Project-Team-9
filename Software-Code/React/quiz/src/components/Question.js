@@ -4,6 +4,6 @@ const Question = ({ questions }) => (
     <div>
         {questions.question}
     </div>
-  );
+  )
 
   export default Question;

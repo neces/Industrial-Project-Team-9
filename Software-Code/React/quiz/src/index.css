@@ -94,7 +94,7 @@ input {
   position: relative;
   text-align: center;
   padding-bottom: 20px;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .question-count {
@@ -105,21 +105,16 @@ input {
   font-size: 28px;
 }
 
-.question-text {
+.question {
   margin-bottom: 30px;
-  margin-right: 8px;
   text-align: center;
-  font-size: larger;
+  font-size: 30px;
 }
 
-.timer-text {
-  background: rgb(230, 153, 12);
-  padding: 15px;
-  margin-top: 20px;
-  margin-right: 20px;
-  border: 5px solid rgb(255, 189, 67);
-  border-radius: 15px;
+.timer {
+  margin-top: 30px;
   text-align: center;
+  font-size: larger;
 }
 
 /* ANSWERS/RIGHT SECTION */
@@ -137,14 +132,13 @@ input {
 button {
   width: 100%;
   font-size: 30px;
-  color: #ffffff;
   background-color: #191E24;
-  border-radius: 15px;
+  border-radius: 5px;
   display: initial;
   padding: 5px;
   justify-content: flex-start;
   align-items: center;
-  border: 5px solid #234668; 
+  border: 1px solid #234668; 
   cursor: pointer;
 }
 
@@ -166,6 +160,40 @@ button:focus {
 
 button svg {
   margin-right: 5px;
+}
+
+/* LEADERBOARD */
+.leaderboard {
+  position: relative;
+  text-align: center;
+}
+
+.leaderboard-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* WAITING */
+.waiting {
+  padding: 10px;
+  margin-top: 120px;
+  position: relative;
+  text-align: center;
+}
+
+.quiz-name {
+  font-size: 45px;
+  position: relative;
+  text-align: center;
+}
+
+.waiting-text {
+  font-size: 30px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
 }
 
 /* LOADING SPINNER */

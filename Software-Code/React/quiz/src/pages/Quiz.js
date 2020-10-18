@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 import Timer from '../components/Timer'
-import Leaderboard from '../components/Leaderboard'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'
 
 const Quiz = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
@@ -12,7 +12,7 @@ const Quiz = () => {
   const [isTimeout, setIsTimeout] = useState(false)
   let timer = 15 // get game status and see what time it is
   const [questions, setQuestions] = useState([])
-  const cookies = new Cookies();
+  const cookies = new Cookies()
 
     const getQuestion = () => {
       console.log('Getting Question')
@@ -25,7 +25,7 @@ const Quiz = () => {
         setLoadingQuestion(false)
       })
       .catch(error => {
-        //console.log('There was an error!', error)
+        console.log('There was an error!', error)
         if (error.response.status === 404) {
           setShowLeaderboard(true)
         }
@@ -48,17 +48,16 @@ const Quiz = () => {
 
     return (
       <div>
-      <div>
         <div className='app'>
-              <Question questions={questions} />
+              <div className='question'><Question questions={questions} /></div>
               <Answer answers={questions.answers} type={questions.type} userID={cookies.get('userID')} />
-              <Timer timer={timer} correctAnswer={questions.correctAnswer}/>
+              <div className='timer'><Timer timer={timer} correctAnswer={questions.correctAnswer}/></div>
+              {/* <CorrectAnswer timer={timer} correctAnswer={questions.correctAnswer}/> */}
         </div>
         <div>
-          { showLeaderboard ? <Leaderboard userID={cookies.get('userID')}/> : null }
+          { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>
       </div>
-    </div>
   )
 }
 
