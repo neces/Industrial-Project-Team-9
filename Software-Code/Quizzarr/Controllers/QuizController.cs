@@ -224,11 +224,9 @@ namespace Quizzarr.Controllers
         [HttpGet("startSession")]
         public ActionResult<PlaceholderType> StartSession(string hostUId)
         {
-            List<Question> questions = _questionRepository.GetQuestionsSet();
-
-            System.Console.WriteLine(questions.Count);
-
             GameSession session = findSessionWithUser(hostUId);
+
+            List<Question> questions = _questionRepository.GetQuestionsSet(session.NumberOfQuestion);
 
             if (!session.HostID.Equals(hostUId)) return Forbid();
 
