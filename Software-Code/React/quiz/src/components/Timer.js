@@ -18,11 +18,11 @@ const Timer = ({ timer, correctAnswer }) => {
       }, 5000);
       setIsTimeout(true)
     }
-      return (
-        <div className="App">
-        <div>The correct answer is: {correctAnswer}</div>
-        </div>
-      )
+    return (
+      <div className="App">
+      <div></div>
+      </div>
+    )
   }
   else
   {

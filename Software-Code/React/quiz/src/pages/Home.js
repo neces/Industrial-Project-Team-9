@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'
 
 const Home = () => {
   const [ sessionID, setSessionID ] = useState('')
   const [ displayName, setDisplayName ] = useState('')
   const [ submitted, setSubmitted ] = useState(false)
-  const cookies = new Cookies();
+  const cookies = new Cookies()
 
   // if (cookies.get('userID') != null) {
   //   cookies.remove('userID')
