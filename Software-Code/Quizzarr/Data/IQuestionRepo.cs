@@ -7,5 +7,6 @@ namespace Quizzarr.Data
     {
         List<string> GetQuestionThemes();
         List<Question> GetQuestionsSet();
+        List<Question> GetQuestionsSet(int count);
     }
 }

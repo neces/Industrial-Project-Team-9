@@ -10,6 +10,11 @@ namespace Quizzarr.Data
             throw new System.NotImplementedException();
         }
 
+        public List<Question> GetQuestionsSet(int count)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<string> GetQuestionThemes()
         {
             throw new System.NotImplementedException();
