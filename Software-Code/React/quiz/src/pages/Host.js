@@ -1,6 +1,6 @@
 import React from "react";
 
-const Host = ({}) => {
+const Host = () => {
     console.log("host")
     return (
         <div>
@@ -9,4 +9,4 @@ const Host = ({}) => {
         )
 }
 
-export default Host;
+export default Host

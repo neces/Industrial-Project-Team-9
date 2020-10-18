@@ -1,51 +1,61 @@
-import React, {useState} from "react";
+import React, { useState } from "react"
+import axios from 'axios'
 
-const Answer = ({ questions, getQuestion }) => {
-    const [currentQuestion, setCurrentQuestion] = useState(0)
-    // state for round
+const Answer = ({ answers, type, userID }) => {
+    const [isAnswerRight, setIsAnswerRight] = useState(false)
 
-    const postScore = () => {
-        // sends answer and userid
+    const sendAnswer = (answer) => {
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/submitAnswer', { params: {
+        userID,
+        answer
+      }})
+      .then(response => {
+        console.log(response.data);
+        setIsAnswerRight(response.data)
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      })
     }
 
     const showAnswer = () => {
-        setTimeout(() => {
-          getQuestion()
-          console.log('Another question')
-        }, 3000);
-        console.log(questions[0].correctAnswer)
-        return <div className="App">{questions[0].correctAnswer}</div>
+      // color the correct answer
+      // after the timer is done
     }
     
     const handleAnswerOptionClick = (answer) => {
-        if (answer === questions[0].correctAnswer) {
-          postScore()
-        }
-        // button changes colour?
-  
-        setTimeout(() => {
-          console.log('Show answer') // call function
-          showAnswer()
-        }, 3000);
-  
-        //postScore
-        // question is just coloured, waiting for the timer to go off to show correct answer and request new data
-        setCurrentQuestion(currentQuestion + 1)
-        //getQuestion()
-  
-        // if check the number of current questions against total in the round to get the leaderboard
-    };
-
-    // answer component will be rendered based on question type
-    if (questions[0].type === "MultiChoice") { // if multiple choice or true false
-        return (
-            <div className='answer-section'>
-                {questions[0].answers.map((answer) => (
-                <button onClick={() => handleAnswerOptionClick(answer)} key={answer}>{answer}</button>
-                ))}
-            </div>
-         )
+        sendAnswer(answer)
+        // return (
+        //   <div className='answer-section'>
+        //     {questions.answers.map((answer) => (
+        //     <button disabled key={answer}>{answer}</button>
+        //     ))}
+        //   </div>
+        // )
+        // disable buttons
+        // colour the chosen button
     }
+
+  if (type === "MultiChoice") {
+      return (
+        <div className='answer-section'>
+          {answers.map((answer) => (
+          <button onClick={() => handleAnswerOptionClick(answer)} key={answer}>{answer}</button>
+          ))}
+        </div>
+      )
+    }
+
+  else if (type === "TrueFalse") {
+    return (
+      <div className='answer-section'>
+          {answers.map((answer) => (
+          <button onClick={() => handleAnswerOptionClick(answer)} key={answer}>{answer}</button>
+          ))}
+      </div>
+    )
+  }
 
     else { // estimation, writtenQ
         return (<></>)

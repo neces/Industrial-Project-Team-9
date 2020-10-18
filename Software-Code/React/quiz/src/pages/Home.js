@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import Cookies from 'universal-cookie';
 
-const Home = ({}) => {
+const Home = () => {
   const [ sessionID, setSessionID ] = useState('')
   const [ displayName, setDisplayName ] = useState('')
-  const [ userID, setUserID ] = useState('')
   const [ submitted, setSubmitted ] = useState(false)
+  const cookies = new Cookies();
+
+  // if (cookies.get('userID') != null) {
+  //   cookies.remove('userID')
+  // }
 
   const handleSessionIDChange = (event) => {
     console.log(event.target.value)
@@ -26,13 +31,13 @@ const Home = ({}) => {
       sessionID
     }})
     .then(response => {
-      console.log(response);
-      setUserID(response)
+      console.log(response.data);
+      cookies.set('userID', response.data, { path: '/' });
+      setSubmitted(true)
     })
     .catch(error => {
       console.error('There was an error!', error);
     })
-    setSubmitted(true)
   }
 
   return (
@@ -47,9 +52,9 @@ const Home = ({}) => {
         <button className='start-button' type="submit">START</button>
         </div>
       </form>
-      { submitted ? <Redirect to='/quiz'/> : null }
+      { submitted ? <Redirect to="/waiting"/> : null }
     </div>
   )
 }
 
-export default Home;
+export default Home
