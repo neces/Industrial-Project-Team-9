@@ -216,10 +216,9 @@ namespace Quizzarr.Controllers
                 return NotFound();
             }
 
-            return Ok(userID);
+            return Ok(userID);  
         }
 
-        
         //api/quizzarr/startSession?hostUId=<your UID here>
         [HttpGet("startSession")]
         public ActionResult<PlaceholderType> StartSession(string hostUId)
@@ -229,7 +228,7 @@ namespace Quizzarr.Controllers
             List<Question> questions = _questionRepository.GetQuestionsSet(session.NumberOfQuestion);
 
             if (!session.HostID.Equals(hostUId)) return Forbid();
-
+            
             if ((questions == null) || (questions.Count <= 0) || (session == null)) return NotFound();
 
             session.Questions = questions;
@@ -272,6 +271,7 @@ namespace Quizzarr.Controllers
 
                 qRead.answers = vals.OrderBy(x => System.Guid.NewGuid()).ToList();
             } else {
+                qRead.answers = new List<string>();
                 qRead.answers.Add("True");
                 qRead.answers.Add("False");
             }
