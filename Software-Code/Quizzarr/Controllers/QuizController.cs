@@ -302,6 +302,8 @@ namespace Quizzarr.Controllers
 
             GameSession curSession = findSessionWithUser(userID);
 
+            if (curSession == null) return NotFound();
+
             int qIndex = curSession.currentQuestion;
 
             GetUserInSession(findSessionWithUser(userID), userID).Answered = true;
