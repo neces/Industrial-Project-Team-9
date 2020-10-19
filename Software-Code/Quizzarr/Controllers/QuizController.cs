@@ -299,14 +299,17 @@ namespace Quizzarr.Controllers
         [HttpGet("submitAnswer")]
         public ActionResult<PlaceholderType> answerQuestion(string userID, string answer)
         {
-
             GameSession curSession = findSessionWithUser(userID);
 
             if (curSession == null) return NotFound();
 
             int qIndex = curSession.currentQuestion;
 
-            GetUserInSession(findSessionWithUser(userID), userID).Answered = true;
+            User user = GetUserInSession(findSessionWithUser(userID), userID);
+
+            if (user.Answered) return Forbid();
+
+            user.Answered = true;
 
             bool ans = false;
             if (answer.Equals(curSession.Questions[qIndex].answer)) {
