@@ -238,6 +238,22 @@ namespace Quizzarr.Controllers
         }
 
 
+        // api/quizzarr/admin/endSession?hostUId=<your uid herer>
+        [HttpGet("admin/endSession")]
+        public ActionResult EndSession(string hostUId) {
+
+            GameSession session = findSessionWithUser(hostUId);
+
+            if (session == null) return NotFound();
+
+            if (!session.HostID.Equals(hostUId)) return Forbid();
+
+            Sessions.Remove(session);
+
+            return NoContent();
+        }
+
+
         // api/quizzarr/getQuestion?userID=<your user ID>
         [HttpGet("getQuestion")]
         public ActionResult<QuestionReadDTO> nextQuestion(string userID)

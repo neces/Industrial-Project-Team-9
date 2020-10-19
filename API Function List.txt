@@ -74,6 +74,22 @@ Returns
 
 
 
+End Session
+    Deletes a session entirely
+Call
+    api/quizzarr/admin/endSession?hostUId=<your user id>
+Call Type
+    GET
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    403 Forbidden
+        User id provided was not the host of the session, session wont be deleted
+    404 Not Found
+        There was a problem with getting the session
+
+
+
 Get Question
     Get the next question in the quiz
 Call
