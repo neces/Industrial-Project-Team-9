@@ -29,7 +29,7 @@ namespace Quizzarr
             services.AddControllers();
 
             services.AddScoped<IQuizzarrRepo, InMemoryQuizzarrRepo>();
-            services.AddScoped<IQuestionRepo, MockQuestionRepo>();
+            services.AddScoped<IQuestionRepo, SqlQuestionRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
