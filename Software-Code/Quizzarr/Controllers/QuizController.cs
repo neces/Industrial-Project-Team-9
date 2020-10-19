@@ -111,15 +111,15 @@ namespace Quizzarr.Controllers
         [HttpGet("newSession")]
         public ActionResult<string> NewSession(string hostUId, string quizName, int numberOfRounds, int numberOfQuestionsPerRound, int timeBetweenRounds, int timePerQuestion)
         {
+            if (quizName == null || quizName == "") quizName = "Quizzar Quiz";
             System.Random rand = new System.Random(System.Guid.NewGuid().GetHashCode());
 
             string newSessionId = null;// rand.Next(999999).ToString();
-            string newQuizCode = (rand.Next(89999999) + 10000000).ToString();
 
             bool isFound = false;
             do
             {
-                newSessionId = rand.Next(999999).ToString();
+                newSessionId = (rand.Next(899999) + 100000).ToString();
                 foreach (GameSession session in Sessions)
                 {
                     if (newSessionId == session.SessionId)
