@@ -120,6 +120,8 @@ Call Type
 Returns
     200 OK
         A boolean value (true if question was answered correct)
+    404 Not Found
+        UserID provided is not a valid userID
 
 
 
