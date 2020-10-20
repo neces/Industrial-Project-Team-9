@@ -51,19 +51,16 @@ const WaitingHost = () => {
         return <div className="app">Loading game session</div>
     }
   
-    // number of questions per round
     return (
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>{gameSession.numberOfRounds} ROUND OF {gameSession.numberOfQuestionPerRound} QUESTIONS</div>
+          <div className='waiting-text'>TO JOIN THIS GAME TYPE IN</div>
+          <button className='quiz-id-button' disabled>{gameSession.sessionId}</button>
           <div className='waiting-text'></div>
           <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
           </div>
-          <div className="loadingio-spinner-ellipsis-8ty8wmpuhyh"><div className="ldio-ctuwgjg8ktk">
-          <div></div><div></div><div></div><div></div><div></div>
-          </div></div>
-          <button onClick={startSession}>START</button>
+          <button className='start-button' onClick={startSession}>START</button>
           { gameSession.gameInProgress ? <Redirect to="/quiz"/> : null }
         </div>
     )
