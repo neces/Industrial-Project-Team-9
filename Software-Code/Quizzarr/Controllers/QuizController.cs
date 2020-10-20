@@ -27,14 +27,6 @@ namespace Quizzarr.Controllers
         [HttpGet("gameSessionStatus")]
         public ActionResult<UserViewGameStatus> gameSessionStatus(string userId)
         {
-
-            /*
-                1. Get this users session / return 4xx code if no session exists for this user
-                2. create UserViewGameStatus instance
-                    2.1 populate this instance with data from the users game session
-                3. return the populated UserViewGameStatus instance
-            */
-
             GameSession gameSession = findSessionWithUser(userId);
 
             UserViewGameStatus view = new UserViewGameStatus
@@ -49,7 +41,7 @@ namespace Quizzarr.Controllers
                 currentQuestion = gameSession.currentQuestion,
 
                 NumberOfRounds = gameSession.NumberOfRounds,
-                NumberOfQuestionPerRound = gameSession.NumberOfQuestionPerRound,
+                NumberOfQuestionsPerRound = gameSession.NumberOfQuestionsPerRound,
                 TimeBetweenRounds = gameSession.TimeBetweenRounds,
                 TimePerQuestion = gameSession.TimePerQuestion
             };
@@ -140,7 +132,7 @@ namespace Quizzarr.Controllers
                 currentQuestion = 0,
                 gameInProgress = false,
                 NumberOfRounds = numberOfRounds,
-                NumberOfQuestionPerRound = numberOfQuestionsPerRound,
+                NumberOfQuestionsPerRound = numberOfQuestionsPerRound,
                 TimeBetweenRounds = timeBetweenRounds,
                 TimePerQuestion = timePerQuestion
             };

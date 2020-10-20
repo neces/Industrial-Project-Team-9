@@ -14,8 +14,8 @@ namespace Quizzarr.Models
         public bool gameInProgress { get; set; }
 
         public int NumberOfRounds { get; set; }
-        public int NumberOfQuestionPerRound {get; set;}
-        public int NumberOfQuestion { get { return NumberOfRounds * NumberOfQuestionPerRound; } }
+        public int NumberOfQuestionsPerRound {get; set;}
+        public int NumberOfQuestion { get { return NumberOfRounds * NumberOfQuestionsPerRound; } }
         public int TimeBetweenRounds { get; set; }
         public int TimePerQuestion { get; set; }
         
