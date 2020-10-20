@@ -258,6 +258,23 @@ button svg {
   text-align: center;
 }
 
+.quiz-id-button {
+  width: 294px;
+  font-size: 25px;
+  background-color: #4DB1B1;
+  border-radius: 5px;
+  display: initial;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #4DB1B1; 
+  cursor: default;
+  margin: 9px;
+}
+
+.quiz-id-button:hover {
+  background-color: #4DB1B1;
+}
+
 /* LOADING SPINNER */
 @keyframes ldio-ctuwgjg8ktk {
    0% { transform: translate(20px,88px) scale(0); }
