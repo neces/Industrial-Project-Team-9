@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import Timer from '../components/Timer'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
+import CorrectAnswer from '../components/CorrectAnswer'
 import Cookies from 'universal-cookie'
 
 const Quiz = () => {
@@ -51,8 +52,8 @@ const Quiz = () => {
         <div className='app'>
               <div className='question'><Question questions={questions} /></div>
               <Answer answers={questions.answers} type={questions.type} userID={cookies.get('userID')} />
-              <div className='timer'><Timer timer={timer} correctAnswer={questions.correctAnswer}/></div>
-              {/* <CorrectAnswer timer={timer} correctAnswer={questions.correctAnswer}/> */}
+              <div className='timer'><Timer timer={timer} /></div>
+              <CorrectAnswer correctAnswer={questions.correctAnswer}/>
         </div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
