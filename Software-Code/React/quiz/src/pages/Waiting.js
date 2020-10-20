@@ -38,13 +38,11 @@ const Waiting = () => {
         return <div className="app">Loading game session</div>
     }
   
-    // number of questions per round
-    // roundS? naming and grammar
     return (
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>{gameSession.numberOfRounds} ROUND OF {gameSession.numberOfQuestionPerRound} QUESTIONS</div>
+          <div className='waiting-text'>{gameSession.numberOfRounds} ROUND(S) OF {gameSession.numberOfQuestionsPerRound} QUESTIONS</div>
           <div className='waiting-text'></div>
           <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
           </div>
