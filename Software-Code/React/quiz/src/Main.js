@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Host from './pages/Host'
 import Quiz from './pages/Quiz'
 import Waiting from './pages/Waiting'
+import WaitingHost from './pages/WaitingHost'
 import Leaderboard from './pages/Leaderboard'
 
 const Main = () => {
@@ -14,6 +15,7 @@ const Main = () => {
       <Route exact path='/host' component={Host}></Route>
       <Route exact path='/quiz' component={Quiz}></Route>
       <Route exact path='/waiting' component={Waiting}></Route>
+      <Route exact path='/hosting' component={WaitingHost}></Route>
       <Route exact path='/leaderboard' component={Leaderboard}></Route>
     </Switch>
   )

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 
-const Waiting = () => {
+const WaitingHost = () => {
     const [isLoadingGame, setLoadingGame] = useState(true)
     const [isTimeout, setIsTimeout] = useState(false)
     const [gameSession, setGameSession] = useState([])
@@ -17,6 +17,19 @@ const Waiting = () => {
           console.log('promise fulfilled')
           setGameSession(response.data)
           setLoadingGame(false)
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.error('There was an error!', error)
+        })
+      }
+    
+      const startSession = () => {
+        console.log('Starting Session')
+        axios
+        .get('https://team9app.azurewebsites.net/api/quizzarr/startSession', { params: { hostUId: cookies.get('userID') } })
+        .then(response => {
+          console.log('promise fulfilled')
           console.log(response.data)
         })
         .catch(error => {
@@ -39,7 +52,6 @@ const Waiting = () => {
     }
   
     // number of questions per round
-    // roundS? naming and grammar
     return (
         <div className='app'>
           <div className='waiting'>
@@ -51,9 +63,10 @@ const Waiting = () => {
           <div className="loadingio-spinner-ellipsis-8ty8wmpuhyh"><div className="ldio-ctuwgjg8ktk">
           <div></div><div></div><div></div><div></div><div></div>
           </div></div>
+          <button onClick={startSession}>START</button>
           { gameSession.gameInProgress ? <Redirect to="/quiz"/> : null }
         </div>
     )
 }
 
-  export default Waiting
+  export default WaitingHost
