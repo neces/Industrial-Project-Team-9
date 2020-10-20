@@ -42,16 +42,16 @@ const Home = () => {
 
   return (
     <div>
-      <Link to="/host"><div className='host-link'>HOST</div></Link>
       <div className='ready-graphic'>
         <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="500"></img>
       </div>
+      { quizFound ? null : <div>Quiz ID not found or nickname already taken</div> }
       <form onSubmit={sendUserDetails}>
         <div className='start-form'>
           <input required title="Quiz ID should be 6 digits." pattern="\d{6}" value={sessionID} placeholder='Quiz ID' onChange={handleSessionIDChange} />
           <input required value={displayName} placeholder='Nickname' onChange={handleDisplayNameChange} />
         <button className='start-button' type="submit">START</button>
-        { quizFound ? null : <div>Quiz ID not found</div> }
+        <Link to="/host"><button className='host-home-button'>HOST</button></Link>
         </div>
       </form>
       { submitted ? <Redirect to="/waiting"/> : null }

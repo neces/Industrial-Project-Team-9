@@ -27,7 +27,7 @@ const Leaderboard = ({ }) => {
         return <div className="app"></div>
     }
 
-    // not returning rank, should be properly formatted
+    // formatted with podiums
     return (
         <div>
             <div className='leaderboard'>
