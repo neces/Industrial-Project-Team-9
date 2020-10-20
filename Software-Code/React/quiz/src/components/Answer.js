@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ answers, type, userID }) => {
-    const [isAnswerRight, setIsAnswerRight] = useState(false)
-    const [answered, setAnswered] = useState(false)
+const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer }) => {
+    const [selected, setSelected] = useState('')
+    const [isSelected, setIsSelected] = useState(false)
 
     const sendAnswer = (answer) => {
       axios
@@ -13,40 +13,94 @@ const Answer = ({ answers, type, userID }) => {
       }})
       .then(response => {
         console.log(response.data);
-        setIsAnswerRight(response.data)
+        console.log("Answer sent")
       })
       .catch(error => {
         console.error('There was an error!', error);
       })
     }
     
-    const handleAnswerOptionClick = (answer) => {
-        sendAnswer(answer)
+    const handleClassNameSelected = ( answer ) => {
+      if (answer === correctAnswer) return 'button-correct' // this should be commented out
+      if (answer === selected) return 'button-selected'
+      else return 'button-normal'
     }
+
+    const handleClassNameCorrect = ( answer ) => {
+      if (answer === correctAnswer) return 'button-correct'
+      else if (answer === selected) return 'button-selected'
+      else return 'button-normal'
+    }
+
+    // this now shows both selected and correct at the same time
+    const OnFilterAnswer = ( isSelected ) => {   
+      if (isSelected === true) { // set selected
+        return(
+          <div>
+            <div className='answer-section'>{answers.map(answer => 
+               <button
+                 key={answer}
+                 className={handleClassNameSelected(answer)}
+                 disabled={true}>{answer}</button>)}</div>
+              </div>)
+      }
+      else if (isSelected === false) { // when timer is out, the state filter answer is set to true but it's not getting rerendered
+        return(
+          <div>
+            <div className='answer-section'>{answers.map(answer => 
+               <button
+                 key={answer}
+                 className={handleClassNameCorrect(answer)}
+                 disabled={true}>{answer}</button>)}</div>
+              </div>)
+      }
+    }
+
+    const handleAnswerOptionClick = (answer) => {
+      setSelected(answer)
+      setIsSelected(true)
+      sendAnswer(answer)
+      handleFilterAnswer() // this is where selected function should be called
+      console.log("Click Answer")
+  }
 
   if (type === "MultiChoice") {
-      return (
-        <div className='answer-section'>
-          {answers.map((answer) => (
-          <button onClick={() => handleAnswerOptionClick(answer)} key={answer}>{answer}</button>
-          ))}
-        </div>
-      )
-    }
-
-  else if (type === "TrueFalse") {
     return (
       <div className='answer-section'>
-          {answers.map((answer) => (
-          <button onClick={() => handleAnswerOptionClick(answer)} key={answer}>{answer}</button>
-          ))}
-      </div>
+        {filterAnswer ? 
+          OnFilterAnswer(isSelected)
+           :
+        <div className='answer-section'>{answers.map((answer) => (
+          <button
+          key={answer}
+          className="button-normal"
+          disabled={false}
+          onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
+        ))}</div>}
+    </div>
     )
   }
 
-    else { // estimation, writtenQ
-        return (<></>)
-    }
+else if (type === "TrueFalse") {
+  return (
+    <div className='answer-section'>
+        {filterAnswer ? 
+          OnFilterAnswer(isSelected)
+           :
+        <div className='answer-section'>{answers.map((answer) => (
+          <button
+          key={answer}
+          className="button-normal"
+          disabled={false}
+          onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
+        ))}</div>}
+    </div>
+  )
+}
+
+  else { // estimation, writtenQ
+      return (<></>)
+  }
 }
 
   export default Answer;

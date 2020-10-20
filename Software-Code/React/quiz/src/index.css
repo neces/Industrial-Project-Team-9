@@ -159,7 +159,7 @@ input {
   justify-content: space-between;
 }
 
-button {
+.button-normal {
   width: 100%;
   font-size: 30px;
   background-color: #191E24;
@@ -172,15 +172,45 @@ button {
   cursor: pointer;
 }
 
-.correct {
-  background-color: #2f922f;
+.button-selected {
+  width: 100%;
+  font-size: 30px;
+  background-color: #A41ABB;
+  border-radius: 5px;
+  display: initial;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #234668; 
+  cursor: pointer;
 }
 
-.incorrect {
-  background-color: #ff3333;
+.button-correct {
+  width: 100%;
+  font-size: 30px;
+  background-color: #4DB1B1;
+  border-radius: 5px;
+  display: initial;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #234668; 
+  cursor: pointer;
 }
 
-button:hover {
+.button-normal:disabled {
+  cursor: default;
+}
+
+.button-selected:disabled {
+  cursor: default;
+}
+
+.button-correct:disabled {
+  cursor: default;
+}
+
+.button-normal:hover:enabled {
   background-color: #555e7d;
 }
 

@@ -4,14 +4,15 @@ import { Redirect } from 'react-router-dom'
 import Timer from '../components/Timer'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
-import CorrectAnswer from '../components/CorrectAnswer'
 import Cookies from 'universal-cookie'
 
 const Quiz = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isLoadingQuestion, setLoadingQuestion] = useState(true)
   const [isTimeout, setIsTimeout] = useState(false)
-  let timer = 15 // get game status and see what time it is
+  const [filterAnswer, setFilterAnswer] = useState(false)
+  //const [timer, setTimer] = useState('')
+  let timer = 15
   const [questions, setQuestions] = useState([])
   const cookies = new Cookies()
 
@@ -23,6 +24,7 @@ const Quiz = () => {
         console.log('promise fulfilled')
         console.log(response.data)
         setQuestions(response.data)
+        setFilterAnswer(false)
         setLoadingQuestion(false)
       })
       .catch(error => {
@@ -31,6 +33,7 @@ const Quiz = () => {
           setShowLeaderboard(true)
         }
       })
+      setLoadingQuestion(false);
     }
 
     if (isLoadingQuestion) {
@@ -39,7 +42,10 @@ const Quiz = () => {
       return <div className="App"></div>
     }
 
+    // if timer is empty set the timer - just do it once
+
     if (isTimeout === false) {
+      setFilterAnswer(false)
       setTimeout(() => {
         getQuestion()
         setIsTimeout(false)
@@ -47,13 +53,25 @@ const Quiz = () => {
       setIsTimeout(true)
     }
 
+    const handleFilterAnswer = () =>{
+        console.log("Filter answer is true")
+        setFilterAnswer(true)
+        // force to rerender answer
+    }
+
     return (
       <div>
         <div className='app'>
               <div className='question'><Question questions={questions} /></div>
-              <Answer answers={questions.answers} type={questions.type} userID={cookies.get('userID')} />
-              <div className='timer'><Timer timer={timer} /></div>
-              <CorrectAnswer correctAnswer={questions.correctAnswer}/>
+              <Answer 
+              type = {questions.type}
+              answers = {questions.answers}
+              correctAnswer = {questions.correctAnswer}
+              userID = {cookies.get('userID')}
+              filterAnswer = {filterAnswer}
+              handleFilterAnswer = {()=>handleFilterAnswer()}
+              />
+              <div className='timer'><Timer timer={timer} handleFilterAnswer={()=>handleFilterAnswer()}/></div>
         </div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
