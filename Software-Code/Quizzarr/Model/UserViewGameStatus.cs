@@ -12,7 +12,7 @@ namespace Quizzarr.Models
         public int currentQuestion { get; set; }
         
         public int NumberOfRounds { get; set; }
-        public int NumberOfQuestionPerRound { get; set; }
+        public int NumberOfQuestionsPerRound { get; set; }
         public int TimeBetweenRounds { get; set; }
         public int TimePerQuestion { get; set; }
 
