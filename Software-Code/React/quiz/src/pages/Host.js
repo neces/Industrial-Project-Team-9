@@ -103,7 +103,7 @@ const createSession = () => {
       <form onSubmit={sendUserDetails}>
         <div className='host-form'>
 
-        <label>Nickname</label>
+        <label>Your Nickname</label>
           <input required value={displayName} onChange={handleDisplayNameChange} />
 
           <label>Quiz Name</label>
@@ -115,10 +115,10 @@ const createSession = () => {
           <label>Questions per Round</label>
           <input title="Select the number of questions per round between 1 and 50." pattern="[1-9]|[0-4][0-9]|[5][0]" value={numberOfQuestionsPerRound} placeholder='10' onChange={handleNoQuestionsChange} />
 
-          <label>Time between Rounds (min)</label>
+          <label>Time between Rounds (minutes)</label>
           <input title="Select the time between rounds between 1 and 30 minutes." pattern="[1-9]|[0-2][0-9]|[3][0]" value={timeBetweenRounds} placeholder='5' onChange={handleTimeRoundsChange} />
 
-          <label>Time per Question (s)</label>
+          <label>Time per Question (seconds)</label>
           <input title="Select time per question between 1 and 100 seconds." pattern="[1-9]|[0-9][0-9]|[1][0][0]" value={timePerQuestion} placeholder='15' onChange={handleTimeQuestionsChange} />
 
         <button className='host-button' type="submit">HOST</button>

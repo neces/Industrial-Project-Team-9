@@ -56,6 +56,24 @@ body {
 }
 
 .start-button {
+  margin-top: 20px;
+  width: 294px;
+  font-size: 25px;
+  background-color: #A41ABB;
+  border-radius: 5px;
+  display: initial;
+  justify-content: flex-start;
+  align-items: center;
+  border: 0px solid #ffffff; 
+  cursor: pointer;
+  margin: 9px;
+}
+
+.start-button:hover {
+  background-color: #A41ABB;
+}
+
+.host-home-button {
   width: 294px;
   font-size: 25px;
   background-color: #030A17;
@@ -68,7 +86,12 @@ body {
   margin: 9px;
 }
 
-.start-button:hover {
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+.host-home-button:hover {
   background-color: #030A17;
 }
 
