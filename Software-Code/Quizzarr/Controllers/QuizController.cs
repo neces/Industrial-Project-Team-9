@@ -186,6 +186,8 @@ namespace Quizzarr.Controllers
             }
             if (user == null) return NotFound();
 
+            if (GetNicknameInSession(user.DisplayName, joinSession)) return NotFound();
+
             LobbyUsers.Remove(user);
             PrintLobbyUsers();
             joinSession.Users.Add(user);
@@ -422,6 +424,14 @@ namespace Quizzarr.Controllers
                     return u;
 
             return null;
+        }
+
+        public bool GetNicknameInSession(string nickname, GameSession session) {
+            foreach (User u in session.Users)
+                if (nickname.Equals(u.DisplayName))
+                    return true;
+
+            return false;
         }
 
         public User GetUserInLobby(string userID) {
