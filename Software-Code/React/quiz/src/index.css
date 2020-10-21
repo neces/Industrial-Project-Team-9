@@ -321,6 +321,15 @@ only screen and (max-width: 425px),
     position: relative;
     left: 0;
   }
+  .leaderboard {
+    width: 400px;
+  }
+  .leaderboard img {
+    width: 400px;
+  }
+  .leaderboard-text {
+    font-size: 15px;
+  }
 }
 
 .quiz-id-button {
