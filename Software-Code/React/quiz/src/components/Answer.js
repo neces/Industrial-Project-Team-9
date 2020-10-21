@@ -56,6 +56,10 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
+    if(filterAnswer===true&&isSelected===false){
+      console.log("Time is out,send null answer")
+      // sendAnswer("");
+    }
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
       setIsSelected(true)
