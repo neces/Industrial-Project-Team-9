@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut }) => {
+const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut,handleIsSelected,isSelected }) => {
     const [selected, setSelected] = useState('')
-    const [isSelected, setIsSelected] = useState(false)
 
 
     const sendAnswer = (answer) => {
@@ -62,24 +61,12 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     if(isTimeOut===true&&isSelected===false){
       console.log("send null answer")
         sendAnswer("")
-        setIsSelected(true)
-        setTimeout(()=>{
-          setIsSelected(false)
-          console.log("setSelectedFalse") 
-        },5050) 
-         /* It is almost the same time as setTimeOut function in Timer.js 
-         As the counter is set, and question is got, the selected will set false.
-         But a little after setTimer, it can fix the conflict when re-render the question and then setSelected false.
-         */
+        handleIsSelected() 
         }
 
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
-      setIsSelected(true)
-      setTimeout(()=>{
-        setIsSelected(false)
-        console.log("setSeletedFalse")
-      },20000)
+      handleIsSelected()
       sendAnswer(answer)
       handleFilterAnswer() // this is where selected function should be called
       console.log("Click Answer")

@@ -16,7 +16,7 @@ const Quiz = () => {
   const [timer, setTimer] = useState('')
   const [questions, setQuestions] = useState([])
   const cookies = new Cookies()
-
+  const [isSelected,setIsSelected] = useState(false)
   const [isTimeOut,setIsTimeOut] = useState(false)
 
     const getQuestion = () => {
@@ -95,7 +95,13 @@ const Quiz = () => {
 
     const resetTimeIsOut = () =>{
       setIsTimeOut(false)
+      setIsSelected(false)
       console.log("resetisTimeOut",isTimeOut)
+    }
+
+    const handleIsSelected = () =>{
+      setIsSelected(true)
+      console.log("handleisTimeOut",isTimeOut)
     }
     return (
       <div>
@@ -109,6 +115,8 @@ const Quiz = () => {
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
               isTimeOut= {isTimeOut}
+              isSelected={isSelected}
+              handleIsSelected={()=>{handleIsSelected()}}
               />
         </div>
         <div className='timer'>
