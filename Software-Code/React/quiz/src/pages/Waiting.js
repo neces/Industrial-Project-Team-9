@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+import Leave from '../components/Leave'
 
 const Waiting = () => {
     const [isLoadingGame, setLoadingGame] = useState(true)
@@ -50,6 +51,7 @@ const Waiting = () => {
           <div></div><div></div><div></div><div></div><div></div>
           </div></div>
           { gameSession.gameInProgress ? <Redirect to="/quiz"/> : null }
+          <Leave userID={cookies.get('userID')}/>
         </div>
     )
 }

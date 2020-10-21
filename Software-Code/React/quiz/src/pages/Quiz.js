@@ -5,19 +5,21 @@ import Timer from '../components/Timer'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import Cookies from 'universal-cookie'
+import Leave from '../components/Leave'
 
 const Quiz = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isLoadingQuestion, setLoadingQuestion] = useState(true)
+  const [isLoadingTimer, setLoadingTimer] = useState(true)
   const [isTimeout, setIsTimeout] = useState(false)
   const [filterAnswer, setFilterAnswer] = useState(false)
-  //const [timer, setTimer] = useState('')
-  let timer = 15
+  const [timer, setTimer] = useState('')
   const [questions, setQuestions] = useState([])
   const cookies = new Cookies()
 
     const getQuestion = () => {
       console.log('Getting Question')
+      setFilterAnswer(false)
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/getQuestion', { params: { userID: cookies.get('userID') } })
       .then(response => {
@@ -35,33 +37,52 @@ const Quiz = () => {
       setLoadingQuestion(false);
     }
 
+    const getTimer = () => {
+      console.log('Getting Timer')
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/gameSessionStatus', { params: { userID: cookies.get('userID') } })
+      .then(response => {
+        console.log('promise fulfilled')
+        console.log(response.data)
+        setTimer(response.data.timePerQuestion)
+        setLoadingTimer(false)
+      })
+      .catch(error => {
+        console.log('There was an error!', error)
+        if (error.response.status === 404) {
+        }
+      })
+    }
+
     if (isLoadingQuestion) {
       console.log('loading questions')
       getQuestion()
       return <div className="App"></div>
     }
 
-    // if timer is empty set the timer - just do it once
+    if (isLoadingTimer) {
+      console.log('loading timer')
+      getTimer()
+      return <div className="App"></div>
+    }
 
     if (isTimeout === false) {
       setTimeout(() => {
         setFilterAnswer(false)
         getQuestion()
         setIsTimeout(false)
-      }, 20000);
+      }, (timer * 1000 + 5000));
       setIsTimeout(true)
     }
 
     const handleFilterAnswer = () =>{
         console.log("Filter answer is true")
         setFilterAnswer(true)
-        // force to rerender answer
     }
 
     const resetFilterAnswer = () =>{
-      console.log("Filter answer is false")
+      console.log("resetFilterAnswer")
       setFilterAnswer(false)
-      // force to rerender answer
   }
 
     return (
@@ -85,6 +106,7 @@ const Quiz = () => {
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>
+        <Leave userID={cookies.get('userID')}/>
       </div>
   )
 }
