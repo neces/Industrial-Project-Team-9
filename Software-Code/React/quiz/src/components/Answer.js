@@ -24,7 +24,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     const handleClassNameSelected = ( answer ) => {
         if(answer === selected) return 'button-selected'
         else return 'button-normal'
-
+    }
     const handleClassNameCorrect = ( answer ) => {   
         if (answer === correctAnswer) return 'button-correct'
         if(answer === selected) return 'button-selected'
