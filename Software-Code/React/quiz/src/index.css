@@ -31,9 +31,8 @@ body {
 }
 
 .quiz-logo {
-  position: fixed;
-  top: 0px;
-  left: -5px;
+  position: relative;
+  top: 0;
 }
 
 .host-link {
@@ -256,6 +255,19 @@ button svg {
   padding: 20px;
   position: relative;
   text-align: center;
+}
+@media 
+only screen and (max-width: 425px),
+(min-device-width: 320px) and (max-device-width: 425px)  {
+
+	.answer-section { 
+		display: block; 
+  }
+  .question {
+    margin-left: 10vh;
+    margin-right: 10vh;
+    font-size: larger;
+  }
 }
 
 /* LOADING SPINNER */
