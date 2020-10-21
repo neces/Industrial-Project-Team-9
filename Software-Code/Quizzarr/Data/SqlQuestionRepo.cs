@@ -15,6 +15,8 @@ namespace Quizzarr.Data
         string sConnectionString;
         SqlConnection objConn;
 
+
+        // Constructor
         public SqlQuestionRepo()
         {
             sConnectionString = "Server=tcp:mysqlserverteam9.database.windows.net,1433;" +
@@ -28,11 +30,8 @@ namespace Quizzarr.Data
             objConn = new SqlConnection(sConnectionString);
         }
 
-        public List<Question> GetQuestionsSet()
-        {
-            throw new System.NotImplementedException();
-        }
 
+        // Returns a list of questions from the database
         public List<Question> GetQuestionsSet(int count)
         {
             List<Question> questions = new List<Question>();
@@ -102,9 +101,5 @@ namespace Quizzarr.Data
             return output;
         }
 
-        public List<string> GetQuestionThemes()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
