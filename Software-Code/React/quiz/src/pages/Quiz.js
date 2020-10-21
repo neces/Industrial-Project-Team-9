@@ -15,6 +15,7 @@ const Quiz = () => {
   const [filterAnswer, setFilterAnswer] = useState(false)
   const [timer, setTimer] = useState('')
   const [questions, setQuestions] = useState([])
+  const [correctAnswer, setCorrectAnswer] = useState('')
   const cookies = new Cookies()
 
   const [isTimeOut,setIsTimeOut] = useState(false)
@@ -90,6 +91,7 @@ const Quiz = () => {
 
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
+      setCorrectAnswer(questions.correctAnswer)
       console.log("handleisTimeOut",isTimeOut)
     }
 
@@ -104,7 +106,7 @@ const Quiz = () => {
               <Answer 
               type = {questions.type}
               answers = {questions.answers}
-              correctAnswer = {questions.correctAnswer}
+              correctAnswer = {correctAnswer}
               userID = {cookies.get('userID')}
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
