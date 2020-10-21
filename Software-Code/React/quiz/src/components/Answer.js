@@ -22,6 +22,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     const handleClassNameSelected = ( answer ) => {
+<<<<<<< Updated upstream
       if (answer === correctAnswer) return 'button-correct' // this should be commented out
       else if (answer === selected) return 'button-selected'
       else return 'button-normal'
@@ -31,6 +32,15 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       if (answer === correctAnswer) return 'button-correct'
       else if (answer === selected) return 'button-selected'
       else return 'button-normal'
+=======
+        if(answer === selected) return 'button-selected'
+        else return 'button-normal'
+    }
+    const handleClassNameCorrect = ( answer ) => {   
+        if (answer === correctAnswer) return 'button-correct'
+        if(answer === selected) return 'button-selected'
+        else return 'button-normal'
+>>>>>>> Stashed changes
     }
 
     // this now shows both selected and correct at the same time
@@ -57,6 +67,14 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
+<<<<<<< Updated upstream
+=======
+    if(isTimeOut===true&&isSelected===false){
+      console.log("Time is out,send null answer")
+      sendAnswer("");
+    }
+
+>>>>>>> Stashed changes
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
       setIsSelected(true)
