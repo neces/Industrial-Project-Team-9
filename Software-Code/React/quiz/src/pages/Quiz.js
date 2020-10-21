@@ -17,15 +17,17 @@ const Quiz = () => {
   const [questions, setQuestions] = useState([])
   const cookies = new Cookies()
 
+  const [isTimeOut,setIsTimeOut] = useState(false)
+
     const getQuestion = () => {
       console.log('Getting Question')
+      setFilterAnswer(false)
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/getQuestion', { params: { userID: cookies.get('userID') } })
       .then(response => {
         console.log('promise fulfilled')
         console.log(response.data)
         setQuestions(response.data)
-        setFilterAnswer(false)
         setLoadingQuestion(false)
       })
       .catch(error => {
@@ -67,8 +69,8 @@ const Quiz = () => {
     }
 
     if (isTimeout === false) {
-      setFilterAnswer(false)
       setTimeout(() => {
+        setFilterAnswer(false)
         getQuestion()
         setIsTimeout(false)
       }, (timer * 1000 + 5000));
@@ -77,10 +79,24 @@ const Quiz = () => {
 
     const handleFilterAnswer = () =>{
         console.log("Filter answer is true")
+        
         setFilterAnswer(true)
-        // force to rerender answer
     }
 
+    const resetFilterAnswer = () =>{
+      console.log("resetFilterAnswer")
+      setFilterAnswer(false)
+  }
+
+    const handleIsTimeOut = () =>{
+      setIsTimeOut(true)
+      console.log("handleisTimeOut",isTimeOut)
+    }
+
+    const resetTimeIsOut = () =>{
+      setIsTimeOut(false)
+      console.log("resetisTimeOut",isTimeOut)
+    }
     return (
       <div>
         <div className='app'>
@@ -92,9 +108,16 @@ const Quiz = () => {
               userID = {cookies.get('userID')}
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
+              isTimeOut= {isTimeOut}
               />
         </div>
-        <div className='timer'><Timer timer={timer} handleFilterAnswer={()=>handleFilterAnswer()}/></div>
+        <div className='timer'>
+          <Timer 
+          timer={timer} 
+          handleFilterAnswer={()=>handleFilterAnswer()}
+          resetFilterAnswer={() =>resetFilterAnswer()}
+          handleIsTimeOut={()=>handleIsTimeOut()}
+          resetTimeIsOut={()=>resetTimeIsOut()}/></div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>

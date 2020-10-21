@@ -6,9 +6,9 @@ import Cookies from 'universal-cookie'
 const Host = () => {
   const [ displayName, setDisplayName ] = useState('')
   const [ quizName, setQuizName ] = useState('')
-  const [ numberOfRounds, setNumberOfRounds ] = useState('')
+  const [ numberOfRounds, setNumberOfRounds ] = useState('1')
   const [ numberOfQuestionsPerRound, setNumberOfQuestionsPerRound ] = useState('')
-  const [ timeBetweenRounds, setTimeBetweenRounds ] = useState('')
+  const [ timeBetweenRounds, setTimeBetweenRounds ] = useState('0')
   const [ timePerQuestion, setTimePerQuestion ] = useState('')
   const [ submitted, setSubmitted ] = useState(false)
   const [ created, setCreated ] = useState(false)
@@ -24,20 +24,20 @@ const Host = () => {
    setQuizName(event.target.value)
   }
 
-  const handleNoRoundsChange = (event) => {
-        console.log(event.target.value)
-        setNumberOfRounds(event.target.value)
-}
+//   const handleNoRoundsChange = (event) => {
+//         console.log(event.target.value)
+//         setNumberOfRounds(event.target.value)
+// }
 
 const handleNoQuestionsChange = (event) => {
         console.log(event.target.value)
         setNumberOfQuestionsPerRound(event.target.value)
 }
 
-const handleTimeRoundsChange = (event) => {
-        console.log(event.target.value)
-        setTimeBetweenRounds(event.target.value)
-}
+// const handleTimeRoundsChange = (event) => {
+//         console.log(event.target.value)
+//         setTimeBetweenRounds(event.target.value)
+// }
 
 const handleTimeQuestionsChange = (event) => {
         console.log(event.target.value)
@@ -57,15 +57,15 @@ const handleTimeQuestionsChange = (event) => {
       console.error('There was an error!', error);
     })
 
-    if (numberOfRounds === '') {
-        setNumberOfRounds('3')
-    }
+    // if (numberOfRounds === '') {
+    //     setNumberOfRounds('3')
+    // }
     if (numberOfQuestionsPerRound === '') {
         setNumberOfQuestionsPerRound('10')
     }
-    if (timeBetweenRounds === '') {
-        setTimeBetweenRounds('5')
-    }
+    // if (timeBetweenRounds === '') {
+    //     setTimeBetweenRounds('5')
+    // }
     if (timePerQuestion === '') {
         setTimePerQuestion('15')
   }
@@ -109,14 +109,14 @@ const createSession = () => {
           <label>Quiz Name</label>
           <input required value={quizName} onChange={handleQuizNameChange} />
 
-          <label>Rounds</label>
-          <input title="Select the number of rounds between 1 and 15." pattern="[1-9][0-5]?" value={numberOfRounds} placeholder='3' onChange={handleNoRoundsChange} />
+          {/* <label>Rounds</label>
+          <input title="Select the number of rounds between 1 and 15." pattern="[1-9][0-5]?" value={numberOfRounds} placeholder='3' onChange={handleNoRoundsChange} /> */}
 
-          <label>Questions per Round</label>
+          <label>Number of Questions</label>
           <input title="Select the number of questions per round between 1 and 50." pattern="[1-9]|[0-4][0-9]|[5][0]" value={numberOfQuestionsPerRound} placeholder='10' onChange={handleNoQuestionsChange} />
 
-          <label>Time between Rounds (minutes)</label>
-          <input title="Select the time between rounds between 1 and 30 minutes." pattern="[1-9]|[0-2][0-9]|[3][0]" value={timeBetweenRounds} placeholder='5' onChange={handleTimeRoundsChange} />
+          {/* <label>Time between Rounds (minutes)</label>
+          <input title="Select the time between rounds between 1 and 30 minutes." pattern="[1-9]|[0-2][0-9]|[3][0]" value={timeBetweenRounds} placeholder='5' onChange={handleTimeRoundsChange} /> */}
 
           <label>Time per Question (seconds)</label>
           <input title="Select time per question between 1 and 100 seconds." pattern="[1-9]|[0-9][0-9]|[1][0][0]" value={timePerQuestion} placeholder='15' onChange={handleTimeQuestionsChange} />

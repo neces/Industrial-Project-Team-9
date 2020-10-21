@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer }) => {
+const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut }) => {
     const [selected, setSelected] = useState('')
     const [isSelected, setIsSelected] = useState(false)
 
@@ -22,20 +22,18 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     const handleClassNameSelected = ( answer ) => {
-      if (answer === correctAnswer) return 'button-correct' // this should be commented out
-      else if (answer === selected) return 'button-selected'
-      else return 'button-normal'
-    }
+        if(answer === selected) return 'button-selected'
+        else return 'button-normal'
 
-    const handleClassNameCorrect = ( answer ) => {
-      if (answer === correctAnswer) return 'button-correct'
-      else if (answer === selected) return 'button-selected'
-      else return 'button-normal'
+    const handleClassNameCorrect = ( answer ) => {   
+        if (answer === correctAnswer) return 'button-correct'
+        if(answer === selected) return 'button-selected'
+        else return 'button-normal'
     }
 
     // this now shows both selected and correct at the same time
-    const OnFilterAnswer = ( isSelected ) => {   
-      if (isSelected === true) { // set selected
+    const OnFilterAnswer = () => {   
+      if(isTimeOut===false) { 
         return(
           <div>
             <div className='answer-section'>{answers.map(answer => 
@@ -43,9 +41,10 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
                  key={answer}
                  className={handleClassNameSelected(answer)}
                  disabled={true}>{answer}</button>)}</div>
-              </div>)
+          </div>
+        )
       }
-      else if (isSelected === false) { // when timer is out, the state filter answer is set to true but it's not getting rerendered
+      else if (isTimeOut===true) { 
         return(
           <div>
             <div className='answer-section'>{answers.map(answer => 
@@ -57,19 +56,25 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
+    if(filterAnswer===true&&isSelected===false){
+      console.log("Time is out,send null answer")
+      // sendAnswer("");
+    }
+
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
       setIsSelected(true)
       sendAnswer(answer)
       handleFilterAnswer() // this is where selected function should be called
       console.log("Click Answer")
+      console.log(isTimeOut)
   }
 
   if (type === "MultiChoice") {
     return (
       <div className='answer-section'>
         {filterAnswer ? 
-          OnFilterAnswer(isSelected)
+          OnFilterAnswer()
            :
         <div className='answer-section'>{answers.map((answer) => (
           <button
@@ -86,7 +91,7 @@ else if (type === "TrueFalse") {
   return (
     <div className='answer-section'>
         {filterAnswer ? 
-          OnFilterAnswer(isSelected)
+          OnFilterAnswer()
            :
         <div className='answer-section'>{answers.map((answer) => (
           <button
