@@ -84,7 +84,7 @@ namespace Quizzarr.Data
                     List<string> _altAnswers = __altAnswers;
 
                     questions.Add( new Question(_id, _type, _question, _answer, _topic, _multiChoice_ID, _numCorrect, _numIncorrect, _difficulty, _altAnswers));
-                } catch (Exception e) {
+                } catch (Exception) {
                     System.Console.WriteLine("Error Occured with index - " + index);
                 }
                 index++;
