@@ -23,7 +23,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
 
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     // toLowerCase() is to gurantee when the correctAnswer is "FALSE" or "TRUE" and the answer is "false" or "true" 
-    
+
     const handleClassNameSelected = ( answer ) => {
         if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'  
         else return 'button-normal'
@@ -59,7 +59,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
-    if(isTimeOut==true&&isSelected==false){
+    if(isTimeOut===true&&isSelected===false){
       console.log("send null answer")
         sendAnswer("")
         setIsSelected(true)
@@ -76,6 +76,10 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
       setIsSelected(true)
+      setTimeout(()=>{
+        setIsSelected(false)
+        console.log("setSeletedFalse")
+      },20000)
       sendAnswer(answer)
       handleFilterAnswer() // this is where selected function should be called
       console.log("Click Answer")
