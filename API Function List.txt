@@ -90,6 +90,20 @@ Returns
 
 
 
+End Session
+    Deletes all session in the system entirely
+Call
+    api/quizzarr/admin/endAllSessions?password=<deletion password>
+Call Type
+    GET
+Returns
+    204 No Content
+        Process was successful but no data needs to be returned
+    403 Forbidden
+        Password provided was not corerct, no sessions will be deleted
+
+
+
 Get Question
     Get the next question in the quiz
 Call
