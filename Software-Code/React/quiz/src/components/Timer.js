@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from 'react'
 
-const Timer = ({ timer, correctAnswer }) => {
+const Timer = ({ timer, handleFilterAnswer }) => {
   const [counter, setCounter] = useState(timer)
   const [isTimeout, setIsTimeout] = useState(false)
 
-  useEffect(() => 
-  {
+  useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
 
   if (counter === 0)
   {
     if (isTimeout === false) {
+      handleFilterAnswer()
       setTimeout(() => {
         setCounter(timer)
         setIsTimeout(false)
-      }, 5000);
+      }, 5000); // this is the time left for showing the correct answer at the end, could change it to 3000
       setIsTimeout(true)
     }
     return (
-      <div className="App">
+      <div className="timer">
       <div></div>
       </div>
     )
@@ -27,8 +27,8 @@ const Timer = ({ timer, correctAnswer }) => {
   else
   {
     return (
-        <div className="App">
-        <div>Time Left: {counter}</div>
+        <div className="timer">
+        <div>{counter}</div>
         </div>
       )
   }
