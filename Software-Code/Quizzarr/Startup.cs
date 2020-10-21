@@ -28,7 +28,6 @@ namespace Quizzarr
         {
             services.AddControllers();
 
-            services.AddScoped<IQuizzarrRepo, InMemoryQuizzarrRepo>();
             services.AddScoped<IQuestionRepo, SqlQuestionRepo>();
         }
 

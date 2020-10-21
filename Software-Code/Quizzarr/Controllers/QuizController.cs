@@ -14,12 +14,10 @@ namespace Quizzarr.Controllers
 
         private static List<GameSession> Sessions = new List<GameSession>();
         private static List<User> LobbyUsers = new List<User>();
-        private readonly IQuizzarrRepo _repository;
         private readonly IQuestionRepo _questionRepository;
 
-        public QuizController(IQuizzarrRepo repository, IQuestionRepo questionRepository)
+        public QuizController(IQuestionRepo questionRepository)
         {
-            _repository = repository;
             _questionRepository = questionRepository;
         }
 
@@ -215,7 +213,7 @@ namespace Quizzarr.Controllers
 
         //api/quizzarr/startSession?hostUId=<your UID here>
         [HttpGet("startSession")]
-        public ActionResult<PlaceholderType> StartSession(string hostUId)
+        public ActionResult StartSession(string hostUId)
         {
             GameSession session = findSessionWithUser(hostUId);
 
@@ -302,7 +300,7 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/submitAnswer?userID=<your user ID>&answer=<answer selected>
         [HttpGet("submitAnswer")]
-        public ActionResult<PlaceholderType> answerQuestion(string userID, string answer)
+        public ActionResult answerQuestion(string userID, string answer)
         {
             GameSession curSession = findSessionWithUser(userID);
 
@@ -351,7 +349,7 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
-        public ActionResult <PlaceholderType> GetLeaderBoard(string userID)
+        public ActionResult GetLeaderBoard(string userID)
         {
             List<Leaderboard> leaderboard = new List<Leaderboard>();
 
@@ -368,7 +366,7 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/leaveSession?userID=<your uid>
         [HttpGet("leaveSession")]
-        public ActionResult <PlaceholderType> LeaveSession(string userID) {
+        public ActionResult LeaveSession(string userID) {
             bool userInSession = true;
 
             GameSession session = findSessionWithUser(userID);
@@ -467,7 +465,7 @@ namespace Quizzarr.Controllers
         }
 
         [HttpGet]
-        public ActionResult<PlaceholderType> PrintAllSessionIDs()
+        public ActionResult PrintAllSessionIDs()
         {
             foreach (GameSession session in Sessions)
                 System.Console.WriteLine(session.SessionId + " - " + session.Users.Count + " users in session");

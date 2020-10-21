@@ -10,7 +10,6 @@ body {
 * {
   font-family: 'Raleway', sans-serif;
   color: #ffffff;
-  margin-bottom: auto;
 }
 
 body {
@@ -32,8 +31,9 @@ body {
 }
 
 .quiz-logo {
-  position: relative;
+  position: fixed;
   top: 0;
+  left: -5px;
 }
 
 .host-link {
@@ -306,12 +306,41 @@ only screen and (max-width: 425px),
 (min-device-width: 320px) and (max-device-width: 425px)  {
 
 	.answer-section { 
-		display: block; 
+    display: block; 
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
   }
   .question {
     margin-left: 10vh;
     margin-right: 10vh;
-    font-size: larger;
+    font-size: 25px;
+  }
+  * {
+    margin-bottom: auto;
+  }
+  .quiz-logo {
+    position: relative;
+    left: 0;
+  }
+  .quiz-logo img {
+    width: 200px;
+  }
+  .ready-graphic img {
+    width: 350px;
+  }
+  .timer {
+    top: 154px;
+    right: 221px;
+  }
+  .leaderboard {
+    width: 400px;
+  }
+  .leaderboard img {
+    width: 400px;
+  }
+  .leaderboard-text {
+    font-size: 15px;
   }
 }
 
