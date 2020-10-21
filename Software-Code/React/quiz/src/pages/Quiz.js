@@ -15,6 +15,7 @@ const Quiz = () => {
   const [filterAnswer, setFilterAnswer] = useState(false)
   const [timer, setTimer] = useState('')
   const [questions, setQuestions] = useState([])
+  const [correctAnswer, setCorrectAnswer] = useState('')
   const cookies = new Cookies()
 
   const [isTimeOut,setIsTimeOut] = useState(false)
@@ -48,6 +49,22 @@ const Quiz = () => {
         console.log(response.data)
         setTimer(response.data.timePerQuestion)
         setLoadingTimer(false)
+      })
+      .catch(error => {
+        console.log('There was an error!', error)
+        if (error.response.status === 404) {
+        }
+      })
+    }
+
+    const getCorrectAnswer = () => {
+      console.log('getting Correct Answer')
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
+      .then(response => {
+        console.log('promise fulfilled')
+        console.log(response.data)
+        setCorrectAnswer(response.data)
       })
       .catch(error => {
         console.log('There was an error!', error)
@@ -90,6 +107,7 @@ const Quiz = () => {
 
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
+      getCorrectAnswer()
       console.log("handleisTimeOut",isTimeOut)
     }
 
@@ -104,7 +122,7 @@ const Quiz = () => {
               <Answer 
               type = {questions.type}
               answers = {questions.answers}
-              correctAnswer = {questions.correctAnswer}
+              correctAnswer = {correctAnswer}
               userID = {cookies.get('userID')}
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
