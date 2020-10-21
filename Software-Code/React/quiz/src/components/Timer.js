@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Timer = ({ timer, correctAnswer, handleFilterAnswer }) => {
+const Timer = ({ timer, handleFilterAnswer , resetFilterAnswer}) => {
   const [counter, setCounter] = useState(timer)
   const [isTimeout, setIsTimeout] = useState(false)
 
@@ -14,6 +14,7 @@ const Timer = ({ timer, correctAnswer, handleFilterAnswer }) => {
     if (isTimeout === false) {
       handleFilterAnswer()
       setTimeout(() => {
+        resetFilterAnswer()
         setCounter(timer)
         setIsTimeout(false)
       }, 5000);

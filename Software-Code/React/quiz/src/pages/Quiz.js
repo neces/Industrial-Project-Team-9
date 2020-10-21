@@ -24,7 +24,6 @@ const Quiz = () => {
         console.log('promise fulfilled')
         console.log(response.data)
         setQuestions(response.data)
-        setFilterAnswer(false)
         setLoadingQuestion(false)
       })
       .catch(error => {
@@ -45,8 +44,8 @@ const Quiz = () => {
     // if timer is empty set the timer - just do it once
 
     if (isTimeout === false) {
-      setFilterAnswer(false)
       setTimeout(() => {
+        setFilterAnswer(false)
         getQuestion()
         setIsTimeout(false)
       }, 20000);
@@ -58,6 +57,12 @@ const Quiz = () => {
         setFilterAnswer(true)
         // force to rerender answer
     }
+
+    const resetFilterAnswer = () =>{
+      console.log("Filter answer is false")
+      setFilterAnswer(false)
+      // force to rerender answer
+  }
 
     return (
       <div>
@@ -71,8 +76,12 @@ const Quiz = () => {
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
               />
-              <div className='timer'><Timer timer={timer} handleFilterAnswer={()=>handleFilterAnswer()}/></div>
         </div>
+        <div className='timer'>
+          <Timer 
+          timer={timer} 
+          handleFilterAnswer={()=>handleFilterAnswer()}
+          resetFilterAnswer={() =>resetFilterAnswer()}/></div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>
