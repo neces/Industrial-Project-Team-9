@@ -5,6 +5,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     const [selected, setSelected] = useState('')
     const [isSelected, setIsSelected] = useState(false)
 
+
     const sendAnswer = (answer) => {
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/submitAnswer', { params: {
@@ -19,7 +20,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
         console.error('There was an error!', error);
       })
     }
-    
+
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     const handleClassNameSelected = ( answer ) => {
         if(answer === selected) return 'button-selected'
@@ -56,9 +57,14 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
-    if(isTimeOut===true&&isSelected===false){
-      console.log("Time is out,send null answer")
-      sendAnswer("");
+    if(isTimeOut==true&&isSelected==false){
+      console.log("send null answer")
+        sendAnswer("")
+        setIsSelected(true)
+        setTimeout(()=>{
+          setIsSelected(false)
+          console.log("setSelectedFalse")
+        },5000)  // It is the same time as setTimeOut function in Timer.js 
     }
 
     const handleAnswerOptionClick = (answer) => {
