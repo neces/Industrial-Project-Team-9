@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
+import Leave from '../components/Leave'
 
 const Leaderboard = ({ }) => {
     const [leaderboard, setLeaderboard] = useState([])
@@ -34,6 +35,7 @@ const Leaderboard = ({ }) => {
                 <img src={require('../assets/LeaderboardFull.png')} alt='Leaderboard' width="800"></img>
                 <div className='leaderboard-text'>{leaderboard.map((user, i) => {return (<div key={i+1} className="rank"> {i+1}. {user.displayName} Score: {user.score} Highest Streak: {user.highestStreak}</div>)})}</div>
             </div>
+            <Leave userID={cookies.get('userID')}/>
         </div>
     )
 }

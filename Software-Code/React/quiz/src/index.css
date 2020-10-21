@@ -95,6 +95,19 @@ a:hover, a:visited, a:link, a:active
   background-color: #030A17;
 }
 
+.button-leave {
+  width: 294px;
+  font-size: 25px;
+  background-color: #030A17;
+  border-radius: 5px;
+  display: initial;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #A41ABB; 
+  cursor: pointer;
+  margin: 9px;
+}
+
 form {
   display: inline-block;
 }
@@ -119,6 +132,13 @@ input {
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
+.timer {
+  position: fixed;
+  font-size: 60px;
+  top: 30px;
+  right: 30px;
+}
+
 .question-section {
   width: 100%;
   position: relative;
@@ -139,12 +159,6 @@ input {
   margin-bottom: 30px;
   text-align: center;
   font-size: 30px;
-}
-
-.timer {
-  margin-top: 30px;
-  text-align: center;
-  font-size: larger;
 }
 
 /* ANSWERS/RIGHT SECTION */
