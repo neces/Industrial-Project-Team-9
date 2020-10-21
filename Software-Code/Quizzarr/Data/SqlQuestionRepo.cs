@@ -38,7 +38,7 @@ namespace Quizzarr.Data
             List<Question> questions = new List<Question>();
             objConn.Open();
 
-            string mainQuery = "SELECT TOP " + count + " * FROM QuestionsTable WHERE Type='MultiChoice' OR Type='TrueFalse' ORDER BY NEWID()";
+            string mainQuery = "SELECT TOP " + count + " * FROM QuestionsTable WHERE (Type='MultiChoice' OR Type='TrueFalse') AND Topic!='BrainTeaser' ORDER BY NEWID()";
 
             SqlDataAdapter daQuestions = new SqlDataAdapter(mainQuery, objConn);
 
