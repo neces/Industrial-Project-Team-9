@@ -317,7 +317,7 @@ namespace Quizzarr.Controllers
             user.Answered = true;
 
             bool ans = false;
-            if (answer.Equals(curSession.Questions[qIndex].answer)) {
+            if (answer.ToLower().Equals(curSession.Questions[qIndex].answer.ToLower())) {
                 ans = true;
 
             }
