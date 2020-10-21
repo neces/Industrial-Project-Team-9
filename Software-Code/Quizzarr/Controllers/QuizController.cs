@@ -248,6 +248,17 @@ namespace Quizzarr.Controllers
         }
 
 
+        // api/quizzarr/admin/endAllSessions?password=team9
+        [HttpGet("admin/endAllSessions")]
+        public ActionResult EndAllSessions(string password) {
+            if (password == "team9") {
+                Sessions.Clear();
+                return NoContent();
+            }
+            return Forbid();
+        }
+
+
         // api/quizzarr/getQuestion?userID=<your user ID>
         [HttpGet("getQuestion")]
         public ActionResult<QuestionReadDTO> nextQuestion(string userID)
@@ -306,7 +317,7 @@ namespace Quizzarr.Controllers
             user.Answered = true;
 
             bool ans = false;
-            if (answer.Equals(curSession.Questions[qIndex].answer)) {
+            if (answer.ToLower().Equals(curSession.Questions[qIndex].answer.ToLower())) {
                 ans = true;
 
             }

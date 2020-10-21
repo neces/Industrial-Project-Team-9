@@ -20,12 +20,10 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       })
     }
     
+    // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     const handleClassNameSelected = ( answer ) => {
-      // if (answer === correctAnswer) return 'button-correct' // this should be commented out
         if(answer === selected) return 'button-selected'
         else return 'button-normal'
-      
-    }
 
     const handleClassNameCorrect = ( answer ) => {   
         if (answer === correctAnswer) return 'button-correct'
@@ -106,7 +104,7 @@ else if (type === "TrueFalse") {
   )
 }
 
-  else { // estimation, writtenQ
+  else {
       return (<></>)
   }
 }

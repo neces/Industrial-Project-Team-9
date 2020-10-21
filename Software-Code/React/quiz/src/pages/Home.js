@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <div>
       <div className='ready-graphic'>
-        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="500"></img>
+        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="400"></img>
       </div>
       { quizFound ? null : <div>Quiz ID not found or nickname already taken</div> }
       <form onSubmit={sendUserDetails}>

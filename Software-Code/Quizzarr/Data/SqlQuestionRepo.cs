@@ -38,7 +38,7 @@ namespace Quizzarr.Data
             List<Question> questions = new List<Question>();
             objConn.Open();
 
-            string mainQuery = "SELECT TOP " + count + " * FROM QuestionsTable WHERE Type='MultiChoice' OR Type='TrueFalse' ORDER BY NEWID()";
+            string mainQuery = "SELECT TOP " + count + " * FROM QuestionsTable WHERE (Type='MultiChoice' OR Type='TrueFalse') AND Topic!='BrainTeaser' ORDER BY NEWID()";
 
             SqlDataAdapter daQuestions = new SqlDataAdapter(mainQuery, objConn);
 
@@ -84,7 +84,7 @@ namespace Quizzarr.Data
                     List<string> _altAnswers = __altAnswers;
 
                     questions.Add( new Question(_id, _type, _question, _answer, _topic, _multiChoice_ID, _numCorrect, _numIncorrect, _difficulty, _altAnswers));
-                } catch (Exception e) {
+                } catch (Exception) {
                     System.Console.WriteLine("Error Occured with index - " + index);
                 }
                 index++;
