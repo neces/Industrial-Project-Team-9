@@ -57,6 +57,22 @@ const Quiz = () => {
       })
     }
 
+    const getCorrectAnswer = () => {
+      console.log('getting Correct Answer')
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
+      .then(response => {
+        console.log('promise fulfilled')
+        console.log(response.data)
+        setCorrectAnswer(response.data)
+      })
+      .catch(error => {
+        console.log('There was an error!', error)
+        if (error.response.status === 404) {
+        }
+      })
+    }
+
     if (isLoadingQuestion) {
       console.log('loading questions')
       getQuestion()
@@ -91,7 +107,7 @@ const Quiz = () => {
 
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
-      setCorrectAnswer(questions.correctAnswer)
+      getCorrectAnswer()
       console.log("handleisTimeOut",isTimeOut)
     }
 
