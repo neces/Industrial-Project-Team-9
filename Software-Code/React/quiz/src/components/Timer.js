@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Timer = ({ timer, handleFilterAnswer, resetFilterAnswer }) => {
+const Timer = ({ timer, handleFilterAnswer, resetFilterAnswer,handleIsTimeOut,resetTimeIsOut}) => {
   const [counter, setCounter] = useState(timer)
   const [isTimeout, setIsTimeout] = useState(false)
 
@@ -11,9 +11,11 @@ const Timer = ({ timer, handleFilterAnswer, resetFilterAnswer }) => {
   if (counter === 0)
   {
     if (isTimeout === false) {
+      handleIsTimeOut()
       handleFilterAnswer()
       setTimeout(() => {
         resetFilterAnswer()
+        resetTimeIsOut()
         setCounter(timer)
         setIsTimeout(false)
       }, 5000); // this is the time left for showing the correct answer at the end, could change it to 3000

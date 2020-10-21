@@ -17,6 +17,8 @@ const Quiz = () => {
   const [questions, setQuestions] = useState([])
   const cookies = new Cookies()
 
+  const [isTimeOut,setIsTimeOut] = useState(false)
+
     const getQuestion = () => {
       console.log('Getting Question')
       setFilterAnswer(false)
@@ -77,6 +79,7 @@ const Quiz = () => {
 
     const handleFilterAnswer = () =>{
         console.log("Filter answer is true")
+        
         setFilterAnswer(true)
     }
 
@@ -85,6 +88,15 @@ const Quiz = () => {
       setFilterAnswer(false)
   }
 
+    const handleIsTimeOut = () =>{
+      setIsTimeOut(true)
+      console.log("handleisTimeOut",isTimeOut)
+    }
+
+    const resetTimeIsOut = () =>{
+      setIsTimeOut(false)
+      console.log("resetisTimeOut",isTimeOut)
+    }
     return (
       <div>
         <div className='app'>
@@ -96,13 +108,16 @@ const Quiz = () => {
               userID = {cookies.get('userID')}
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
+              isTimeOut= {isTimeOut}
               />
         </div>
         <div className='timer'>
           <Timer 
           timer={timer} 
           handleFilterAnswer={()=>handleFilterAnswer()}
-          resetFilterAnswer={() =>resetFilterAnswer()}/></div>
+          resetFilterAnswer={() =>resetFilterAnswer()}
+          handleIsTimeOut={()=>handleIsTimeOut()}
+          resetTimeIsOut={()=>resetTimeIsOut()}/></div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>
