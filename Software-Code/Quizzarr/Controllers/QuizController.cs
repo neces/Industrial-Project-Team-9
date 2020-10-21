@@ -317,9 +317,11 @@ namespace Quizzarr.Controllers
             user.Answered = true;
 
             bool ans = false;
-            if (answer.ToLower().Equals(curSession.Questions[qIndex].answer.ToLower())) {
+            if (answer == null) {
+                // This catches any null answers and treats them as an incorrect answer
+                // Do nothing as the ans variable is already set to null
+            } else if (answer.ToLower().Equals(curSession.Questions[qIndex].answer.ToLower())) {
                 ans = true;
-
             }
             GetUserInSession(findSessionWithUser(userID), userID).MyScore.UpdateScore(ans);
             
