@@ -22,13 +22,15 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     }
 
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
+    // toLowerCase() is to gurantee when the correctAnswer is "FALSE" or "TRUE" and the answer is "false" or "true" 
+    
     const handleClassNameSelected = ( answer ) => {
-        if(answer === selected) return 'button-selected'
+        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'  
         else return 'button-normal'
     }
     const handleClassNameCorrect = ( answer ) => {   
-        if (answer === correctAnswer) return 'button-correct'
-        if(answer === selected) return 'button-selected'
+        if (answer.toLowerCase() === correctAnswer.toLowerCase()) return 'button-correct'
+        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'
         else return 'button-normal'
     }
 
@@ -63,9 +65,13 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
         setIsSelected(true)
         setTimeout(()=>{
           setIsSelected(false)
-          console.log("setSelectedFalse")
-        },5000)  // It is the same time as setTimeOut function in Timer.js 
-    }
+          console.log("setSelectedFalse") 
+        },5050) 
+         /* It is almost the same time as setTimeOut function in Timer.js 
+         As the counter is set, and question is got, the selected will set false.
+         But a little after setTimer, it can fix the conflict when re-render the question and then setSelected false.
+         */
+        }
 
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
@@ -76,7 +82,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       console.log(isTimeOut)
   }
 
-  if (type === "MultiChoice") {
+  if (type === "TrueFalse") {
     return (
       <div className='answer-section'>
         {filterAnswer ? 
@@ -93,7 +99,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     )
   }
 
-else if (type === "TrueFalse") {
+else if (type === "MultiChoice") {
   return (
     <div className='answer-section'>
         {filterAnswer ? 
