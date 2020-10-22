@@ -6,7 +6,7 @@ import Question from '../components/Question'
 import Answer from '../components/Answer'
 import Cookies from 'universal-cookie'
 import Leave from '../components/Leave'
- 
+
 const Quiz = () => {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isLoadingQuestion, setLoadingQuestion] = useState(true)
@@ -17,7 +17,7 @@ const Quiz = () => {
   const [questions, setQuestions] = useState([])
   const [correctAnswer, setCorrectAnswer] = useState('')
   const cookies = new Cookies()
-  const [isSelected,setIsSelected] = useState(false)
+
   const [isTimeOut,setIsTimeOut] = useState(false)
 
     const getQuestion = () => {
@@ -57,14 +57,14 @@ const Quiz = () => {
       })
     }
 
-    const getCorrectAnswer = ()=>{
+    const getCorrectAnswer = () => {
       console.log('getting Correct Answer')
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
       .then(response => {
-        console.log('getCorrectAnswer')
-        setCorrectAnswer(response.data)
+        console.log('promise fulfilled')
         console.log(response.data)
+        setCorrectAnswer(response.data)
       })
       .catch(error => {
         console.log('There was an error!', error)
@@ -107,22 +107,13 @@ const Quiz = () => {
 
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
-      setTimeout(()=>{
-        getCorrectAnswer()
-        handleFilterAnswer()
-      },1000)
+      getCorrectAnswer()
       console.log("handleisTimeOut",isTimeOut)
     }
 
     const resetTimeIsOut = () =>{
       setIsTimeOut(false)
-      setIsSelected(false)
       console.log("resetisTimeOut",isTimeOut)
-    }
-
-    const handleIsSelected = () =>{
-      setIsSelected(true)
-      console.log("handleisTimeOut",isTimeOut)
     }
     return (
       <div>
@@ -136,23 +127,21 @@ const Quiz = () => {
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
               isTimeOut= {isTimeOut}
-              isSelected={isSelected}
-              handleIsSelected={()=>{handleIsSelected()}}
-              getCorrectAnswer={()=>{getCorrectAnswer()}}
               />
         </div>
         <div className='timer'>
           <Timer 
           timer={timer} 
+          handleFilterAnswer={()=>handleFilterAnswer()}
           resetFilterAnswer={() =>resetFilterAnswer()}
           handleIsTimeOut={()=>handleIsTimeOut()}
           resetTimeIsOut={()=>resetTimeIsOut()}/></div>
         <div>
           { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
         </div>
-        <Leave userID={cookies.get('userID')}/>
+        <Leave userID={cookies.get('userID')} isLeaderboard={false}/>
       </div>
   )
 }
 
-export default Quiz;
+export default Quiz
