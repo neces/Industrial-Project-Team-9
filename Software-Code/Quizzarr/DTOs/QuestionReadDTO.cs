@@ -6,7 +6,6 @@ namespace Quizzarr.DTOs {
 
         public string type { get; set; }
         public string question { get; set; }
-        public string correctAnswer { get; set; }
         public List<string> answers { get; set; }
 
     }

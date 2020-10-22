@@ -146,7 +146,7 @@ const Quiz = () => {
       <div>
         {showLeaderboard ? <Redirect to="/leaderboard" /> : null}
       </div>
-      <Leave userID={cookies.get('userID')} />
+      <Leave userID={cookies.get('userID')} isLeaderboard={false} />
     </div>
   )
 }
