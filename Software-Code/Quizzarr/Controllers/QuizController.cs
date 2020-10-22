@@ -340,6 +340,9 @@ namespace Quizzarr.Controllers
             string answer = session.Questions[session.currentQuestion - 1].answer;
             if (answer == null) { System.Console.WriteLine("Answer not found"); return NotFound(); }
 
+            if (answer.ToLower().Equals("true")) answer = "True";
+            else if (answer.ToLower().Equals("false")) answer = "False";
+
             return Ok(answer);
         }
 
