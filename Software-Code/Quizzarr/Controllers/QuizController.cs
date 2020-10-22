@@ -323,11 +323,11 @@ namespace Quizzarr.Controllers
             }
             GetUserInSession(findSessionWithUser(userID), userID).MyScore.UpdateScore(ans);
             
-            if (CheckIfAllAnswered(curSession)) {
-                curSession.currentQuestion += 1;
-                System.Console.WriteLine("New current question num " + curSession.currentQuestion);
-                SetAllUnanswered(curSession);
-            }
+            // if (CheckIfAllAnswered(curSession)) {
+            //     curSession.currentQuestion += 1;
+            //     System.Console.WriteLine("New current question num " + curSession.currentQuestion);
+            //     SetAllUnanswered(curSession);
+            // }
 
             return Ok(ans);
         }
@@ -339,9 +339,21 @@ namespace Quizzarr.Controllers
 
             GameSession session = findSessionWithUser(userID);
             if (session == null) { System.Console.WriteLine("Session not found"); return NotFound(); }
+            
+            User user = GetUserInSession(session, userID);
+            if (user == null) { System.Console.WriteLine("User not found"); return NotFound(); }
 
-            string answer = session.Questions[session.currentQuestion - 1].answer;
+            string answer = session.Questions[session.currentQuestion].answer;
             if (answer == null) { System.Console.WriteLine("Answer not found"); return NotFound(); }
+
+            user.GotAnswer = true;
+
+            if (CheckIfAllAnswered(session) && CheckIfAllGotAnswer(session)) {
+                session.currentQuestion += 1;
+                System.Console.WriteLine("New current question num " + session.currentQuestion);
+                SetAllUnanswered(session);
+                SetAllGotAnswerFalse(session);
+            }
 
             return Ok(answer);
         }
@@ -413,8 +425,7 @@ namespace Quizzarr.Controllers
             return curSession;
         }
 
-        public bool CheckIfAllAnswered(GameSession session)
-        {
+        public bool CheckIfAllAnswered(GameSession session) {
             foreach (User u in session.Users)
             {
                 if (!u.Answered)
@@ -423,10 +434,23 @@ namespace Quizzarr.Controllers
             return true;
         }
 
-        public void SetAllUnanswered(GameSession session)
-        {
+        public void SetAllUnanswered(GameSession session) {
             foreach (User u in session.Users)
                 u.Answered = false;
+        }
+
+        public bool CheckIfAllGotAnswer(GameSession session) {
+            foreach (User u in session.Users)
+            {
+                if (!u.GotAnswer)
+                    return false;
+            }
+            return true;
+        }
+
+        public void SetAllGotAnswerFalse(GameSession session) {
+            foreach (User u in session.Users)
+                u.GotAnswer = false;
         }
 
         public User GetUserInSession(GameSession session, string userID) {
