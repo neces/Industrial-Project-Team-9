@@ -23,11 +23,11 @@ namespace Quizzarr.Controllers
 
         // api/quizzarr/gameSessionStatus?userId=<your UId here>
         [HttpGet("gameSessionStatus")]
-        public ActionResult<UserViewGameStatus> gameSessionStatus(string userId)
+        public ActionResult<UserViewGameStatusDTO> gameSessionStatus(string userId)
         {
             GameSession gameSession = findSessionWithUser(userId);
 
-            UserViewGameStatus view = new UserViewGameStatus
+            UserViewGameStatusDTO view = new UserViewGameStatusDTO
             {
                 SessionId = gameSession.SessionId,
                 QuizName = gameSession.QuizName,
