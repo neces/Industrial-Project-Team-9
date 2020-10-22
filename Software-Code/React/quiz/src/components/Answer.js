@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut }) => {
+const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut,handleIsSelected,isSelected,getCorrectAnswer}) => {
     const [selected, setSelected] = useState('')
-    const [isSelected, setIsSelected] = useState(false)
+
 
     const sendAnswer = (answer) => {
       axios
@@ -19,15 +19,17 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
         console.error('There was an error!', error);
       })
     }
-    
-    // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
-    const handleClassNameSelected = ( answer ) => {
-        if(answer === selected) return 'button-selected'
-        else return 'button-normal'
 
+    // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
+    // toLowerCase() is to gurantee when the correctAnswer is "FALSE" or "TRUE" and the answer is "false" or "true" 
+
+    const handleClassNameSelected = ( answer ) => {
+        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'  
+        else return 'button-normal'
+    }
     const handleClassNameCorrect = ( answer ) => {   
-        if (answer === correctAnswer) return 'button-correct'
-        if(answer === selected) return 'button-selected'
+        if (answer.toLowerCase() === correctAnswer.toLowerCase()) return 'button-correct'
+        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'
         else return 'button-normal'
     }
 
@@ -56,21 +58,26 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
-    if(filterAnswer===true&&isSelected===false){
-      console.log("Time is out,send null answer")
-      // sendAnswer("");
-    }
+    if(isTimeOut===true){
+        if(isSelected===false){
+          console.log("send null answer")
+          sendAnswer("") 
+          handleIsSelected() 
+          handleFilterAnswer() 
+        }
+        getCorrectAnswer()
+        }
 
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
-      setIsSelected(true)
+      handleIsSelected()
       sendAnswer(answer)
       handleFilterAnswer() // this is where selected function should be called
       console.log("Click Answer")
       console.log(isTimeOut)
   }
 
-  if (type === "MultiChoice") {
+  if (type === "TrueFalse") {
     return (
       <div className='answer-section'>
         {filterAnswer ? 
@@ -87,7 +94,7 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
     )
   }
 
-else if (type === "TrueFalse") {
+else if (type === "MultiChoice") {
   return (
     <div className='answer-section'>
         {filterAnswer ? 
