@@ -96,6 +96,8 @@ a:hover, a:visited, a:link, a:active
 }
 
 .button-leave {
+  bottom: 30px;
+  right: 30px;
   width: 294px;
   font-size: 25px;
   background-color: #030A17;
@@ -106,6 +108,7 @@ a:hover, a:visited, a:link, a:active
   border: 1px solid #A41ABB; 
   cursor: pointer;
   margin: 9px;
+  position: fixed
 }
 
 form {
@@ -349,6 +352,20 @@ only screen and (max-width: 425px),
 
   .waiting {
     margin-top: 0px;
+  }
+
+  .button-leave {
+    width: 294px;
+    font-size: 25px;
+    background-color: #030A17;
+    border-radius: 5px;
+    display: initial;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #A41ABB; 
+    cursor: pointer;
+    margin: 9px;
+    position: static;
   }
 }
 
