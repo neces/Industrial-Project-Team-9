@@ -278,9 +278,6 @@ namespace Quizzarr.Controllers
 
             qRead.type = question.type;
             qRead.question = question.question;
-
-            // ** THIS IS TEMPORARY - USE FOR THE CLIENT MEETING ONLY AND THEN REPLACE WITH THE GET ANSWER FUNCTION **
-            qRead.correctAnswer = question.answer;
             
             if (question.type.Equals("MultiChoice")) {
                 List<string> vals = new List<string>();
