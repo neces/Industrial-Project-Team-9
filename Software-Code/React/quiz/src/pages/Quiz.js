@@ -120,34 +120,34 @@ const Quiz = () => {
       setIsSelected(true)
       console.log("handleisTimeOut",isTimeOut)
     }
-    return (
-      <div>
-        <div className='app'>
-              <div className='question'><Question questions={questions} /></div>
-              <Answer 
-              type = {questions.type}
-              answers = {questions.answers}
-              correctAnswer = {correctAnswer}
-              userID = {cookies.get('userID')}
-              filterAnswer = {filterAnswer}
-              handleFilterAnswer = {()=>handleFilterAnswer()}
-              isTimeOut= {isTimeOut}
-              isSelected={isSelected}
-              handleIsSelected={()=>{handleIsSelected()}}
-              getCorrectAnswer={()=>{getCorrectAnswer()}}
-              />
-        </div>
-        <div className='timer'>
-          <Timer 
-          timer={timer} 
-          resetFilterAnswer={() =>resetFilterAnswer()}
-          handleIsTimeOut={()=>handleIsTimeOut()}
-          resetTimeIsOut={()=>resetTimeIsOut()}/></div>
-        <div>
-          { showLeaderboard ? <Redirect to="/leaderboard"/> : null }
-        </div>
-        <Leave userID={cookies.get('userID')}/>
+  return (
+    <div>
+      <div className='timer'>
+        <Timer
+          timer={timer}
+          resetFilterAnswer={() => resetFilterAnswer()}
+          handleIsTimeOut={() => handleIsTimeOut()}
+          resetTimeIsOut={() => resetTimeIsOut()} /></div>
+      <div className='app'>
+        <div className='question'><Question questions={questions} /></div>
+        <Answer
+          type={questions.type}
+          answers={questions.answers}
+          correctAnswer={correctAnswer}
+          userID={cookies.get('userID')}
+          filterAnswer={filterAnswer}
+          handleFilterAnswer={() => handleFilterAnswer()}
+          isTimeOut={isTimeOut}
+          isSelected={isSelected}
+          handleIsSelected={() => { handleIsSelected() }}
+          getCorrectAnswer={() => { getCorrectAnswer() }}
+        />
       </div>
+      <div>
+        {showLeaderboard ? <Redirect to="/leaderboard" /> : null}
+      </div>
+      <Leave userID={cookies.get('userID')} />
+    </div>
   )
 }
 
