@@ -19,6 +19,7 @@ const Quiz = () => {
   const cookies = new Cookies()
   const [isSelected,setIsSelected] = useState(false)
   const [isTimeOut,setIsTimeOut] = useState(false)
+  const [isSendAnswer,setIsSendAnswer] = useState(false)
 
     const getQuestion = () => {
       console.log('Getting Question')
@@ -55,10 +56,27 @@ const Quiz = () => {
       })
     }
 
-    const getCorrectAnswer = ()=>{
-      console.log('getting Correct Answer')
+    const sendAnswer = (answer) => {
       axios
-      .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
+      .get('https://team9app.azurewebsites.net/api/quizzarr/submitAnswer', { params: {
+        userID:cookies.get('userID'),
+        answer
+      }})
+      .then(response => {
+        console.log("Answer sent")
+        getCorrectAnswer()
+        setIsSelected(true)
+        setIsSendAnswer(true)
+        setFilterAnswer(true)
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      })
+    }
+
+    const getCorrectAnswer = ()=>{
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID')} })
       .then(response => {
         console.log('getCorrectAnswer')
         setCorrectAnswer(response.data)
@@ -84,31 +102,19 @@ const Quiz = () => {
     if (isTimeout === false) {
       setTimeout(() => {
         setFilterAnswer(false)
-        getQuestion()
         setIsTimeout(false)
+        getQuestion()
+        setIsTimeOut(false)  //For the appearence of correctAnswer
+        setIsSendAnswer(false)
+        setIsSelected(false)
       }, (timer * 1000 + 5000));
       setIsTimeout(true)
     }
 
-    const handleFilterAnswer = () =>{
-        console.log("Filter answer is true")
-        
-        setFilterAnswer(true)
-    }
-
-    const resetFilterAnswer = () =>{
-      console.log("resetFilterAnswer")
-      setFilterAnswer(false)
-  }
-
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
-      setTimeout(()=>{
-        getCorrectAnswer()
-        handleFilterAnswer()
-      },1000)
-      console.log("handleisTimeOut",isTimeOut)
-    }
+      console.log("Time is out")
+      }
 
     const resetTimeIsOut = () =>{
       setIsTimeOut(false)
@@ -116,31 +122,25 @@ const Quiz = () => {
       console.log("resetisTimeOut",isTimeOut)
     }
 
-    const handleIsSelected = () =>{
-      setIsSelected(true)
-      console.log("handleisTimeOut",isTimeOut)
-    }
   return (
     <div>
       <div className='timer'>
         <Timer
-          timer={timer}
-          resetFilterAnswer={() => resetFilterAnswer()}
-          handleIsTimeOut={() => handleIsTimeOut()}
-          resetTimeIsOut={() => resetTimeIsOut()} /></div>
+          timer={timer} 
+          handleIsTimeOut={()=>handleIsTimeOut()}
+          resetTimeIsOut={()=>resetTimeIsOut()} /></div>
       <div className='app'>
         <div className='question'><Question questions={questions} /></div>
         <Answer
-          type={questions.type}
-          answers={questions.answers}
-          correctAnswer={correctAnswer}
-          userID={cookies.get('userID')}
-          filterAnswer={filterAnswer}
-          handleFilterAnswer={() => handleFilterAnswer()}
-          isTimeOut={isTimeOut}
-          isSelected={isSelected}
-          handleIsSelected={() => { handleIsSelected() }}
-          getCorrectAnswer={() => { getCorrectAnswer() }}
+         type = {questions.type}
+         answers = {questions.answers}
+         correctAnswer={correctAnswer}
+         userID = {cookies.get('userID')}
+         filterAnswer = {filterAnswer}
+         isTimeOut= {isTimeOut}
+         isSelected={isSelected}
+         isSendAnswer={isSendAnswer}
+         sendAnswer={(answer)=>sendAnswer(answer)}
         />
       </div>
       <div>
