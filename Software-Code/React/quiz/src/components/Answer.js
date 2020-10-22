@@ -8,12 +8,12 @@ const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,
     // toLowerCase() is to gurantee when the correctAnswer is "FALSE" or "TRUE" and the answer is "false" or "true" 
 
     const handleClassNameSelected = ( answer ) => {
-        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'  
+        if (answer === selected) return 'button-selected'  
         else return 'button-normal'
     }
     const handleClassNameCorrect = ( answer ) => {   
-        if (answer.toLowerCase() === correctAnswer.toLowerCase()) return 'button-correct'
-        if(answer.toLowerCase() === selected.toLowerCase()) return 'button-selected'
+        if (answer === correctAnswer) return 'button-correct'
+        if(answer === selected) return 'button-selected'
         else return 'button-normal'
     }
 

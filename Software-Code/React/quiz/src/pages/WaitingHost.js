@@ -56,7 +56,7 @@ const WaitingHost = () => {
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>TO JOIN THIS GAME TYPE IN</div>
+          <div className='waiting-text'>TO JOIN THIS GAME <br></br>TYPE IN</div>
           <button className='quiz-id-button' disabled>{gameSession.sessionId}</button>
           <div className='waiting-text'></div>
           <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
