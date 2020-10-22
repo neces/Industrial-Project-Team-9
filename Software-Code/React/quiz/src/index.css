@@ -336,6 +336,7 @@ only screen and (max-width: 425px),
   .timer {
     top: 154px;
     right: 221px;
+    position: static;
   }
   .leaderboard {
     width: 400px;
