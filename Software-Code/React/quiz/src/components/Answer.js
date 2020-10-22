@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut,handleIsSelected,isSelected }) => {
+const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut,handleIsSelected,isSelected,getCorrectAnswer}) => {
     const [selected, setSelected] = useState('')
 
 
@@ -58,10 +58,14 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
-    if(isTimeOut===true&&isSelected===false){
-      console.log("send null answer")
-        sendAnswer("")
-        handleIsSelected() 
+    if(isTimeOut===true){
+        if(isSelected===false){
+          console.log("send null answer")
+          sendAnswer("") 
+          handleIsSelected() 
+          handleFilterAnswer() 
+        }
+        getCorrectAnswer()
         }
 
     const handleAnswerOptionClick = (answer) => {

@@ -15,7 +15,7 @@ const Quiz = () => {
   const [filterAnswer, setFilterAnswer] = useState(false)
   const [timer, setTimer] = useState('')
   const [questions, setQuestions] = useState([])
-  // const [correctAnswer, setCorrectAnswer] = useState('')
+  const [correctAnswer, setCorrectAnswer] = useState('')
   const cookies = new Cookies()
   const [isSelected,setIsSelected] = useState(false)
   const [isTimeOut,setIsTimeOut] = useState(false)
@@ -57,21 +57,21 @@ const Quiz = () => {
       })
     }
 
-    // const getCorrectAnswer = ()=>{
-    //   console.log('getting Correct Answer')
-    //   axios
-    //   .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
-    //   .then(response => {
-    //     console.log('promise fulfilled')
-    //     console.log(response.data)
-    //     setCorrectAnswer(response.data)
-    //   })
-    //   .catch(error => {
-    //     console.log('There was an error!', error)
-    //     if (error.response.status === 404) {
-    //     }
-    //   })
-    // }
+    const getCorrectAnswer = ()=>{
+      console.log('getting Correct Answer')
+      axios
+      .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID') } })
+      .then(response => {
+        console.log('getCorrectAnswer')
+        setCorrectAnswer(response.data)
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log('There was an error!', error)
+        if (error.response.status === 404) {
+        }
+      })
+    }
 
     if (isLoadingQuestion) {
       console.log('loading questions')
@@ -107,6 +107,10 @@ const Quiz = () => {
 
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
+      setTimeout(()=>{
+        getCorrectAnswer()
+        handleFilterAnswer()
+      },1000)
       console.log("handleisTimeOut",isTimeOut)
     }
 
@@ -127,19 +131,19 @@ const Quiz = () => {
               <Answer 
               type = {questions.type}
               answers = {questions.answers}
-              correctAnswer = {questions.correctAnswer}
+              correctAnswer = {correctAnswer}
               userID = {cookies.get('userID')}
               filterAnswer = {filterAnswer}
               handleFilterAnswer = {()=>handleFilterAnswer()}
               isTimeOut= {isTimeOut}
               isSelected={isSelected}
               handleIsSelected={()=>{handleIsSelected()}}
+              getCorrectAnswer={()=>{getCorrectAnswer()}}
               />
         </div>
         <div className='timer'>
           <Timer 
           timer={timer} 
-          handleFilterAnswer={()=>handleFilterAnswer()}
           resetFilterAnswer={() =>resetFilterAnswer()}
           handleIsTimeOut={()=>handleIsTimeOut()}
           resetTimeIsOut={()=>resetTimeIsOut()}/></div>
