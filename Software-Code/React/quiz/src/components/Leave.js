@@ -13,6 +13,7 @@ const Leave = ({ userID, isLeaderboard }) => {
         }})
         .then(response => {
           console.log(response.data);
+          checkIfHost()
           setLeft(true)
         })
         .catch(error => {
@@ -27,11 +28,27 @@ const Leave = ({ userID, isLeaderboard }) => {
         }})
         .then(response => {
           console.log(response.data);
+          checkIfHost()
           setLeft(true)
         })
         .catch(error => {
           console.error('There was an error!', error);
         })
+      }
+      const checkIfHost = () => {
+        axios
+        .call('https://team9app.azurewebsites.net/api/quizzarr/admin/endSession', { params: {
+         userID,
+        }})
+        .then(response => {
+          console.log(response.data);
+          setLeft(true)
+          console.log('Session Deleted')
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        })
+
       }
 
     if (left === true) {
