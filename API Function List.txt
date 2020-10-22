@@ -115,7 +115,6 @@ Returns
         Question JSON object
             Type
             Question
-            CorrectAnswer
             Answers[]
     404 Not Found
         No more questions in the list
