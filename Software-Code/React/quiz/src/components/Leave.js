@@ -7,17 +7,7 @@ const Leave = ({ userID, isLeaderboard }) => {
 
     const leaveSession = (event) => {
         event.preventDefault();
-        axios
-        .get('https://team9app.azurewebsites.net/api/quizzarr/leaveSession', { params: {
-          userID,
-        }})
-        .then(response => {
-          console.log(response.data);
-          setLeft(true)
-        })
-        .catch(error => {
-          console.error('There was an error!', error);
-        })
+        setLeft(true)
       }
 
       const leaveSessionAuto = () => {
@@ -26,9 +16,8 @@ const Leave = ({ userID, isLeaderboard }) => {
           userID,
         }})
         .then(response => {
-          console.log(response.data);
+          console.log('Session Left');
           checkIfHost()
-          setLeft(true)
         })
         .catch(error => {
           console.error('There was an error!', error);
@@ -42,7 +31,6 @@ const Leave = ({ userID, isLeaderboard }) => {
         }})
         .then(response => {
           console.log(response.data);
-          setLeft(true)
           console.log('Session Deleted')
         })
         .catch(error => {
@@ -57,23 +45,29 @@ const Leave = ({ userID, isLeaderboard }) => {
         )
     }
 
-    if(isLeaderboard === true)
-    {
-      setTimeout(() => {
+      
+
+      if(isLeaderboard === true)
+      {
         leaveSessionAuto()
-      }, 10000);
-      return(
-        <div>Session will end in 10 seconds</div>
-      )
-    }
-    else
-    {
-      return (
-        <div>
-        <button className='button-leave' onClick={leaveSession}>LEAVE SESSION</button>
-        </div>
-            )
-    }
+        
+        return (
+        
+          <div>
+          <button className='button-leave' onClick={leaveSession}>RETURN TO HOMEPAGE</button>
+          </div>
+              )
+      }
+      else
+      {
+        return (
+        
+          <div>
+          <button className='button-leave' onClick={leaveSession}>LEAVE SESSION</button>
+          </div>
+              )
+      }
+      
 }
 
   export default Leave;
