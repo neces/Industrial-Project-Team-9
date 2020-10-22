@@ -7,6 +7,21 @@ const Leave = ({ userID, isLeaderboard }) => {
 
     const leaveSession = (event) => {
         event.preventDefault();
+        if(isLeaderboard === false)
+        {
+        axios
+        .get('https://team9app.azurewebsites.net/api/quizzarr/leaveSession', { params: {
+          userID,
+        }})
+        .then(response => {
+          console.log('Session Left')
+          checkIfHost()
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        })
+      }
+
         setLeft(true)
       }
 
@@ -50,7 +65,7 @@ const Leave = ({ userID, isLeaderboard }) => {
       if(isLeaderboard === true)
       {
         leaveSessionAuto()
-        
+
         return (
         
           <div>
