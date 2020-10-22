@@ -251,6 +251,10 @@ button svg {
 }
 
 /* HOST */
+label {
+  font-size: 20px;
+}
+
 .host-text {
   font-size: 30px;
   padding: 20px;
@@ -327,7 +331,7 @@ only screen and (max-width: 425px),
     width: 200px;
   }
   .ready-graphic img {
-    width: 350px;
+    width: 420px;
   }
   .timer {
     top: 154px;
@@ -342,11 +346,16 @@ only screen and (max-width: 425px),
   .leaderboard-text {
     font-size: 15px;
   }
+
+  .waiting {
+    margin-top: 0px;
+  }
 }
 
 .quiz-id-button {
   width: 294px;
-  font-size: 25px;
+  height: 80px;
+  font-size: 45px;
   background-color: #4DB1B1;
   border-radius: 5px;
   display: initial;

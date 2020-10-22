@@ -43,7 +43,8 @@ const Waiting = () => {
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>{gameSession.numberOfRounds} ROUND(S) OF {gameSession.numberOfQuestionsPerRound} QUESTIONS</div>
+          <div className='waiting-text'>{gameSession.numberOfQuestionsPerRound} QUESTIONS</div>
+          <div className='waiting-text'>{gameSession.timePerQuestion} SECONDS TIMER</div>
           <div className='waiting-text'></div>
           <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
           </div>
