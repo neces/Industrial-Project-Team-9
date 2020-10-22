@@ -52,8 +52,6 @@ const Quiz = () => {
       })
       .catch(error => {
         console.log('There was an error!', error)
-        if (error.response.status === 404) {
-        }
       })
     }
 
@@ -68,8 +66,6 @@ const Quiz = () => {
       })
       .catch(error => {
         console.log('There was an error!', error)
-        if (error.response.status === 404) {
-        }
       })
     }
 
