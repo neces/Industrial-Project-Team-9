@@ -1,24 +1,8 @@
 import React, { useState } from "react"
 import axios from 'axios'
 
-const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilterAnswer,isTimeOut,handleIsSelected,isSelected,getCorrectAnswer}) => {
+const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,isSendAnswer,sendAnswer}) => {
     const [selected, setSelected] = useState('')
-
-
-    const sendAnswer = (answer) => {
-      axios
-      .get('https://team9app.azurewebsites.net/api/quizzarr/submitAnswer', { params: {
-        userID,
-        answer
-      }})
-      .then(response => {
-        console.log(response.data);
-        console.log("Answer sent")
-      })
-      .catch(error => {
-        console.error('There was an error!', error);
-      })
-    }
 
     // if no answer was selected == if isSelected false after the timer is out, send null answer sendAnswer(null)
     // toLowerCase() is to gurantee when the correctAnswer is "FALSE" or "TRUE" and the answer is "false" or "true" 
@@ -58,23 +42,17 @@ const Answer = ({ type, answers, correctAnswer, userID, filterAnswer, handleFilt
       }
     }
 
-    if(isTimeOut===true){
-        if(isSelected===false){
-          console.log("send null answer")
-          sendAnswer("") 
-          handleIsSelected() 
-          handleFilterAnswer() 
-        }
-        getCorrectAnswer()
-        }
+    if(isTimeOut===true&&isSendAnswer===false&&isSelected===false){
+        console.log("send null answer")
+        sendAnswer("") 
+
+        
+    }
 
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
-      handleIsSelected()
-      sendAnswer(answer)
-      handleFilterAnswer() // this is where selected function should be called
+      sendAnswer(answer)// this is where selected function should be called
       console.log("Click Answer")
-      console.log(isTimeOut)
   }
 
   if (type === "TrueFalse") {
