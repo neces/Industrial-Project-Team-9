@@ -180,6 +180,19 @@ Returns
         User id doesnt exist
 
 
+Leave Session
+    Removes a user from a session or the lobby
+Call
+    api/quizzarr/leave
+Call Body
+    <UserId>
+Call Body Example
+    "423451"
+Call Type
+    POST
+Returns
+    None
+
 
 Game Session Status
     Gets the status of a game session given user id
