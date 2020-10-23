@@ -20,7 +20,7 @@ const Quiz = () => {
   const [isSelected,setIsSelected] = useState(false)
   const [isTimeOut,setIsTimeOut] = useState(false)
   const [isSendAnswer,setIsSendAnswer] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(1)
   const [totalQuestions, setTotalQuestions] = useState('')
 
     const getQuestion = () => {
@@ -31,8 +31,7 @@ const Quiz = () => {
       .then(response => {
         console.log('promise fulfilled')
         console.log(response.data)
-        setQuestions(response.data)
-        setCurrentQuestion(currentQuestion + 1)
+        setQuestions(response.data)    
         console.log(currentQuestion)
         setLoadingQuestion(false)
       })
@@ -124,6 +123,7 @@ const Quiz = () => {
     const resetTimeIsOut = () =>{
       setIsTimeOut(false)
       setIsSelected(false)
+      setCurrentQuestion(currentQuestion + 1)
       console.log("resetisTimeOut",isTimeOut)
     }
 

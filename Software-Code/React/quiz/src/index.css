@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400&display=swap");
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center
+  text-align: center;
 }
 
 * {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   color: #ffffff;
 }
 
 body {
-  background-color: #030A17;
+  background-color: #030a17;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ body {
 }
 
 .app {
-  background-color: #030A17;
+  background-color: #030a17;
   width: 450px;
   min-height: 200px;
   height: min-content;
@@ -59,42 +59,44 @@ body {
   margin-top: 20px;
   width: 294px;
   font-size: 25px;
-  background-color: #A41ABB;
+  background-color: #a41abb;
   padding: 10px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
   align-items: center;
-  border: 0px solid #ffffff; 
+  border: 0px solid #ffffff;
   cursor: pointer;
   margin: 9px;
 }
 
 .start-button:hover {
-  background-color: #A41ABB;
+  background-color: #a41abb;
 }
 
 .host-home-button {
   width: 294px;
   font-size: 25px;
-  background-color: #030A17;
+  background-color: #030a17;
   padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #A41ABB; 
+  border: 1px solid #a41abb;
   cursor: pointer;
   margin: 9px;
 }
 
-a:hover, a:visited, a:link, a:active
-{
-    text-decoration: none;
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
 }
 
 .host-home-button:hover {
-  background-color: #030A17;
+  background-color: #030a17;
 }
 
 .button-leave {
@@ -102,16 +104,16 @@ a:hover, a:visited, a:link, a:active
   right: 30px;
   width: 170px;
   font-size: 15px;
-  background-color: #030A17;
+  background-color: #030a17;
   padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #A41ABB; 
+  border: 1px solid #a41abb;
   cursor: pointer;
   margin: 9px;
-  position: fixed
+  position: fixed;
 }
 
 form {
@@ -123,7 +125,7 @@ input {
   height: 40px;
   font-size: 25px;
   text-align: center;
-  background-color: #191E24;
+  background-color: #191e24;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
@@ -182,39 +184,39 @@ input {
 .button-normal {
   width: 100%;
   font-size: 30px;
-  background-color: #191E24;
+  background-color: #191e24;
   border-radius: 5px;
   display: initial;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #234668; 
+  border: 1px solid #234668;
   cursor: pointer;
 }
 
 .button-selected {
   width: 100%;
   font-size: 30px;
-  background-color: #A41ABB;
+  background-color: #a41abb;
   border-radius: 5px;
   display: initial;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #234668; 
+  border: 1px solid #234668;
   cursor: pointer;
 }
 
 .button-correct {
   width: 100%;
   font-size: 30px;
-  background-color: #4DB1B1;
+  background-color: #4db1b1;
   border-radius: 5px;
   display: initial;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #234668; 
+  border: 1px solid #234668;
   cursor: pointer;
 }
 
@@ -293,19 +295,19 @@ label {
 .host-button {
   width: 294px;
   font-size: 25px;
-  background-color: #A41ABB;
+  background-color: #a41abb;
   padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #A41ABB; 
+  border: 1px solid #a41abb;
   cursor: pointer;
   margin: 9px;
 }
 
 .host-button:hover {
-  background-color: #A41ABB;
+  background-color: #a41abb;
 }
 
 /* WAITING */
@@ -329,28 +331,26 @@ label {
   text-align: center;
 }
 
-@media 
-only screen and (max-width: 425px),
-(min-device-width: 320px) and (max-device-width: 425px)  {
-
-	.answer-section { 
-    display: block; 
+@media only screen and (max-width: 425px),
+  (min-device-width: 320px) and (max-device-width: 425px) {
+  .answer-section {
+    display: block;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .button-normal { 
+  .button-normal {
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  .button-selected { 
+  .button-selected {
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  .button-correct { 
+  .button-correct {
     margin-top: 5px;
     margin-bottom: 5px;
   }
@@ -401,18 +401,18 @@ only screen and (max-width: 425px),
   }
 
   .button-normal:hover:enabled {
-    background-color: #191E24;
+    background-color: #191e24;
   }
 
   .button-leave {
     width: 170px;
     font-size: 15px;
-    background-color: #030A17;
+    background-color: #030a17;
     border-radius: 5px;
     display: initial;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid #A41ABB; 
+    border: 1px solid #a41abb;
     cursor: pointer;
     margin: 9px;
     position: static;
@@ -423,62 +423,91 @@ only screen and (max-width: 425px),
   width: 294px;
   height: 80px;
   font-size: 45px;
-  background-color: #4DB1B1;
+  background-color: #4db1b1;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #4DB1B1; 
+  border: 1px solid #4db1b1;
   cursor: default;
   margin: 9px;
 }
 
 .quiz-id-button:hover {
-  background-color: #4DB1B1;
+  background-color: #4db1b1;
 }
 
 /* LOADING SPINNER */
 @keyframes ldio-ctuwgjg8ktk {
-   0% { transform: translate(20px,88px) scale(0); }
-  25% { transform: translate(20px,88px) scale(0); }
-  50% { transform: translate(20px,88px) scale(1); }
-  75% { transform: translate(88px,88px) scale(1); }
- 100% { transform: translate(156px,88px) scale(1); }
+  0% {
+    transform: translate(20px, 88px) scale(0);
+  }
+  25% {
+    transform: translate(20px, 88px) scale(0);
+  }
+  50% {
+    transform: translate(20px, 88px) scale(1);
+  }
+  75% {
+    transform: translate(88px, 88px) scale(1);
+  }
+  100% {
+    transform: translate(156px, 88px) scale(1);
+  }
 }
 @keyframes ldio-ctuwgjg8ktk-r {
-   0% { transform: translate(156px,88px) scale(1); }
- 100% { transform: translate(156px,88px) scale(0); }
+  0% {
+    transform: translate(156px, 88px) scale(1);
+  }
+  100% {
+    transform: translate(156px, 88px) scale(0);
+  }
 }
 @keyframes ldio-ctuwgjg8ktk-c {
-   0% { background: #ffffff }
-  25% { background: #ffffff }
-  50% { background: #ffffff }
-  75% { background: #ffffff }
- 100% { background: #ffffff }
+  0% {
+    background: #ffffff;
+  }
+  25% {
+    background: #ffffff;
+  }
+  50% {
+    background: #ffffff;
+  }
+  75% {
+    background: #ffffff;
+  }
+  100% {
+    background: #ffffff;
+  }
 }
 .ldio-ctuwgjg8ktk div {
   position: absolute;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  transform: translate(88px,88px) scale(1);
+  transform: translate(88px, 88px) scale(1);
   background: #ffffff;
-  animation: ldio-ctuwgjg8ktk 4s infinite cubic-bezier(0,0.5,0.5,1);
+  animation: ldio-ctuwgjg8ktk 4s infinite cubic-bezier(0, 0.5, 0.5, 1);
 }
 .ldio-ctuwgjg8ktk div:nth-child(1) {
   background: #ffffff;
-  transform: translate(156px,88px) scale(1);
-  animation: ldio-ctuwgjg8ktk-r 1s infinite cubic-bezier(0,0.5,0.5,1), ldio-ctuwgjg8ktk-c 4s infinite step-start;
-}.ldio-ctuwgjg8ktk div:nth-child(2) {
+  transform: translate(156px, 88px) scale(1);
+  animation: ldio-ctuwgjg8ktk-r 1s infinite cubic-bezier(0, 0.5, 0.5, 1),
+    ldio-ctuwgjg8ktk-c 4s infinite step-start;
+}
+.ldio-ctuwgjg8ktk div:nth-child(2) {
   animation-delay: -1s;
   background: #ffffff;
-}.ldio-ctuwgjg8ktk div:nth-child(3) {
+}
+.ldio-ctuwgjg8ktk div:nth-child(3) {
   animation-delay: -2s;
   background: #ffffff;
-}.ldio-ctuwgjg8ktk div:nth-child(4) {
+}
+.ldio-ctuwgjg8ktk div:nth-child(4) {
   animation-delay: -3s;
   background: #ffffff;
-}.ldio-ctuwgjg8ktk div:nth-child(5) {
+}
+.ldio-ctuwgjg8ktk div:nth-child(5) {
   animation-delay: -4s;
   background: #ffffff;
 }
@@ -497,5 +526,7 @@ only screen and (max-width: 425px),
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
 }
-.ldio-ctuwgjg8ktk div { box-sizing: content-box; }
+.ldio-ctuwgjg8ktk div {
+  box-sizing: content-box;
+}
 /* generated by https://loading.io/ */
