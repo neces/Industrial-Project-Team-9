@@ -16,12 +16,12 @@ const Timer = ({ timer, handleIsTimeOut, resetTimeIsOut }) => {
         resetTimeIsOut()
         setCounter(timer)
         setIsTimeout(false)
-      }, 5000); // this is the time left for showing the correct answer at the end, could change it to 3000
+      }, 2000); // this is the time left for showing the correct answer at the end
       setIsTimeout(true)
     }
     return (
       <div className="timer">
-      <div></div>
+      <div>&nbsp;</div>
       </div>
     )
   }

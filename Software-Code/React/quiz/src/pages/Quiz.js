@@ -20,6 +20,8 @@ const Quiz = () => {
   const [isSelected,setIsSelected] = useState(false)
   const [isTimeOut,setIsTimeOut] = useState(false)
   const [isSendAnswer,setIsSendAnswer] = useState(false)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [totalQuestions, setTotalQuestions] = useState('')
 
     const getQuestion = () => {
       console.log('Getting Question')
@@ -30,6 +32,8 @@ const Quiz = () => {
         console.log('promise fulfilled')
         console.log(response.data)
         setQuestions(response.data)
+        setCurrentQuestion(currentQuestion + 1)
+        console.log(currentQuestion)
         setLoadingQuestion(false)
       })
       .catch(error => {
@@ -49,6 +53,7 @@ const Quiz = () => {
         console.log('promise fulfilled')
         console.log(response.data)
         setTimer(response.data.timePerQuestion)
+        setTotalQuestions(response.data.numberOfQuestions)
         setLoadingTimer(false)
       })
       .catch(error => {
@@ -107,7 +112,7 @@ const Quiz = () => {
         setIsTimeOut(false)  //For the appearence of correctAnswer
         setIsSendAnswer(false)
         setIsSelected(false)
-      }, (timer * 1000 + 5000));
+      }, (timer * 1000 + 2000));
       setIsTimeout(true)
     }
 
@@ -130,7 +135,7 @@ const Quiz = () => {
           handleIsTimeOut={()=>handleIsTimeOut()}
           resetTimeIsOut={()=>resetTimeIsOut()} /></div>
       <div className='app'>
-        <div className='question'><Question questions={questions} /></div>
+        <div className='question'><Question questions={questions} currentQuestion={currentQuestion} totalQuestions={totalQuestions}/></div>
         <Answer
          type = {questions.type}
          answers = {questions.answers}

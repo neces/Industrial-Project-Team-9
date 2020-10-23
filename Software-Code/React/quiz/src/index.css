@@ -60,6 +60,7 @@ body {
   width: 294px;
   font-size: 25px;
   background-color: #A41ABB;
+  padding: 10px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
@@ -77,6 +78,7 @@ body {
   width: 294px;
   font-size: 25px;
   background-color: #030A17;
+  padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
@@ -96,11 +98,12 @@ a:hover, a:visited, a:link, a:active
 }
 
 .button-leave {
-  bottom: 30px;
+  bottom: 10px;
   right: 30px;
-  width: 294px;
-  font-size: 25px;
+  width: 170px;
+  font-size: 15px;
   background-color: #030A17;
+  padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
@@ -182,7 +185,7 @@ input {
   background-color: #191E24;
   border-radius: 5px;
   display: initial;
-  padding: 5px;
+  padding: 10px;
   justify-content: flex-start;
   align-items: center;
   border: 1px solid #234668; 
@@ -195,7 +198,7 @@ input {
   background-color: #A41ABB;
   border-radius: 5px;
   display: initial;
-  padding: 5px;
+  padding: 10px;
   justify-content: flex-start;
   align-items: center;
   border: 1px solid #234668; 
@@ -208,7 +211,7 @@ input {
   background-color: #4DB1B1;
   border-radius: 5px;
   display: initial;
-  padding: 5px;
+  padding: 10px;
   justify-content: flex-start;
   align-items: center;
   border: 1px solid #234668; 
@@ -246,11 +249,27 @@ button svg {
 }
 
 .leaderboard-text {
-  position: absolute;
+  position: relative;
+  text-align: center;
   font-size: 25px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+}
+
+.first-place {
+  position: relative;
+  text-align: center;
+  font-size: 25px;
+}
+
+.second-place {
+  position: relative;
+  text-align: center;
+  font-size: 25px;
+}
+
+.third-place {
+  position: relative;
+  text-align: center;
+  font-size: 25px;
 }
 
 /* HOST */
@@ -275,6 +294,7 @@ label {
   width: 294px;
   font-size: 25px;
   background-color: #A41ABB;
+  padding: 7px;
   border-radius: 5px;
   display: initial;
   justify-content: flex-start;
@@ -308,6 +328,7 @@ label {
   position: relative;
   text-align: center;
 }
+
 @media 
 only screen and (max-width: 425px),
 (min-device-width: 320px) and (max-device-width: 425px)  {
@@ -318,35 +339,59 @@ only screen and (max-width: 425px),
     margin-left: auto;
     margin-right: auto;
   }
+
+  .button-normal { 
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .button-selected { 
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .button-correct { 
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
   .question {
     margin-left: 10vh;
     margin-right: 10vh;
     font-size: 25px;
   }
-  * {
+
+  /* * {
     margin-bottom: auto;
-  }
+  } */
+
   .quiz-logo {
     position: relative;
     left: 0;
   }
+
   .quiz-logo img {
     width: 200px;
   }
+
   .ready-graphic img {
     width: 420px;
   }
+
   .timer {
     top: 154px;
     right: 221px;
     position: static;
   }
+
   .leaderboard {
     width: 400px;
   }
+
   .leaderboard img {
     width: 400px;
   }
+
   .leaderboard-text {
     font-size: 15px;
   }
@@ -355,9 +400,13 @@ only screen and (max-width: 425px),
     margin-top: 0px;
   }
 
+  .button-normal:hover:enabled {
+    background-color: #191E24;
+  }
+
   .button-leave {
-    width: 294px;
-    font-size: 25px;
+    width: 170px;
+    font-size: 15px;
     background-color: #030A17;
     border-radius: 5px;
     display: initial;
