@@ -39,14 +39,13 @@ const Waiting = () => {
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>{gameSession.numberOfQuestions} QUESTIONS</div>
-          <div className='waiting-text'>{gameSession.timePerQuestion} SECONDS TIMER</div>
+          <div className='waiting-text'>{gameSession.numberOfQuestions} QUESTIONS<br></br>{gameSession.timePerQuestion} SECONDS TIMER</div>
           <div className='waiting-text'></div>
-          <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
           </div>
           <div className="loadingio-spinner-ellipsis-8ty8wmpuhyh"><div className="ldio-ctuwgjg8ktk">
           <div></div><div></div><div></div><div></div><div></div>
           </div></div>
+          <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
           { gameSession.gameInProgress ? <Redirect to="/quiz"/> : null }
           <Leave userID={cookies.get('userID')}/>
         </div>

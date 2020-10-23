@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 
@@ -124,6 +124,9 @@ const createSession = () => {
           <a><button className='host-button' type="submit">HOST</button></a>
         </div>
       </form>
+      <div>
+          <Link to="/"><button className='button-leave'>RETURN TO HOMEPAGE</button></Link>
+      </div>
       { submitted ? <Redirect to="/hosting"/> : null }
     </div>
   )
