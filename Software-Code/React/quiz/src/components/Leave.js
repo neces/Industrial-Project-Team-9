@@ -15,7 +15,6 @@ const Leave = ({ userID, isLeaderboard }) => {
         }})
         .then(response => {
           console.log('Session Left')
-          checkIfHost()
         })
         .catch(error => {
           console.error('There was an error!', error);
