@@ -11,14 +11,11 @@ const WaitingHost = () => {
     const cookies = new Cookies()
 
     const getGameSession = () => {
-        console.log('Getting Game Status')
         axios
         .get('https://team9app.azurewebsites.net/api/quizzarr/gameSessionStatus', { params: { userID: cookies.get('userID') } })
         .then(response => {
-          console.log('promise fulfilled')
           setGameSession(response.data)
           setLoadingGame(false)
-          console.log(response.data)
         })
         .catch(error => {
           console.error('There was an error!', error)
@@ -30,8 +27,7 @@ const WaitingHost = () => {
         axios
         .get('https://team9app.azurewebsites.net/api/quizzarr/startSession', { params: { hostUId: cookies.get('userID') } })
         .then(response => {
-          console.log('promise fulfilled')
-          console.log(response.data)
+          console.log('Session started')
         })
         .catch(error => {
           console.error('There was an error!', error)
@@ -42,14 +38,13 @@ const WaitingHost = () => {
       setTimeout(() => {
         getGameSession()
         setIsTimeout(false)
-      }, 3000); // set to 1500
+      }, 1500);
       setIsTimeout(true)
     }
 
     if (isLoadingGame) {
-        console.log('Loading game session')
         getGameSession()
-        return <div className="app">Loading game session</div>
+        return <div className="app"></div>
     }
   
     return (

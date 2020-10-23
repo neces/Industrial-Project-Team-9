@@ -11,14 +11,11 @@ const Waiting = () => {
     const cookies = new Cookies()
 
     const getGameSession = () => {
-        console.log('Getting Game Status')
         axios
         .get('https://team9app.azurewebsites.net/api/quizzarr/gameSessionStatus', { params: { userID: cookies.get('userID') } })
         .then(response => {
-          console.log('promise fulfilled')
           setGameSession(response.data)
           setLoadingGame(false)
-          console.log(response.data)
         })
         .catch(error => {
           console.error('There was an error!', error)
@@ -29,21 +26,20 @@ const Waiting = () => {
       setTimeout(() => {
         getGameSession()
         setIsTimeout(false)
-      }, 3000); // set to 1500
+      }, 1500);
       setIsTimeout(true)
     }
 
     if (isLoadingGame) {
-        console.log('Loading game session')
         getGameSession()
-        return <div className="app">Loading game session</div>
+        return <div className="app"></div>
     }
   
     return (
         <div className='app'>
           <div className='waiting'>
           <div className='quiz-name'>{gameSession.quizName.toUpperCase()}</div>
-          <div className='waiting-text'>{gameSession.numberOfQuestionsPerRound} QUESTIONS</div>
+          <div className='waiting-text'>{gameSession.numberOfQuestions} QUESTIONS</div>
           <div className='waiting-text'>{gameSession.timePerQuestion} SECONDS TIMER</div>
           <div className='waiting-text'></div>
           <div className='waiting-text'>PEOPLE JOINED: {gameSession.numberOfUsers}</div>
