@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css"
 
 const Question = ({ questions, currentQuestion, totalQuestions }) => {
     return (
