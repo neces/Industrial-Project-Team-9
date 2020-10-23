@@ -58,16 +58,16 @@ Neja is progressing with the structure of React frontend, will push it to the Gi
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
-n/a
+Melvin, Andrew, Neja, Mengqi, Cameron, Daniel, Fayzuddin, Blazej, Jordan
 
 ### Members Not Present:
 n/a
 
 ### Apologies:
-n/a
+Oskar
 
 ### Summary of Conversation:
-
+Fayzuddin mentioned that he was working on the codebase, scoring system and leaderboard on the backend and will continue on working on the database today. Cameron and Jordan spent most of the day pair programming on the backend. Jordan will set up a server for the backend. Melvin is working on the report and the user manual and asked us to note any specific issues we would like to discuss in the report. Blazej updated the .gitignore file as there was some excess files visible. Neja added the graphics and logo on the GitHub, updated product backlog and scrum meetings, also worked on the main React app, to which new components and functionalities are being added. Mengqi was assigned to the Leaderboard component, Andrew was building the timer component and Daniel was slowly progressing with the styling the frontend to make it look like the protoype.
 
 
 ---
@@ -76,15 +76,15 @@ n/a
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
-n/a
+Melvin, Andrew, Neja, Mengqi, Cameron, Daniel, Fayzuddin, Oskar, Jordan
 
 ### Members Not Present:
 n/a
 
 ### Apologies:
-n/a
+Blazej
 
 ### Summary of Conversation:
-
+Neja started the meeting by describing how the structure of the frontend will change due to a react-router library that will allow us to have pages with separate urls. Currently we have Home, Host and Quiz. The priority is on making Home and Quiz work for the Monday client meeting, as we can avoid using the Host page by starting the session with a call on Postman. Cameron worked on the backend API and added functionality that the user is able to leave the quiz. Fayzuddin is working on an algorithm that calculates the difficulty. Jordan has connected the database with web app on the Azure website, now the connection has to be updated in the backend as well. Oskar updated the API call list for requesting the questions. Melvin is writing up a rough version of the report and looking into how to do a user manual. He has also been helping Daniel set up everything for the user testing. Daniel continued with CSS stlying, Andrew and Mengqi were still working on their components.
 
 
