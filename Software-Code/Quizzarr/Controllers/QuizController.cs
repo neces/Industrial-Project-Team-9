@@ -406,10 +406,10 @@ namespace Quizzarr.Controllers
             return NoContent();
         }
         
-        // [HttpPost("leave")]
-        // public void Post([FromBody] string userID) {
-        //     LeaveSession(userID);
-        // }
+        [HttpPost("leave")]
+        public void Post([FromBody] string userID) {
+            LeaveSession(userID);
+        }
 
         
         public GameSession findSessionWithUser(string userID)
