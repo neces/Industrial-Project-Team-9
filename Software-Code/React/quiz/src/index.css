@@ -309,6 +309,22 @@ label {
   text-align: center;
 }
 @media 
+only screen and (max-width: 2560px),
+(min-device-width: 1025px) and (max-device-width: 2560px)  {
+  .first-place {
+    margin-top: 4%;
+    font-size: 35px;
+  }
+  .second-place {
+    margin-top: 4%;
+    font-size: 35px;
+  }
+  .third-place {
+    margin-top: 4%;
+    font-size: 35px;
+  }
+}
+@media 
 only screen and (max-width: 425px),
 (min-device-width: 320px) and (max-device-width: 425px)  {
 
