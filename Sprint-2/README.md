@@ -18,7 +18,7 @@ Scrum meeting was short, as we had to discuss all the changes we are making afte
 
 ---
 
-## Day [2] - Scrum Meeting, Oct 13th, 9.30 am
+## Day [2] - Scrum Meeting, Tuesday Oct 13th, 9.30 am
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
@@ -36,7 +36,7 @@ Neja spoke about adding the protection on the main branch on GitHub. From now on
 
 ---
 
-## Day [3] - Scrum Meeting, Oct 14th, 10.30 am
+## Day [3] - Scrum Meeting, Wednesday Oct 14th, 10.30 am
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
@@ -54,7 +54,7 @@ Neja is progressing with the structure of React frontend, will push it to the Gi
 
 ---
 
-## Day [4] - Scrum Meeting, Oct 15th, 9.30 am
+## Day [4] - Scrum Meeting, Thursday Oct 15th, 9.30 am
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
@@ -72,7 +72,7 @@ Fayzuddin mentioned that he was working on the codebase, scoring system and lead
 
 ---
 
-## Day [5] - Scrum Meeting, Oct 16th, 9.30 am
+## Day [5] - Scrum Meeting, Friday Oct 16th, 9.30 am
 The Scrum Master for this meeting was **Cameron McNeill**
 
 ### Members Present:
