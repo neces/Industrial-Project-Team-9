@@ -7,8 +7,8 @@ const Leave = ({ userID, isLeaderboard }) => {
 
     /* 
       Allows User to leave session
-      Outcome: when button is clicked the user will leave the session and return to the hompeage.
-               will only leave the session if the user is not on the leaderboard page    
+      Outcome: When button is clicked the user will leave the session and return to the homepage.
+               Will only leave the session if the user is not on the leaderboard page    
     */
     const leaveSession = (event) => {
       event.preventDefault();
@@ -27,7 +27,7 @@ const Leave = ({ userID, isLeaderboard }) => {
 
     /* 
       Allows User to leave session
-      Outcome: the session will automatically be left when on the leaderboard page
+      Outcome: The session will automatically be left when on the leaderboard page
     */
     const leaveSessionAuto = () => {
       axios
@@ -42,9 +42,8 @@ const Leave = ({ userID, isLeaderboard }) => {
     }
 
     /* 
-      Checks to se if the user leaviong is the host
-      Outcome: if the user is the host then the session will end
-               if not then the session will not end   
+      If the user leaving is a host, the function will end the session for everybody
+      Outcome: If the user is the host then the session will end, otherwise it will still be ongoing
     */
     const checkIfHost = () => {
       axios
@@ -59,8 +58,8 @@ const Leave = ({ userID, isLeaderboard }) => {
     }
 
     /* 
-      if the variable setLeft is true then
-      Outcome: redirects the user to the homepage   
+      If the user has left the session
+      Outcome: Redirects the user to the homepage   
     */
     if (left === true) {
       return (
@@ -69,7 +68,7 @@ const Leave = ({ userID, isLeaderboard }) => {
     }
 
     /* 
-      checks to see if the isLeaderboard variable passed through is true
+      Checks to see if the isLeaderboard variable passed through is true
       Outcome: if so then the session will be left automatically
                if not then the session will be left once the user clicks the button
     */
