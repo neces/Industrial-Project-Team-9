@@ -1,18 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;400&display=swap');
 
+/* BASE CSS FOR CONTENT */
 body {
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center
-}
-
-* {
-  font-family: 'Raleway', sans-serif;
-  color: #ffffff;
-}
-
-body {
+  text-align: center;
   background-color: #030A17;
   display: flex;
   justify-content: center;
@@ -20,6 +13,11 @@ body {
   min-height: 100vh;
 }
 
+* {
+  font-family: 'Raleway', sans-serif;
+  color: #ffffff;
+}
+/* MAIN SECTION */
 .app {
   background-color: #030A17;
   width: 450px;
@@ -29,32 +27,25 @@ body {
   padding: 20px;
   justify-content: space-evenly;
 }
-
+/* VIRTUAL PUB QUIZ LOGO ON ALL PAGES (DESKTOP) */
 .quiz-logo {
   position: fixed;
   top: 0;
   left: -5px;
 }
 
-.host-link {
-  position: fixed;
-  top: 45px;
-  right: 55px;
-  font-size: 30px;
-}
-
-/* HOMEPAGE */
+/* HOMEPAGE READY FOR A QUIZ GRAPHIC (DESKTOP) */
 .ready-graphic {
   margin-left: auto;
   margin-right: auto;
 }
-
+/* FORM CONTAINING BUTTONS AND FIELDS ON HOMEPAGE */
 .start-form {
   margin-left: auto;
   margin-right: auto;
   display: grid;
 }
-
+/* JOIN BUTTON ON HOMEPAGE (TO JOIN WAITING ROOM) AND START ON HOSTING PAGE (TO BEGIN QUIZ) */
 .start-button {
   margin-top: 20px;
   width: 294px;
@@ -73,7 +64,7 @@ body {
 .start-button:hover {
   background-color: #A41ABB;
 }
-
+/* BUTTON TO RETURN TO HOMEPAGE WHEN IN THE PROCESS OF HOSTING A QUIZ (BEFORE WAITING ROOM) */
 .host-home-button {
   width: 294px;
   font-size: 25px;
@@ -97,6 +88,7 @@ a:hover, a:visited, a:link, a:active
   background-color: #030A17;
 }
 
+/* BUTTON TO LEAVE QUIZ DURING QUIZ */
 .button-leave {
   bottom: 10px;
   right: 30px;
@@ -118,6 +110,7 @@ form {
   display: inline-block;
 }
 
+/* BASE CSS FOR INPUT BUTTONS */
 input {
   width: 285px;
   height: 40px;
@@ -144,30 +137,14 @@ input {
   top: 30px;
   right: 30px;
 }
-
-.question-section {
-  width: 100%;
-  position: relative;
-  text-align: center;
-  padding-bottom: 20px;
-  font-size: 30px;
-}
-
-.question-count {
-  margin-bottom: 20px;
-}
-
-.question-count span {
-  font-size: 28px;
-}
-
+/* THE CLASS FOR THE QUESTION BEING ASKED DURING QUIZ */
 .question {
   margin-bottom: 30px;
   text-align: center;
   font-size: 30px;
 }
 
-/* ANSWERS/RIGHT SECTION */
+/* THE CLASS CONTAINING THE ANSWERS DURING QUIZ */
 .answer-section {
   width: 100%;
   display: grid;
@@ -179,6 +156,7 @@ input {
   justify-content: space-between;
 }
 
+/* BUTTON DEFAULT */
 .button-normal {
   width: 100%;
   font-size: 30px;
@@ -192,6 +170,7 @@ input {
   cursor: pointer;
 }
 
+/* BUTTON CHANGE WHEN SELECTED/CLICKED */
 .button-selected {
   width: 100%;
   font-size: 30px;
@@ -204,7 +183,7 @@ input {
   border: 1px solid #234668; 
   cursor: pointer;
 }
-
+/* BUTTON CHANGE WHEN TIME IS UP AND ANSWER REVEALED */
 .button-correct {
   width: 100%;
   font-size: 30px;
@@ -233,7 +212,6 @@ input {
 .button-normal:hover:enabled {
   background-color: #555e7d;
 }
-
 button svg {
   margin-right: 5px;
 }
@@ -249,19 +227,19 @@ button svg {
   text-align: center;
   font-size: 25px;
 }
-
+/* FIRST PLACE ON LEADERBOARD CLASS */
 .first-place {
   position: relative;
   text-align: center;
   font-size: 25px;
 }
-
+/* SECOND PLACE ON LEADERBOARD CLASS */
 .second-place {
   position: relative;
   text-align: center;
   font-size: 25px;
 }
-
+/* THIRD PLACE ON LEADERBOARD CLASS */
 .third-place {
   position: relative;
   text-align: center;
@@ -272,20 +250,20 @@ button svg {
 label {
   font-size: 20px;
 }
-
+/* CONTROLS TEXT WHEN HOSTING A QUIZ */
 .host-text {
   font-size: 30px;
   padding: 20px;
   position: relative;
   text-align: center;
 }
-
+/* CLASS FOR THE FORM CONTAINER */
 .host-form {
   margin-left: auto;
   margin-right: auto;
   display: grid;
 }
-
+/* BUTTON TO HOST A QUIZ AFTER ALL NECESSARY FIELDS FILLED OUT */
 .host-button {
   width: 294px;
   font-size: 25px;
@@ -311,20 +289,20 @@ label {
   position: relative;
   text-align: center;
 }
-
+/* CONTROLS TEXT FOR THE NAME OF THE QUIZ (WAITING ROOM) */
 .quiz-name {
   font-size: 45px;
   position: relative;
   text-align: center;
 }
-
+/* CONTROLS TEXT FOR NO. QUESTIONS, DURATION OF EACH QUESTION, NO. PEOPLE JOINED (IN WAITING ROOM) */
 .waiting-text {
   font-size: 30px;
   padding: 20px;
   position: relative;
   text-align: center;
 }
-
+/* CHANGING CSS FOR LARGER DEVICES (DESKTOP, LAPTOP, TABLETS) */
 @media 
 only screen and (max-width: 2560px),
 (min-device-width: 1025px) and (max-device-width: 2560px)  {
@@ -341,11 +319,12 @@ only screen and (max-width: 2560px),
     font-size: 35px;
   }
 }
-
+/* CHANGING CSS FOR SMALLER DEVICES (MOBILE VIEW) */
 @media 
 only screen and (max-width: 425px),
 (min-device-width: 320px) and (max-device-width: 425px)  {
 
+  /* SPACE ANSWERS INTO ROWS*/
 	.answer-section { 
     display: block; 
     width: 80%;
@@ -373,7 +352,6 @@ only screen and (max-width: 425px),
     margin-right: 10vh;
     font-size: 25px;
   }
-
   .quiz-logo {
     position: relative;
     left: 0;
@@ -386,7 +364,7 @@ only screen and (max-width: 425px),
   .ready-graphic img {
     width: 420px;
   }
-
+  /* PREVENT TIMER FROM SCROLLING */
   .timer {
     top: 154px;
     right: 221px;
@@ -413,6 +391,7 @@ only screen and (max-width: 425px),
     background-color: #191E24;
   }
 
+  /* CHANGING POSITION OF LEAVE BUTTON FOR MOBILE (UNDER CONTENT, NOT BOTTOM-RIGHT */
   .button-leave {
     width: 170px;
     font-size: 15px;
@@ -427,7 +406,7 @@ only screen and (max-width: 425px),
     position: static;
   }
 }
-
+/* CONTAINER OF THE QUIZ-ID THAT IS PROVIDED TO OTHER USERS TO JOIN QUIZ */
 .quiz-id-button {
   width: 294px;
   height: 80px;
