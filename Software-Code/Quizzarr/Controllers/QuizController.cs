@@ -12,15 +12,24 @@ namespace Quizzarr.Controllers
     public class QuizController : ControllerBase
     {
 
+        // Holds all the data about all the sessions being used
         private static List<GameSession> Sessions = new List<GameSession>();
+
+        // List of all users who are known but are not yet in a session
         private static List<User> LobbyUsers = new List<User>();
+
+        // Interface to get questions
         private readonly IQuestionRepo _questionRepository;
 
+        // Constructor
         public QuizController(IQuestionRepo questionRepository)
         {
             _questionRepository = questionRepository;
         }
 
+
+        // Returns a DTO containing all the information that the front end needs
+        // about a specific session
         // api/quizzarr/gameSessionStatus?userId=<your UId here>
         [HttpGet("gameSessionStatus")]
         public ActionResult<UserViewGameStatusDTO> gameSessionStatus(string userId)
@@ -50,7 +59,9 @@ namespace Quizzarr.Controllers
         }
 
 
-        // GetUId is generates new userId for a client that requests it; the id is added to list of all UIds
+        // Generates a new object of class User with a display name and a unique user ID
+        // the ID is then returned to be stored on the front end
+        // All new users are automatically put into the LobbyUsers list
         // api/quizzarr/newUser?displayName=<your name here>
         [HttpGet("newUser")]
         public ActionResult<string> newUser(string displayName)
@@ -97,6 +108,8 @@ namespace Quizzarr.Controllers
             return Ok(userId);
         }
 
+
+        // Creates a new session and adds it to the list of known sessions
         // api/quizzarr/newSession?hostUId=<your UId here>&quizName=<quiz name here>&numberOfRounds=<nor>&numberOfQuestionsPerRound=<norpr>&timeBetweenRounds=<tbr>&timePerQuestion=<tpq>
         [HttpGet("newSession")]
         public ActionResult<string> NewSession(string hostUId, string quizName, int numberOfRounds, int numberOfQuestionsPerRound, int timeBetweenRounds, int timePerQuestion)
@@ -156,6 +169,8 @@ namespace Quizzarr.Controllers
             return Ok(newSession);
         }
 
+
+        // Add an existing LobbyUser to an existing Session
         // api/quizzarr/joinSession?userID=<your id here>&sessionID=<friends quiz code>
         [HttpGet("joinSession")]
         public ActionResult<string> JoinSession(string userId, string sessionID)
@@ -194,6 +209,7 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Wrapper function to create a new user and join a session in one call
         // api/quizzarr/newUserAndJoin?displayName=<your name here>&sessionID=<session id>
         [HttpGet("newUserAndJoin")]
         public ActionResult<string> newUserAndJoinSession(string displayName, string sessionID) {
@@ -211,6 +227,9 @@ namespace Quizzarr.Controllers
             return Ok(userID);  
         }
 
+
+        // Set an existing session to in progress, this stops others users joining
+        // and allows all users to start requesting questions and answers
         //api/quizzarr/startSession?hostUId=<your UID here>
         [HttpGet("startSession")]
         public ActionResult StartSession(string hostUId)
@@ -230,6 +249,8 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Admin Branch
+        // End a session by passing in the host uid, usually used for test session cleanup 
         // api/quizzarr/admin/endSession?hostUId=<your uid herer>
         [HttpGet("admin/endSession")]
         public ActionResult EndSession(string hostUId) {
@@ -246,6 +267,9 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Admin Branch
+        // Ends all the sessions that are currently in progress
+        // Requires a password, though this is only to stop accidental deletion
         // api/quizzarr/admin/endAllSessions?password=team9
         [HttpGet("admin/endAllSessions")]
         public ActionResult EndAllSessions(string password) {
@@ -257,6 +281,7 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Returns a DTO containing all the relevant information required to display a question
         // api/quizzarr/getQuestion?userID=<your user ID>
         [HttpGet("getQuestion")]
         public ActionResult<QuestionReadDTO> nextQuestion(string userID)
@@ -295,6 +320,9 @@ namespace Quizzarr.Controllers
             return Ok(qRead);
         }
 
+
+        // Checks if the user has submitted the correct answer
+        // If so it awards them points, if not then nothing happens 
         // api/quizzarr/submitAnswer?userID=<your user ID>&answer=<answer selected>
         [HttpGet("submitAnswer")]
         public ActionResult answerQuestion(string userID, string answer)
@@ -330,6 +358,7 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Returns the correct answer for the current question in the session
         // api/quizzarr/getCorrectAnswer?userID=<your id here>
         [HttpGet("getCorrectAnswer")]
         public ActionResult <string> getCorrectAnswer(string userID) {
@@ -345,6 +374,8 @@ namespace Quizzarr.Controllers
 
             user.GotAnswer = true;
 
+            // Ensures all users have both answered and received the correct answer
+            // If so, moves the session onto the next question
             if (CheckIfAllAnswered(session) && CheckIfAllGotAnswer(session)) {
                 session.currentQuestion += 1;
                 System.Console.WriteLine("New current question num " + session.currentQuestion);
@@ -359,6 +390,7 @@ namespace Quizzarr.Controllers
         }
 
 
+        // Returns a leaderboard for the session that the user is in
         // api/quizzarr/getLeaderboard?userID=<your user id here>
         [HttpGet("getLeaderBoard")]
         public ActionResult GetLeaderBoard(string userID)
@@ -376,6 +408,8 @@ namespace Quizzarr.Controllers
             return Ok(leaderboard);
         }
 
+
+        // Removes a user from the session they are in to allow the game to continue
         // api/quizzarr/leaveSession?userID=<your uid>
         [HttpGet("leaveSession")]
         public ActionResult LeaveSession(string userID) {
@@ -406,12 +440,14 @@ namespace Quizzarr.Controllers
             return NoContent();
         }
         
+
         [HttpPost("leave")]
         public void Post([FromBody] string userID) {
             LeaveSession(userID);
         }
 
         
+        // Returns the session that the user is a part of 
         public GameSession findSessionWithUser(string userID)
         {
             GameSession curSession = null;
@@ -430,6 +466,8 @@ namespace Quizzarr.Controllers
             return curSession;
         }
 
+
+        // Checks to see if all the users in the session have answered
         public bool CheckIfAllAnswered(GameSession session) {
             foreach (User u in session.Users)
             {
@@ -439,11 +477,15 @@ namespace Quizzarr.Controllers
             return true;
         }
 
+
+        // Resets all users in a session to a false answer state (preparing for next question)
         public void SetAllUnanswered(GameSession session) {
             foreach (User u in session.Users)
                 u.Answered = false;
         }
 
+
+        // Checks all users in a session to see if they have all requested the correct answer
         public bool CheckIfAllGotAnswer(GameSession session) {
             foreach (User u in session.Users)
             {
@@ -453,11 +495,16 @@ namespace Quizzarr.Controllers
             return true;
         }
 
+
+
+        // Resets all users in a session to a false request answer state (preparing for next question)
         public void SetAllGotAnswerFalse(GameSession session) {
             foreach (User u in session.Users)
                 u.GotAnswer = false;
         }
 
+
+        // Gets a specific user in a session
         public User GetUserInSession(GameSession session, string userID) {
             foreach (User u in session.Users)
                 if (userID.Equals(u.Id))
@@ -466,6 +513,8 @@ namespace Quizzarr.Controllers
             return null;
         }
 
+
+        // Checks the session user list to check if the nickname is already taken
         public bool GetNicknameInSession(string nickname, GameSession session) {
             foreach (User u in session.Users)
                 if (nickname.Equals(u.DisplayName))
@@ -474,6 +523,8 @@ namespace Quizzarr.Controllers
             return false;
         }
 
+
+        // Gets a specific user in the user lobby
         public User GetUserInLobby(string userID) {
             foreach (User u in LobbyUsers)
                 if (userID.Equals(u.Id))
@@ -482,17 +533,26 @@ namespace Quizzarr.Controllers
             return null;
         }
 
+
+        // Sets the host of the game to the first user in the list of users
+        // Used to ensure there is always a host (even if host leaves)
         public void SetUpHost(GameSession session) {
             session.HostID = session.Users[0].Id;
         }
 
         // ==================================================================================
+        //                               TESTING FUNCTIONS
+
+        // Prints all the lobby users to the console
         public void PrintLobbyUsers()
         {
             foreach (User u in LobbyUsers) { System.Console.WriteLine(u.Id + " " + u.DisplayName); }
             System.Console.WriteLine();
         }
 
+
+        // Prints all the session ids and user count in the console
+        // Returns all the sessions in json format
         [HttpGet]
         public ActionResult PrintAllSessionIDs()
         {
