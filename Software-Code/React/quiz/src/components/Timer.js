@@ -17,18 +17,15 @@ const Timer = ({ timer, handleIsTimeOut, resetTimeIsOut }) => {
       Outcome: if so, counter will be set to timer and timeout will be handled by the Quiz.js page timeout variable will be set to true,
                nothing will be sent back to the call page
                if not then counter will be passed back to the page which called it
-    */
-  if (counter === 0)
-  {
+  */
+  if (counter === 0) {
     if (isTimeout === false) {
-
       handleIsTimeOut()
       setTimeout(() => {
         resetTimeIsOut()
         setCounter(timer)
         setIsTimeout(false)
       }, 2000); 
-
       setIsTimeout(true)
     }
 
@@ -38,15 +35,15 @@ const Timer = ({ timer, handleIsTimeOut, resetTimeIsOut }) => {
       </div>
     )
   }
+
   else
   {
-
     return (
-        <div className="timer">
-        <div>{counter}</div>
-        </div>
-      )
+      <div className="timer">
+      <div>{counter}</div>
+      </div>
+    )
   }
 }
 
-export default Timer;
+export default Timer
