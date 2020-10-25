@@ -4,33 +4,34 @@ const Timer = ({ timer, handleIsTimeOut, resetTimeIsOut }) => {
   const [counter, setCounter] = useState(timer)
   const [isTimeout, setIsTimeout] = useState(false)
 
-  //An effect is applied to the counter variable where every second the number will be reduced by one and then returned
+    /* 
+      Applies effect to the counter variable to count down
+      Outcome: the counter variable will count down every second until it reahes 0 from the designated time
+    */
   useEffect(() => {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
 
-  //if the counter reaches 0 then
+  /* 
+      Checks if counter had reached 0
+      Outcome: if so, counter will be set to timer and timeout will be handled by the Quiz.js page timeout variable will be set to true,
+               nothing will be sent back to the call page
+               if not then counter will be passed back to the page which called it
+    */
   if (counter === 0)
   {
-    //check if the variable isTimeout is false then
     if (isTimeout === false) {
-      //call function handleIsTimeOut from the Quiz.js page
-      //then set the variable isTimeout while
+
       handleIsTimeOut()
       setTimeout(() => {
-        // call function resetTimeIsOut from the Quiz.js page
-        //set the counter variable to the value of timer from the variable passed through
-        //set the IsTimeout variable to false
         resetTimeIsOut()
         setCounter(timer)
         setIsTimeout(false)
-      }, 2000); // this is the time left for showing the correct answer at the end
+      }, 2000); 
 
-      //then set the IsTimeout variable to true
       setIsTimeout(true)
     }
 
-    //return nothing to the page call
     return (
       <div className="timer">
       <div>&nbsp;</div>
@@ -39,8 +40,7 @@ const Timer = ({ timer, handleIsTimeOut, resetTimeIsOut }) => {
   }
   else
   {
-    //if the counter does not reach 0 then
-    //return the counter variable to the page call
+
     return (
         <div className="timer">
         <div>{counter}</div>
