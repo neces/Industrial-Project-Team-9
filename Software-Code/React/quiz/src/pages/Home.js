@@ -40,6 +40,7 @@ const Home = () => {
     }})
     .then(response => {
       cookies.set('userID', response.data, { path: '/' })
+      setQuizFound(response.status)
       setSubmitted(true)
       setQuizFound(true)
     })

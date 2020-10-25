@@ -114,6 +114,10 @@ const Answer = ({ type, answers, correctAnswer, filterAnswer, isTimeOut, isSelec
         </div>
       )
     }
+
+    else {
+      return (<></>)
+    }
   }
 
   export default Answer

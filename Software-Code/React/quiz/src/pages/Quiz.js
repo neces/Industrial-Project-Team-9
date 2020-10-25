@@ -101,10 +101,6 @@ const Quiz = () => {
     })
   }
 
-  /*
-    It's used for Timer component to control isTimeOut variable which is a property of Answer component.
-    'isTimeOut' is not the same as 'isTimeout', the former one is to justify whether the quiz time is out so that the correct answer can be appeared.
-  */
   const handleIsTimeOut = () => {
     setIsTimeOut(true)
   }
