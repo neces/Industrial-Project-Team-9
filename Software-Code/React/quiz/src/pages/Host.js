@@ -29,49 +29,50 @@ const Host = () => {
 //         setNumberOfRounds(event.target.value)
 // }
 
-const handleNoQuestionsChange = (event) => {
-        console.log(event.target.value)
-        setNumberOfQuestionsPerRound(event.target.value)
-}
+  const handleNoQuestionsChange = (event) => {
+    console.log(event.target.value)
+    setNumberOfQuestionsPerRound(event.target.value)
+  }
 
 // const handleTimeRoundsChange = (event) => {
 //         console.log(event.target.value)
 //         setTimeBetweenRounds(event.target.value)
 // }
 
-const handleTimeQuestionsChange = (event) => {
-        console.log(event.target.value)
-        setTimePerQuestion(event.target.value)
-}
+  const handleTimeQuestionsChange = (event) => {
+    console.log(event.target.value)
+    setTimePerQuestion(event.target.value)
+  }
        
   const sendUserDetails = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
     .get('https://team9app.azurewebsites.net/api/quizzarr/newUser', { params: { displayName }})
     .then(response => {
-      console.log(response.data);
-      cookies.set('userID', response.data, { path: '/' });
+      cookies.set('userID', response.data, { path: '/' })
       setSubmitted(true)
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
     })
 
     // if (numberOfRounds === '') {
     //     setNumberOfRounds('3')
     // }
+
     if (numberOfQuestionsPerRound === '') {
         setNumberOfQuestionsPerRound('10')
     }
     // if (timeBetweenRounds === '') {
     //     setTimeBetweenRounds('5')
     // }
+
     if (timePerQuestion === '') {
         setTimePerQuestion('15')
   }
 }
 
-const createSession = () => {
+  const createSession = () => {
     axios
     .get('https://team9app.azurewebsites.net/api/quizzarr/newSession', { params: {
         hostUId: cookies.get('userID'),
@@ -82,16 +83,16 @@ const createSession = () => {
         timePerQuestion
     }})
     .then(response => {
-      console.log(response.data);
+      console.log('Session created')
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
     })
   }
 
   if (submitted === true && created === false) {
-        createSession()
-        setCreated(true)
+    createSession()
+    setCreated(true)
   }
 
   return (

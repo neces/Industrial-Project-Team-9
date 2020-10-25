@@ -28,13 +28,13 @@ const Home = () => {
       sessionID
     }})
     .then(response => {
-      cookies.set('userID', response.data, { path: '/' });
+      cookies.set('userID', response.data, { path: '/' })
       setQuizFound(response.status)
       setSubmitted(true)
       setQuizFound(true)
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
       setQuizFound(false)
     })
   }
@@ -48,7 +48,7 @@ const Home = () => {
       <form onSubmit={sendUserDetails}>
         <div className='start-form'>
           <input required title='Quiz ID should be 6 digits.' pattern='\d{6}' value={sessionID} aria-label='Quiz ID' placeholder='Quiz ID' onChange={handleSessionIDChange} />
-          <input required value={displayName} aria-label="Nickname" placeholder='Nickname' onChange={handleDisplayNameChange} />
+          <input required value={displayName} aria-label='Nickname' placeholder='Nickname' onChange={handleDisplayNameChange} />
         <button className='start-button' type='submit'>JOIN</button>
         <Link to='/host'><button className='host-home-button'>HOST</button></Link>
         </div>
