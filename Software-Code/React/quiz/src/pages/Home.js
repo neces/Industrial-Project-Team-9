@@ -10,16 +10,27 @@ const Home = () => {
   const [ quizFound, setQuizFound ] = useState(true)
   const cookies = new Cookies()
 
+  /*
+    This function is keeping track of the changes in the Session ID input field
+  */
   const handleSessionIDChange = (event) => {
     console.log(event.target.value)
     setSessionID(event.target.value)
   }
 
+  /*
+    This function is keeping track of the changes in the Nickname input field
+  */
   const handleDisplayNameChange = (event) => {
     console.log(event.target.value)
     setDisplayName(event.target.value)
   }
 
+  /*
+    This function sends user Nickname and Quiz ID to the backend and adds them to the quiz
+    User ID response is stored as a cookie, when a response is received the setSubmitted and setQuizFound are both set to true
+    If the response is an error, it means that either the Quiz ID does not exists or someone with that name already joined the session
+  */
   const sendUserDetails = (event) => {
     event.preventDefault();
     axios
@@ -29,7 +40,6 @@ const Home = () => {
     }})
     .then(response => {
       cookies.set('userID', response.data, { path: '/' })
-      setQuizFound(response.status)
       setSubmitted(true)
       setQuizFound(true)
     })
