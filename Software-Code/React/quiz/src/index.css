@@ -4,20 +4,17 @@ body {
   font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center
-}
-
-* {
-  font-family: 'Raleway', sans-serif;
-  color: #ffffff;
-}
-
-body {
+  text-align: center;
   background-color: #030A17;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+* {
+  font-family: 'Raleway', sans-serif;
+  color: #ffffff;
 }
 
 .app {
