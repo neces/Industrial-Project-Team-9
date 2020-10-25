@@ -10,16 +10,27 @@ const Home = () => {
   const [ quizFound, setQuizFound ] = useState(true)
   const cookies = new Cookies()
 
+  /*
+    This function is keeping track of the changes in the Session ID input field
+  */
   const handleSessionIDChange = (event) => {
     console.log(event.target.value)
     setSessionID(event.target.value)
   }
 
+  /*
+    This function is keeping track of the changes in the Nickname input field
+  */
   const handleDisplayNameChange = (event) => {
     console.log(event.target.value)
     setDisplayName(event.target.value)
   }
 
+  /*
+    This function sends user Nickname and Quiz ID to the backend and adds them to the quiz
+    User ID response is stored as a cookie, when a response is received the setSubmitted and setQuizFound are both set to true
+    If the response is an error, it means that either the Quiz ID does not exists or someone with that name already joined the session
+  */
   const sendUserDetails = (event) => {
     event.preventDefault();
     axios
@@ -28,13 +39,13 @@ const Home = () => {
       sessionID
     }})
     .then(response => {
-      cookies.set('userID', response.data, { path: '/' });
+      cookies.set('userID', response.data, { path: '/' })
       setQuizFound(response.status)
       setSubmitted(true)
       setQuizFound(true)
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
       setQuizFound(false)
     })
   }
@@ -48,7 +59,7 @@ const Home = () => {
       <form onSubmit={sendUserDetails}>
         <div className='start-form'>
           <input required title='Quiz ID should be 6 digits.' pattern='\d{6}' value={sessionID} aria-label='Quiz ID' placeholder='Quiz ID' onChange={handleSessionIDChange} />
-          <input required value={displayName} aria-label="Nickname" placeholder='Nickname' onChange={handleDisplayNameChange} />
+          <input required value={displayName} aria-label='Nickname' placeholder='Nickname' onChange={handleDisplayNameChange} />
         <button className='start-button' type='submit'>JOIN</button>
         <Link to='/host'><button className='host-home-button'>HOST</button></Link>
         </div>

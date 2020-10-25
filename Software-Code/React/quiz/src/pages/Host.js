@@ -14,64 +14,87 @@ const Host = () => {
   const [ created, setCreated ] = useState(false)
   const cookies = new Cookies()
 
+  /*
+    This function is keeping track of the changes in the Host Nickname input field
+  */
   const handleDisplayNameChange = (event) => {
     console.log(event.target.value)
     setDisplayName(event.target.value)
   }
 
+  /*
+    This function is keeping track of the changes in the Quiz Name input field
+  */
   const handleQuizNameChange = (event) => {
    console.log(event.target.value)
    setQuizName(event.target.value)
   }
 
-//   const handleNoRoundsChange = (event) => {
-//         console.log(event.target.value)
-//         setNumberOfRounds(event.target.value)
-// }
+  //   const handleNoRoundsChange = (event) => {
+  //         console.log(event.target.value)
+  //         setNumberOfRounds(event.target.value)
+  // }
 
-const handleNoQuestionsChange = (event) => {
-        console.log(event.target.value)
-        setNumberOfQuestionsPerRound(event.target.value)
-}
+  /*
+    This function is keeping track of the changes in the Number of Questions input field
+  */
+  const handleNoQuestionsChange = (event) => {
+    console.log(event.target.value)
+    setNumberOfQuestionsPerRound(event.target.value)
+  }
 
-// const handleTimeRoundsChange = (event) => {
-//         console.log(event.target.value)
-//         setTimeBetweenRounds(event.target.value)
-// }
+  // const handleTimeRoundsChange = (event) => {
+  //         console.log(event.target.value)
+  //         setTimeBetweenRounds(event.target.value)
+  // }
 
-const handleTimeQuestionsChange = (event) => {
-        console.log(event.target.value)
-        setTimePerQuestion(event.target.value)
-}
-       
+  /*
+    This function is keeping track of the changes in the Time per Question input field
+  */
+  const handleTimeQuestionsChange = (event) => {
+    console.log(event.target.value)
+    setTimePerQuestion(event.target.value)
+  }
+  
+  /*
+    This function sends Host Nickname to the backend and returns their User ID
+    User ID response is stored as a cookie, when a response is received the setSubmitted is set to true
+    If the fields for questions and time per question are empty, these values are set to default
+  */
   const sendUserDetails = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     axios
     .get('https://team9app.azurewebsites.net/api/quizzarr/newUser', { params: { displayName }})
     .then(response => {
-      console.log(response.data);
-      cookies.set('userID', response.data, { path: '/' });
+      cookies.set('userID', response.data, { path: '/' })
       setSubmitted(true)
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
     })
 
     // if (numberOfRounds === '') {
     //     setNumberOfRounds('3')
     // }
+
     if (numberOfQuestionsPerRound === '') {
         setNumberOfQuestionsPerRound('10')
     }
+
     // if (timeBetweenRounds === '') {
     //     setTimeBetweenRounds('5')
     // }
+
     if (timePerQuestion === '') {
         setTimePerQuestion('15')
   }
 }
 
-const createSession = () => {
+  /*
+    This function sends Host ID, Quiz Name, Number of Questions, Number of Rounds, Time per Question and 
+    Time per Round to the backend and creates a session
+  */
+  const createSession = () => {
     axios
     .get('https://team9app.azurewebsites.net/api/quizzarr/newSession', { params: {
         hostUId: cookies.get('userID'),
@@ -82,16 +105,19 @@ const createSession = () => {
         timePerQuestion
     }})
     .then(response => {
-      console.log(response.data);
+      console.log('Session created')
     })
     .catch(error => {
-      console.error('There was an error!', error);
+      console.error('There was an error!', error)
     })
   }
 
+  /*
+    If statement makes sure that only when we already have the User ID returned the session can be created
+  */
   if (submitted === true && created === false) {
-        createSession()
-        setCreated(true)
+    createSession()
+    setCreated(true)
   }
 
   return (

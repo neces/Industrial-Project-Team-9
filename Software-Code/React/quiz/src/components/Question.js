@@ -1,6 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const Question = ({ questions, currentQuestion, totalQuestions }) => {
+    
+    /* 
+      Always returns the progress of the quiz and the current question
+    */
     return (
         <div>
             <div className='progress'>{currentQuestion}/{totalQuestions}</div>
@@ -9,4 +13,4 @@ const Question = ({ questions, currentQuestion, totalQuestions }) => {
     )
   }
 
-  export default Question;
+  export default Question
