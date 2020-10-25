@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import axios from 'axios'
 
 const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,isSendAnswer,sendAnswer}) => {
     const [selected, setSelected] = useState('')
