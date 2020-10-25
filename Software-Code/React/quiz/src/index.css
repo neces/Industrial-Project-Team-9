@@ -36,13 +36,6 @@ body {
   left: -5px;
 }
 
-.host-link {
-  position: fixed;
-  top: 45px;
-  right: 55px;
-  font-size: 30px;
-}
-
 /* HOMEPAGE */
 .ready-graphic {
   margin-left: auto;
@@ -145,22 +138,6 @@ input {
   right: 30px;
 }
 
-.question-section {
-  width: 100%;
-  position: relative;
-  text-align: center;
-  padding-bottom: 20px;
-  font-size: 30px;
-}
-
-.question-count {
-  margin-bottom: 20px;
-}
-
-.question-count span {
-  font-size: 28px;
-}
-
 .question {
   margin-bottom: 30px;
   text-align: center;
@@ -232,6 +209,10 @@ input {
 
 .button-normal:hover:enabled {
   background-color: #555e7d;
+}
+
+button:focus {
+  outline: none;
 }
 
 button svg {
@@ -341,7 +322,6 @@ only screen and (max-width: 2560px),
     font-size: 35px;
   }
 }
-
 @media 
 only screen and (max-width: 425px),
 (min-device-width: 320px) and (max-device-width: 425px)  {
@@ -373,6 +353,10 @@ only screen and (max-width: 425px),
     margin-right: 10vh;
     font-size: 25px;
   }
+
+  /* * {
+    margin-bottom: auto;
+  } */
 
   .quiz-logo {
     position: relative;
