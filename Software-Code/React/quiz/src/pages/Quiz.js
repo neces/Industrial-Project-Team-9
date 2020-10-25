@@ -60,6 +60,9 @@ const Quiz = () => {
       })
     }
 
+    /*
+      To submit answer, so that backend can calculate the score and point to the next question
+    */
     const sendAnswer = (answer) => {
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/submitAnswer', { params: {
@@ -78,6 +81,9 @@ const Quiz = () => {
       })
     }
 
+    /*
+      To get the current question's correct answer, so user can only know the correct answer after time out to avoid cheating
+    */
     const getCorrectAnswer = ()=>{
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/getCorrectAnswer', { params: { userID: cookies.get('userID')} })
@@ -103,18 +109,25 @@ const Quiz = () => {
       return <div className="App"></div>
     }
 
+    /*
+      When time is out, initialize all the related variables. 
+    */
     if (isTimeout === false) {
       setTimeout(() => {
         setFilterAnswer(false)
         setIsTimeout(false)
         getQuestion()
-        setIsTimeOut(false)  //For the appearence of correctAnswer
+        setIsTimeOut(false)
         setIsSendAnswer(false)
         setIsSelected(false)
       }, (timer * 1000 + 2000));
       setIsTimeout(true)
     }
 
+    /*
+      Is used for Timer component to control isTimeOut variable which is a property of Answer component.
+      isTimeOut is not the same as isTimeout, the former one is to justify whether the quiz time is out so that the correct answer can be appeared.
+    */
     const handleIsTimeOut = () =>{
       setIsTimeOut(true)
       console.log("Time is out")
