@@ -102,32 +102,31 @@ const createSession = () => {
       </div>
       <form onSubmit={sendUserDetails}>
         <div className='host-form'>
+          <label for='host-name'>Host Nickname</label>
+          <input required id='host-name' value={displayName} onChange={handleDisplayNameChange} />
 
-        <label>Host Nickname</label>
-          <input required value={displayName} onChange={handleDisplayNameChange} />
+          <label for='quiz-name'>Quiz Name</label>
+          <input required id='quiz-name' value={quizName} onChange={handleQuizNameChange} />
 
-          <label>Quiz Name</label>
-          <input required value={quizName} onChange={handleQuizNameChange} />
+          {/* <label for='rounds-number'>Rounds</label>
+          <input id='rounds-number' title="Select the number of rounds between 1 and 15." pattern="[1-9][0-5]?" value={numberOfRounds} placeholder='3' onChange={handleNoRoundsChange} /> */}
 
-          {/* <label>Rounds</label>
-          <input title="Select the number of rounds between 1 and 15." pattern="[1-9][0-5]?" value={numberOfRounds} placeholder='3' onChange={handleNoRoundsChange} /> */}
+          <label for='questions-number'>Number of Questions</label>
+          <input id='questions-number' title='Select the number of questions per round between 1 and 50.' pattern='[1-9]|[0-4][0-9]|[5][0]' value={numberOfQuestionsPerRound} placeholder='10' onChange={handleNoQuestionsChange} />
 
-          <label>Number of Questions</label>
-          <input title="Select the number of questions per round between 1 and 50." pattern="[1-9]|[0-4][0-9]|[5][0]" value={numberOfQuestionsPerRound} placeholder='10' onChange={handleNoQuestionsChange} />
+          {/* <label for='rounds-time'>Time between Rounds (minutes)</label>
+          <input id='rounds-time' title="Select the time between rounds between 1 and 30 minutes." pattern="[1-9]|[0-2][0-9]|[3][0]" value={timeBetweenRounds} placeholder='5' onChange={handleTimeRoundsChange} /> */}
 
-          {/* <label>Time between Rounds (minutes)</label>
-          <input title="Select the time between rounds between 1 and 30 minutes." pattern="[1-9]|[0-2][0-9]|[3][0]" value={timeBetweenRounds} placeholder='5' onChange={handleTimeRoundsChange} /> */}
+          <label for='questions-time'>Time per Question (seconds)</label>
+          <input id='questions-time' title='Select time per question between 5 and 100 seconds.' pattern='[5-9]|[0-9][0-9]|[1][0][0]' value={timePerQuestion} placeholder='15' onChange={handleTimeQuestionsChange} />
 
-          <label>Time per Question (seconds)</label>
-          <input title="Select time per question between 5 and 100 seconds." pattern="[5-9]|[0-9][0-9]|[1][0][0]" value={timePerQuestion} placeholder='15' onChange={handleTimeQuestionsChange} />
-
-          <a><button className='host-button' type="submit">HOST</button></a>
+          <button className='host-button' type='submit'>HOST</button>
         </div>
       </form>
       <div>
-          <Link to="/"><button className='button-leave'>RETURN TO HOMEPAGE</button></Link>
+          <Link to='/'><button className='button-leave'>RETURN TO HOMEPAGE</button></Link>
       </div>
-      { submitted ? <Redirect to="/hosting"/> : null }
+      { submitted ? <Redirect to='/hosting'/> : null }
     </div>
   )
 }

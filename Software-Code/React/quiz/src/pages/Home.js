@@ -42,18 +42,18 @@ const Home = () => {
   return (
     <div>
       <div className='ready-graphic'>
-        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width="500"></img>
+        <img src={require('../assets/Ready.png')} alt='Ready for a quiz?' width='500'></img>
       </div>
       { quizFound ? null : <div>Quiz ID not found or nickname already taken</div> }
       <form onSubmit={sendUserDetails}>
         <div className='start-form'>
-          <input required title="Quiz ID should be 6 digits." pattern="\d{6}" value={sessionID} placeholder='Quiz ID' onChange={handleSessionIDChange} />
-          <input required value={displayName} placeholder='Nickname' onChange={handleDisplayNameChange} />
-        <a><button className='start-button' type="submit">JOIN</button></a>
-        <Link to="/host"><button className='host-home-button'>HOST</button></Link>
+          <input required title='Quiz ID should be 6 digits.' pattern='\d{6}' value={sessionID} aria-label='Quiz ID' placeholder='Quiz ID' onChange={handleSessionIDChange} />
+          <input required value={displayName} aria-label="Nickname" placeholder='Nickname' onChange={handleDisplayNameChange} />
+        <button className='start-button' type='submit'>JOIN</button>
+        <Link to='/host'><button className='host-home-button'>HOST</button></Link>
         </div>
       </form>
-      { submitted ? <Redirect to="/waiting"/> : null }
+      { submitted ? <Redirect to='/waiting'/> : null }
     </div>
   )
 }
