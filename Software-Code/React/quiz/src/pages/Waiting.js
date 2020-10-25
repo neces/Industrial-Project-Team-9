@@ -10,6 +10,10 @@ const Waiting = () => {
     const [gameSession, setGameSession] = useState([])
     const cookies = new Cookies()
 
+    /*
+      This function fetches the game session status update
+      Response is stored in gameSession state, setLoadingGameis set to false once we have a first game session status
+    */
     const getGameSession = () => {
       axios
       .get('https://team9app.azurewebsites.net/api/quizzarr/gameSessionStatus', { params: { userID: cookies.get('userID') } })
@@ -22,6 +26,10 @@ const Waiting = () => {
       })
     }
 
+    /*
+      Statement checks if we already have a timeout set and if not, sets it to 1.5 seconds to check for
+      games status updates regularly
+    */
     if (isTimeout === false) {
       setTimeout(() => {
         getGameSession()
@@ -30,6 +38,9 @@ const Waiting = () => {
       setIsTimeout(true)
     }
 
+    /*
+      While the data about the game session status is not fetched yet, this will display an empty loading screen
+    */
     if (isLoadingGame) {
         getGameSession()
         return <div className='app'></div>
