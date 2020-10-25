@@ -1,7 +1,6 @@
-import React, { useState } from "react"
-import axios from 'axios'
+import React, { useState } from 'react'
 
-const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,isSendAnswer,sendAnswer}) => {
+const Answer = ({ type, answers, correctAnswer, filterAnswer, isTimeOut, isSelected, isSendAnswer, sendAnswer }) => {
     const [selected, setSelected] = useState('')
 
     
@@ -24,7 +23,7 @@ const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,
     */
     const handleClassNameCorrect = ( answer ) => {   
         if (answer === correctAnswer.toString()) return 'button-correct'
-        if(answer === selected) return 'button-selected'
+        if (answer === selected) return 'button-selected'
         else return 'button-normal'
     }
 
@@ -36,36 +35,31 @@ const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,
     */
     const OnFilterAnswer = () => {   
       //When Time isn't out, those below
-      if(isTimeOut===false) { 
-        return(
+      if (isTimeOut === false) { 
+        return (
           <div>
             <div className='answer-section'>{answers.map(answer => 
                <button
                  key={answer}
                  className={handleClassNameSelected(answer)}
-                 disabled={true}>{answer}</button>)}</div>
+                 disabled={true}>{answer}</button>)}
+              </div>
           </div>
         )
       }
+
       else if (isTimeOut===true) { 
-        return(
+        return (
           <div>
             <div className='answer-section'>{answers.map(answer => 
                <button
                  key={answer}
                  className={handleClassNameCorrect(answer)}
-                 disabled={true}>{answer}</button>)}</div>
-              </div>)
+                 disabled={true}>{answer}</button>)}
+              </div>
+          </div>
+        )
       }
-    }
-
-    /*
-      To send null answer and then push the pointer in question array to the next question
-      Outcome: Send null answer if user didn't click and time is out
-    */
-    if(isTimeOut===true&&isSendAnswer===false&&isSelected===false){
-        console.log("send null answer")
-        sendAnswer("")      
     }
 
     /*
@@ -75,49 +69,52 @@ const Answer = ({ type, answers,correctAnswer,filterAnswer,isTimeOut,isSelected,
     const handleAnswerOptionClick = (answer) => {
       setSelected(answer)
       sendAnswer(answer)
-      console.log("Click Answer")
-  }
+    }
+
+    /*
+      To send null answer and then push the pointer in question array to the next question
+      Outcome: Send null answer if user didn't click and time is out
+    */
+    if (isTimeOut === true && isSendAnswer === false && isSelected === false) {
+        sendAnswer('')      
+    }
 
     /*
       We want to design different render style for different type of question
     */
-  if (type === "TrueFalse") {
-    return (
-      <div className='answer-section'>
-        {filterAnswer ? 
-          OnFilterAnswer()
-           :
-        <div className='answer-section'>{answers.map((answer) => (
-          <button
-          key={answer}
-          className="button-normal"
-          disabled={false}
-          onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
-        ))}</div>}
-    </div>
-    )
+    if (type === 'TrueFalse') {
+      return (
+        <div className='answer-section'>
+          {filterAnswer ? 
+            OnFilterAnswer()
+            :
+          <div className='answer-section'>{answers.map((answer) => (
+            <button
+            key={answer}
+            className='button-normal'
+            disabled={false}
+            onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
+          ))}</div>}
+        </div>
+      )
+    }
+
+    else if (type === 'MultiChoice') {
+      return (
+        <div className='answer-section'>
+          {filterAnswer ? 
+            OnFilterAnswer()
+            :
+          <div className='answer-section'>{answers.map((answer) => (
+            <button
+            key={answer}
+            className='button-normal'
+            disabled={false}
+            onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
+          ))}</div>}
+        </div>
+      )
+    }
   }
 
-else if (type === "MultiChoice") {
-  return (
-    <div className='answer-section'>
-        {filterAnswer ? 
-          OnFilterAnswer()
-           :
-        <div className='answer-section'>{answers.map((answer) => (
-          <button
-          key={answer}
-          className="button-normal"
-          disabled={false}
-          onClick={()=>handleAnswerOptionClick(answer)}>{answer}</button>
-        ))}</div>}
-    </div>
-  )
-}
-
-  else {
-      return (<></>)
-  }
-}
-
-  export default Answer;
+  export default Answer

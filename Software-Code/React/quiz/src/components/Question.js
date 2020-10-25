@@ -9,4 +9,4 @@ const Question = ({ questions, currentQuestion, totalQuestions }) => {
     )
   }
 
-  export default Question;
+  export default Question
