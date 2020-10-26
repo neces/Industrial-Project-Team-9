@@ -6,6 +6,8 @@ namespace Quizzarr.Models {
         public int streak { get; private set; }
         public int highestStreak { get; private set; }
 
+
+        // Create a new object of scoring
         public Scoring()
         {
             Score = 0;
@@ -14,6 +16,8 @@ namespace Quizzarr.Models {
             highestStreak = 0;
         }
 
+
+        // Increases the score based on if the question was answered correctly
         public void UpdateScore(bool isCorrect) {
             if (isCorrect) {
                 UpdateStreak();
@@ -25,6 +29,8 @@ namespace Quizzarr.Models {
             }
         }
 
+
+        // Increases the streak attirbutes as well as tracking the highest streak
         private void UpdateStreak() {
             streak++;
             streakMultiplier += 0.05;

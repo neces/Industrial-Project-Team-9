@@ -17,6 +17,7 @@ namespace Quizzarr.Data
 
 
         // Constructor
+        // Sets up the connection string
         public SqlQuestionRepo()
         {
             sConnectionString = "Server=tcp:mysqlserverteam9.database.windows.net,1433;" +
@@ -37,6 +38,7 @@ namespace Quizzarr.Data
             List<Question> questions = new List<Question>();
             objConn.Open();
 
+            // Main Query
             string mainQuery = "SELECT TOP " + count + " * FROM QuestionsTable WHERE (Type='MultiChoice' OR Type='TrueFalse') AND Topic!='BrainTeaser' ORDER BY NEWID()";
 
             SqlDataAdapter daQuestions = new SqlDataAdapter(mainQuery, objConn);
@@ -51,9 +53,10 @@ namespace Quizzarr.Data
 
             int index = 0;
 
+            // For every question, check if it has multiple answers and then add them to the list
             foreach (DataRow dr in tblQuestions.Rows) {
                 try {
-
+                    // IF the question is a multi choice, then run a new query to get the alt answers 
                     List<string> __altAnswers = new List<string>();
                     if (dr["Type"].ToString().Equals("MultiChoice")) {
                         string query = "Select * from MultiChoiceTable where ID='" + dr["MultiChoice_ID"].ToString() + "'";
