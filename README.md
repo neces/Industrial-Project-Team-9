@@ -1,4 +1,8 @@
 # AC41004 Industrial Team Project - Team 9
+
+Checkout the video pitch on youtube!
+https://www.youtube.com/watch?v=YewMI_XgjdI
+
 Group Members:
 
 *    Binu Melvin M.E.Binu@dundee.ac.uk
