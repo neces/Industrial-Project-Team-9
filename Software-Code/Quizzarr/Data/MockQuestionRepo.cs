@@ -5,6 +5,8 @@ namespace Quizzarr.Data
 {
     public class MockQuestionRepo : IQuestionRepo
     {
+
+        // Example list of questions to use for testing
         List<Question> questions = new List<Question> {
             new Question (0, "MultiChoice", "What is the rarest colour found in nature?", "Blue", "Personal", 0, 1, 10, (1/10), new List<string>{"Yellow", "Red", "Black"} ),
             new Question (1, "MultiChoice", "How many blue stripes are there on the American flag?", "0", "Personal", 1, 1, 10, (1/10), new List<string>{"6", "7", "13"} ),
@@ -17,6 +19,8 @@ namespace Quizzarr.Data
             new Question (8, "TrueFalse", "Gouda and Edam are famous types of Dutch cheeses", "True", "Personal", 1, 1, 10, (1/10),  new List<string>{} )
         };
 
+
+        // Returns a list of questions made from the example data above
         public List<Question> GetQuestionsSet(int count)
         {
             if (count >= questions.Count) return questions;
