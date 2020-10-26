@@ -101,10 +101,17 @@ const Quiz = () => {
     })
   }
 
+  /*
+    When the initial timer is done, this will be set to true to allow the answer to colour correctly
+  */
   const handleIsTimeOut = () => {
     setIsTimeOut(true)
   }
 
+  /*
+    When both timer is done and the answer has been shown, this will reset all the states before we get the new question
+    This means that all the new answers will have the 'button-normal' style
+  */
   const resetTimeIsOut = () => {
     setIsTimeOut(false)
     setIsSelected(false)
