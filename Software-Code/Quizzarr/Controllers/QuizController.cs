@@ -36,6 +36,10 @@ namespace Quizzarr.Controllers
         {
             GameSession gameSession = findSessionWithUser(userId);
 
+            if (gameSession == null) {
+                return NotFound();
+            }
+
             UserViewGameStatusDTO view = new UserViewGameStatusDTO
             {
                 SessionId = gameSession.SessionId,
