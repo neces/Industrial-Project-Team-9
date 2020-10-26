@@ -1,0 +1,563 @@
+{
+	"id": "70e8a58c-ad7a-492d-bf16-573458a6de62",
+	"name": "Create Quiz Session & Users Join This Session",
+	"timestamp": "2020-10-26T23:54:45.303Z",
+	"collection_id": "ce101440-55ca-4a45-ab3a-1519c714f925",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 20,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "9f73e50f-2b36-4fc5-bdfc-875204b00a7a",
+			"name": "Create New User (Host)",
+			"url": "http://localhost:5000/api/quizzarr/newUser?displayName=Oskar",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response is numeric": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is numeric": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response is numeric": true
+				}
+			]
+		},
+		{
+			"id": "9a9121dd-3462-474f-9da6-4809e6fc2c9b",
+			"name": "Create Session",
+			"url": "http://localhost:5000/api/quizzarr/newSession?hostUId=639269&quizName=Oskar%20Quiz&numberOfRounds=3&numberOfQuestionsPerRound=3&timeBetweenRounds=5&timePerQuestion=15",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "171fdd54-4e44-409d-93b7-5fb227e711d8",
+			"name": "Attempt to Create Another Session With Same User",
+			"url": "http://localhost:5000/api/quizzarr/newSession?hostUId=639269&quizName=Test%20Quiz&numberOfRounds=3&numberOfQuestionsPerRound=3&timeBetweenRounds=5&timePerQuestion=15",
+			"time": 5,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404 - User ID provided was either already in a game or doesnt exist": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404 - User ID provided was either already in a game or doesnt exist": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 404 - User ID provided was either already in a game or doesnt exist": true
+				}
+			]
+		},
+		{
+			"id": "b3b51269-2fa3-4311-9509-75d4a6cc0731",
+			"name": "Create First User",
+			"url": "http://localhost:5000/api/quizzarr/newUser?displayName=FirstUser",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "4658cbe2-6e2e-4d83-a32e-5e68274f9127",
+			"name": "First User Join Session",
+			"url": "http://localhost:5000/api/quizzarr/joinSession?userID=576336&sessionID=176347",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "ee4bfcb0-c61e-40f9-83e9-00158e37b0bd",
+			"name": "Check Session Has 2 Users",
+			"url": "http://localhost:5000/api/quizzarr/gameSessionStatus?userId=576336",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"There are 2 users in session": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"There are 2 users in session": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"There are 2 users in session": true
+				}
+			]
+		},
+		{
+			"id": "618f86b2-3f7c-4c0d-adb3-35094af86e33",
+			"name": "Create Second User & Second User Join Session",
+			"url": "http://localhost:5000/api/quizzarr/newUserAndJoin?displayName=SecondUser&sessionID=176347",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "6f1e8e01-f723-4368-8a83-c62488b98034",
+			"name": "Create Second User & Second User Join Session - No Session Associated With Given ID",
+			"url": "http://localhost:5000/api/quizzarr/newUserAndJoin?displayName=TestUser&sessionID=176348",
+			"time": 4,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404 - No Session Found": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404 - No Session Found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code is 404 - No Session Found": true
+				}
+			]
+		},
+		{
+			"id": "38cb0e16-261c-4ac4-8b5f-2ad758656a61",
+			"name": "Check Session Has 3 Users",
+			"url": "http://localhost:5000/api/quizzarr/gameSessionStatus?userId=498013",
+			"time": 2,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"There are 3 users in session": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"There are 3 users in session": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"There are 3 users in session": true
+				}
+			]
+		},
+		{
+			"id": "ac681589-b035-43a5-94c2-d7462fb2465b",
+			"name": "Start Session",
+			"url": "http://localhost:5000/api/quizzarr/startSession?hostUId=639269",
+			"time": 295,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				295
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				}
+			]
+		},
+		{
+			"id": "32368894-3632-4e58-bced-5d3eb3fd1ae6",
+			"name": "First User Leaves Session",
+			"url": "http://localhost:5000/api/quizzarr/leaveSession?userID=576336",
+			"time": 4,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				}
+			]
+		},
+		{
+			"id": "0ef202c2-25e1-4d3b-86e4-0b3f0863c989",
+			"name": "End Session",
+			"url": "http://localhost:5000/api/quizzarr/admin/endSession?hostUId=639269",
+			"time": 2,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204 - Session ended successfully": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204 - Session ended successfully": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 204 - Session ended successfully": true
+				}
+			]
+		},
+		{
+			"id": "975f539c-1573-4555-85c7-2e243ee5cb81",
+			"name": "Attempt End Non-Existent Session",
+			"url": "http://localhost:5000/api/quizzarr/admin/endSession?hostUId=639269",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404 - Session not found": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404 - Session not found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"Status code is 404 - Session not found": true
+				}
+			]
+		},
+		{
+			"id": "ebbad627-5710-4fee-9ea9-8ad013a53392",
+			"name": "Second User Attempts to Leave Session",
+			"url": "http://localhost:5000/api/quizzarr/leaveSession?userID=498013",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"404 - Session or user not found": true
+			},
+			"testPassFailCounts": {
+				"404 - Session or user not found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"404 - Session or user not found": true
+				}
+			]
+		},
+		{
+			"id": "4db6aa64-8611-46e2-aaa6-a2b940996776",
+			"name": "Second User Attempts to Check Game Session Status",
+			"url": "http://localhost:5000/api/quizzarr/gameSessionStatus?userId=498013",
+			"time": 8,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"404 - No session found associated with this userId": true
+			},
+			"testPassFailCounts": {
+				"404 - No session found associated with this userId": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"404 - No session found associated with this userId": true
+				}
+			]
+		},
+		{
+			"id": "84f8da37-8280-4320-916b-fc81cab1c0d2",
+			"name": "Host Attempts To Leave Session",
+			"url": "http://localhost:5000/api/quizzarr/leaveSession?userID=639269",
+			"time": 2,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"404 - Session or user not found": true
+			},
+			"testPassFailCounts": {
+				"404 - Session or user not found": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				2
+			],
+			"allTests": [
+				{
+					"404 - Session or user not found": true
+				}
+			]
+		},
+		{
+			"id": "72900f4f-6238-4cc3-a8c8-3ca8b9df6aed",
+			"name": "Host Attempts to Check Game Session Status",
+			"url": "http://localhost:5000/api/quizzarr/gameSessionStatus?userId=639269",
+			"time": 8,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"404 - No session found associated with this userId": true
+			},
+			"testPassFailCounts": {
+				"404 - No session found associated with this userId": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"404 - No session found associated with this userId": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 353,
+	"collection": {
+		"requests": [
+			{
+				"id": "9f73e50f-2b36-4fc5-bdfc-875204b00a7a",
+				"method": "GET"
+			},
+			{
+				"id": "9a9121dd-3462-474f-9da6-4809e6fc2c9b",
+				"method": "GET"
+			},
+			{
+				"id": "171fdd54-4e44-409d-93b7-5fb227e711d8",
+				"method": "GET"
+			},
+			{
+				"id": "b3b51269-2fa3-4311-9509-75d4a6cc0731",
+				"method": "GET"
+			},
+			{
+				"id": "4658cbe2-6e2e-4d83-a32e-5e68274f9127",
+				"method": "GET"
+			},
+			{
+				"id": "ee4bfcb0-c61e-40f9-83e9-00158e37b0bd",
+				"method": "GET"
+			},
+			{
+				"id": "618f86b2-3f7c-4c0d-adb3-35094af86e33",
+				"method": "GET"
+			},
+			{
+				"id": "6f1e8e01-f723-4368-8a83-c62488b98034",
+				"method": "GET"
+			},
+			{
+				"id": "38cb0e16-261c-4ac4-8b5f-2ad758656a61",
+				"method": "GET"
+			},
+			{
+				"id": "ac681589-b035-43a5-94c2-d7462fb2465b",
+				"method": "GET"
+			},
+			{
+				"id": "32368894-3632-4e58-bced-5d3eb3fd1ae6",
+				"method": "GET"
+			},
+			{
+				"id": "0ef202c2-25e1-4d3b-86e4-0b3f0863c989",
+				"method": "GET"
+			},
+			{
+				"id": "975f539c-1573-4555-85c7-2e243ee5cb81",
+				"method": "GET"
+			},
+			{
+				"id": "ebbad627-5710-4fee-9ea9-8ad013a53392",
+				"method": "GET"
+			},
+			{
+				"id": "4db6aa64-8611-46e2-aaa6-a2b940996776",
+				"method": "GET"
+			},
+			{
+				"id": "84f8da37-8280-4320-916b-fc81cab1c0d2",
+				"method": "GET"
+			},
+			{
+				"id": "72900f4f-6238-4cc3-a8c8-3ca8b9df6aed",
+				"method": "GET"
+			}
+		]
+	}
+}
