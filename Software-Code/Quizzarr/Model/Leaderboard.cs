@@ -6,6 +6,7 @@ namespace Quizzarr.Models {
         public int highestStreak { get; set; }
 
 
+        // Creates a new object of a leaderboard item
         public Leaderboard(string displayName, int score, int highestStreak)
         {
             this.displayName = displayName;
